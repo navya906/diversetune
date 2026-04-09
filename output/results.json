@@ -1,0 +1,1916 @@
+{
+  "greedy": {
+    "ild": 0.0347,
+    "gini": 0.007,
+    "avg_popularity": 95.9,
+    "niche_pct": 0.0,
+    "runs": [
+      {
+        "seed_songs": [
+          "Crystal Bright Dreams (Live)",
+          "Crystal Silent Fire (Live)",
+          "Dancing (feat. Unknown)",
+          "Endless Roads (feat. Unknown)",
+          "Frozen Midnight Flames",
+          "Burning Roses (Remix)",
+          "Crystal Falling Lights",
+          "Midnight (Deluxe)",
+          "Lost Wings (Live)",
+          "Wild Rising Chains (Remix)"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "The Heart (Remix)",
+          "The Flames",
+          "The Roses",
+          "Roses of Wings",
+          "Bright",
+          "Dancing Golden Horizons (Deluxe)",
+          "The Skies (feat. Unknown)",
+          "The Shadows",
+          "The Chains (Live)",
+          "Echoes of Heart (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Wild Lights (Remix)",
+          "The Roses (feat. Unknown)",
+          "Broken Neon Lights",
+          "Midnight Rising Heart",
+          "Fire of Echoes",
+          "Rising Chains (Remix)",
+          "Dark Echoes (feat. Unknown)",
+          "The Flames",
+          "Dreams of Rain"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Horizons of Waves",
+          "Echoes of Rain (Deluxe)",
+          "Chains of Chains (Remix)",
+          "Lost Silent Stars",
+          "The Memories (Deluxe)",
+          "Rising Fire (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "The Roses",
+          "Whispers of Eyes (Acoustic)",
+          "Wings of Shadows (Live)",
+          "Chains of Chains (Remix)",
+          "Endless Bright Whispers (Remix)",
+          "Silent Dark Thunder (Deluxe)"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Lost Wings (Live)",
+          "Heart of Roads (Live)",
+          "Lost Roses (Deluxe)",
+          "Roses of Chains (Acoustic)",
+          "Falling Wild Chains (Remix)",
+          "Shadows of Memories",
+          "Burning Chains (Acoustic)"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Heart of Thunder (Remix)",
+          "The Echoes",
+          "Golden Dancing Memories",
+          "Flames of Chains",
+          "The Dreams (Acoustic)",
+          "Neon Dancing Skies (Acoustic)",
+          "Silent Chains (Acoustic)",
+          "Golden Lights (Remix)",
+          "Endless Electric Eyes (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Fading (Live)",
+          "Rain of Eyes",
+          "Burning Shadows",
+          "Midnight Memories (feat. Unknown)",
+          "Silent Silent Memories (Acoustic)"
+        ],
+        "recommendations": [
+          {
+            "name": "Bright Dark Roses (feat. Unknown)",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 98.0
+          },
+          {
+            "name": "Stars of Stars (feat. Unknown)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "The Memories (feat. Unknown)",
+            "artist": "Kanye West",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Broken Crystal Fire (Deluxe)",
+            "artist": "Kendrick Lamar",
+            "genre": "hip-hop",
+            "popularity": 97.0
+          },
+          {
+            "name": "Hidden Heart",
+            "artist": "21 Savage",
+            "genre": "hip-hop",
+            "popularity": 96.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Hidden Eyes",
+            "artist": "Drake",
+            "genre": "hip-hop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Golden Dreams (Remix)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Sacred Echoes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 94.0
+          }
+        ]
+      }
+    ],
+    "per_run_ild": [
+      0.0347,
+      0.0347,
+      0.0347,
+      0.0347,
+      0.0347,
+      0.0347,
+      0.0347,
+      0.0347
+    ],
+    "per_run_gini": [
+      0.007,
+      0.007,
+      0.007,
+      0.007,
+      0.007,
+      0.007,
+      0.007,
+      0.007
+    ],
+    "per_run_avg_pop": [
+      95.9,
+      95.9,
+      95.9,
+      95.9,
+      95.9,
+      95.9,
+      95.9,
+      95.9
+    ],
+    "per_run_niche_pct": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "similarity": {
+    "ild": 0.0064,
+    "gini": 0.1632,
+    "avg_popularity": 48.69,
+    "niche_pct": 26.25,
+    "runs": [
+      {
+        "seed_songs": [
+          "Crystal Bright Dreams (Live)",
+          "Crystal Silent Fire (Live)",
+          "Dancing (feat. Unknown)",
+          "Endless Roads (feat. Unknown)",
+          "Frozen Midnight Flames",
+          "Burning Roses (Remix)",
+          "Crystal Falling Lights",
+          "Midnight (Deluxe)",
+          "Lost Wings (Live)",
+          "Wild Rising Chains (Remix)"
+        ],
+        "recommendations": [
+          {
+            "name": "Shadows of Roses (Remix)",
+            "artist": "Daniel Caesar",
+            "genre": "r&b",
+            "popularity": 41.0
+          },
+          {
+            "name": "The Skies (Deluxe)",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 46.0
+          },
+          {
+            "name": "Sacred (Live)",
+            "artist": "Beach House",
+            "genre": "indie",
+            "popularity": 31.0
+          },
+          {
+            "name": "Endless Eyes (Acoustic)",
+            "artist": "Luke Bryan",
+            "genre": "country",
+            "popularity": 38.0
+          },
+          {
+            "name": "The Flames (Deluxe)",
+            "artist": "Brent Faiyaz",
+            "genre": "r&b",
+            "popularity": 35.0
+          },
+          {
+            "name": "Lost",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 61.0
+          },
+          {
+            "name": "Bright Dark Chains (Acoustic)",
+            "artist": "H.E.R.",
+            "genre": "r&b",
+            "popularity": 60.0
+          },
+          {
+            "name": "Neon (Remix)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 51.0
+          },
+          {
+            "name": "Bright Midnight Flames (Live)",
+            "artist": "Tame Impala",
+            "genre": "indie",
+            "popularity": 28.0
+          },
+          {
+            "name": "Neon Thunder (Remix)",
+            "artist": "Miranda Lambert",
+            "genre": "country",
+            "popularity": 51.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "The Heart (Remix)",
+          "The Flames",
+          "The Roses",
+          "Roses of Wings",
+          "Bright",
+          "Dancing Golden Horizons (Deluxe)",
+          "The Skies (feat. Unknown)",
+          "The Shadows",
+          "The Chains (Live)",
+          "Echoes of Heart (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Fire of Chains (Acoustic)",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 53.0
+          },
+          {
+            "name": "The Whispers (Remix)",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 83.0
+          },
+          {
+            "name": "Bright",
+            "artist": "Karol G",
+            "genre": "latin",
+            "popularity": 78.0
+          },
+          {
+            "name": "The Lights (Deluxe)",
+            "artist": "Ariana Grande",
+            "genre": "pop",
+            "popularity": 44.0
+          },
+          {
+            "name": "The Memories",
+            "artist": "Miranda Lambert",
+            "genre": "country",
+            "popularity": 25.0
+          },
+          {
+            "name": "Rising Broken Rain",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 52.0
+          },
+          {
+            "name": "Silent Falling Shadows",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 44.0
+          },
+          {
+            "name": "Wild Echoes",
+            "artist": "The Weeknd",
+            "genre": "pop",
+            "popularity": 72.0
+          },
+          {
+            "name": "Neon Burning Rain (Acoustic)",
+            "artist": "Rauw Alejandro",
+            "genre": "latin",
+            "popularity": 43.0
+          },
+          {
+            "name": "The Skies",
+            "artist": "Becky G",
+            "genre": "latin",
+            "popularity": 83.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Wild Lights (Remix)",
+          "The Roses (feat. Unknown)",
+          "Broken Neon Lights",
+          "Midnight Rising Heart",
+          "Fire of Echoes",
+          "Rising Chains (Remix)",
+          "Dark Echoes (feat. Unknown)",
+          "The Flames",
+          "Dreams of Rain"
+        ],
+        "recommendations": [
+          {
+            "name": "Silent Falling Shadows",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 44.0
+          },
+          {
+            "name": "Thunder of Flames",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 54.0
+          },
+          {
+            "name": "Silent (Live)",
+            "artist": "Linkin Park",
+            "genre": "rock",
+            "popularity": 60.0
+          },
+          {
+            "name": "Neon (Deluxe)",
+            "artist": "The Killers",
+            "genre": "rock",
+            "popularity": 51.0
+          },
+          {
+            "name": "The Whispers (Remix)",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 83.0
+          },
+          {
+            "name": "Lost Lost Wings (Deluxe)",
+            "artist": "The Killers",
+            "genre": "rock",
+            "popularity": 83.0
+          },
+          {
+            "name": "Fire of Chains (Acoustic)",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 53.0
+          },
+          {
+            "name": "Frozen Fading Horizons",
+            "artist": "Green Day",
+            "genre": "rock",
+            "popularity": 56.0
+          },
+          {
+            "name": "Hidden Stars (feat. Unknown)",
+            "artist": "Foo Fighters",
+            "genre": "rock",
+            "popularity": 41.0
+          },
+          {
+            "name": "Rising Hidden Dreams (Acoustic)",
+            "artist": "Muse",
+            "genre": "rock",
+            "popularity": 72.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Horizons of Waves",
+          "Echoes of Rain (Deluxe)",
+          "Chains of Chains (Remix)",
+          "Lost Silent Stars",
+          "The Memories (Deluxe)",
+          "Rising Fire (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Fire of Eyes",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 44.0
+          },
+          {
+            "name": "Electric Echoes",
+            "artist": "Chris Stapleton",
+            "genre": "country",
+            "popularity": 52.0
+          },
+          {
+            "name": "Dreams of Eyes (feat. Unknown)",
+            "artist": "Alvvays",
+            "genre": "indie",
+            "popularity": 44.0
+          },
+          {
+            "name": "Rising",
+            "artist": "Summer Walker",
+            "genre": "r&b",
+            "popularity": 44.0
+          },
+          {
+            "name": "Skies of Stars (feat. Unknown)",
+            "artist": "Thelonious Monk",
+            "genre": "jazz",
+            "popularity": 45.0
+          },
+          {
+            "name": "Hidden Waves (Deluxe)",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 48.0
+          },
+          {
+            "name": "The Chains (Deluxe)",
+            "artist": "Carrie Underwood",
+            "genre": "country",
+            "popularity": 25.0
+          },
+          {
+            "name": "Fading Falling Echoes (Remix)",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 42.0
+          },
+          {
+            "name": "Golden Lights (Remix)",
+            "artist": "Fleet Foxes",
+            "genre": "indie",
+            "popularity": 19.0
+          },
+          {
+            "name": "Dark Wings",
+            "artist": "Kacey Musgraves",
+            "genre": "country",
+            "popularity": 27.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "The Roses",
+          "Whispers of Eyes (Acoustic)",
+          "Wings of Shadows (Live)",
+          "Chains of Chains (Remix)",
+          "Endless Bright Whispers (Remix)",
+          "Silent Dark Thunder (Deluxe)"
+        ],
+        "recommendations": [
+          {
+            "name": "Silent Falling Shadows",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 44.0
+          },
+          {
+            "name": "Frozen Fading Horizons",
+            "artist": "Green Day",
+            "genre": "rock",
+            "popularity": 56.0
+          },
+          {
+            "name": "Crystal",
+            "artist": "Alvvays",
+            "genre": "indie",
+            "popularity": 41.0
+          },
+          {
+            "name": "Wild (Remix)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 20.0
+          },
+          {
+            "name": "The Flames",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 61.0
+          },
+          {
+            "name": "Silent (Live)",
+            "artist": "Linkin Park",
+            "genre": "rock",
+            "popularity": 60.0
+          },
+          {
+            "name": "Neon (Deluxe)",
+            "artist": "The Killers",
+            "genre": "rock",
+            "popularity": 51.0
+          },
+          {
+            "name": "Lost Lost Wings (Deluxe)",
+            "artist": "The Killers",
+            "genre": "rock",
+            "popularity": 83.0
+          },
+          {
+            "name": "Thunder of Flames",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 54.0
+          },
+          {
+            "name": "The Chains (Live)",
+            "artist": "Imagine Dragons",
+            "genre": "rock",
+            "popularity": 50.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Lost Wings (Live)",
+          "Heart of Roads (Live)",
+          "Lost Roses (Deluxe)",
+          "Roses of Chains (Acoustic)",
+          "Falling Wild Chains (Remix)",
+          "Shadows of Memories",
+          "Burning Chains (Acoustic)"
+        ],
+        "recommendations": [
+          {
+            "name": "Burning Dark Shadows",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 62.0
+          },
+          {
+            "name": "The Shadows",
+            "artist": "Giveon",
+            "genre": "r&b",
+            "popularity": 64.0
+          },
+          {
+            "name": "Electric",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 31.0
+          },
+          {
+            "name": "The Heart (Deluxe)",
+            "artist": "Morgan Wallen",
+            "genre": "country",
+            "popularity": 22.0
+          },
+          {
+            "name": "Dreams of Eyes (feat. Unknown)",
+            "artist": "Alvvays",
+            "genre": "indie",
+            "popularity": 44.0
+          },
+          {
+            "name": "Eyes of Wings (Acoustic)",
+            "artist": "SZA",
+            "genre": "r&b",
+            "popularity": 57.0
+          },
+          {
+            "name": "Sacred (Acoustic)",
+            "artist": "Kacey Musgraves",
+            "genre": "country",
+            "popularity": 26.0
+          },
+          {
+            "name": "Rising (Deluxe)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 37.0
+          },
+          {
+            "name": "The Waves",
+            "artist": "Summer Walker",
+            "genre": "r&b",
+            "popularity": 73.0
+          },
+          {
+            "name": "Roads of Echoes",
+            "artist": "Kacey Musgraves",
+            "genre": "country",
+            "popularity": 29.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Heart of Thunder (Remix)",
+          "The Echoes",
+          "Golden Dancing Memories",
+          "Flames of Chains",
+          "The Dreams (Acoustic)",
+          "Neon Dancing Skies (Acoustic)",
+          "Silent Chains (Acoustic)",
+          "Golden Lights (Remix)",
+          "Endless Electric Eyes (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Burning Endless Memories",
+            "artist": "Alicia Keys",
+            "genre": "r&b",
+            "popularity": 45.0
+          },
+          {
+            "name": "Wild Echoes (Deluxe)",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 47.0
+          },
+          {
+            "name": "Wild",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 53.0
+          },
+          {
+            "name": "Wild Shadows (feat. Unknown)",
+            "artist": "Mitski",
+            "genre": "indie",
+            "popularity": 30.0
+          },
+          {
+            "name": "Electric (Deluxe)",
+            "artist": "John Coltrane",
+            "genre": "jazz",
+            "popularity": 45.0
+          },
+          {
+            "name": "Rising (Deluxe)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 37.0
+          },
+          {
+            "name": "Dark Rain (Deluxe)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 56.0
+          },
+          {
+            "name": "The Flames (Deluxe)",
+            "artist": "Brent Faiyaz",
+            "genre": "r&b",
+            "popularity": 35.0
+          },
+          {
+            "name": "Fire of Eyes",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 44.0
+          },
+          {
+            "name": "Dreams of Eyes (feat. Unknown)",
+            "artist": "Alvvays",
+            "genre": "indie",
+            "popularity": 44.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Fading (Live)",
+          "Rain of Eyes",
+          "Burning Shadows",
+          "Midnight Memories (feat. Unknown)",
+          "Silent Silent Memories (Acoustic)"
+        ],
+        "recommendations": [
+          {
+            "name": "Lost",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 61.0
+          },
+          {
+            "name": "Sacred (Deluxe)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 62.0
+          },
+          {
+            "name": "The Thunder (Remix)",
+            "artist": "Chris Stapleton",
+            "genre": "country",
+            "popularity": 27.0
+          },
+          {
+            "name": "Sacred (Remix)",
+            "artist": "Summer Walker",
+            "genre": "r&b",
+            "popularity": 30.0
+          },
+          {
+            "name": "Roses of Skies",
+            "artist": "Carrie Underwood",
+            "genre": "country",
+            "popularity": 24.0
+          },
+          {
+            "name": "Dark Rain (Deluxe)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 56.0
+          },
+          {
+            "name": "Silent (Remix)",
+            "artist": "Bon Iver",
+            "genre": "indie",
+            "popularity": 28.0
+          },
+          {
+            "name": "The Shadows",
+            "artist": "Giveon",
+            "genre": "r&b",
+            "popularity": 64.0
+          },
+          {
+            "name": "Roses of Chains (Acoustic)",
+            "artist": "Post Malone",
+            "genre": "pop",
+            "popularity": 94.0
+          },
+          {
+            "name": "The Stars",
+            "artist": "Mac DeMarco",
+            "genre": "indie",
+            "popularity": 42.0
+          }
+        ]
+      }
+    ],
+    "per_run_ild": [
+      0.0077,
+      0.0036,
+      0.0056,
+      0.0068,
+      0.0102,
+      0.0062,
+      0.0059,
+      0.0056
+    ],
+    "per_run_gini": [
+      0.1412,
+      0.1832,
+      0.1305,
+      0.1421,
+      0.1554,
+      0.2191,
+      0.095,
+      0.2389
+    ],
+    "per_run_avg_pop": [
+      44.2,
+      57.7,
+      59.7,
+      39.0,
+      52.0,
+      44.5,
+      43.6,
+      48.8
+    ],
+    "per_run_niche_pct": [
+      40.0,
+      10.0,
+      0.0,
+      30.0,
+      10.0,
+      50.0,
+      30.0,
+      40.0
+    ]
+  },
+  "hybrid": {
+    "ild": 0.0187,
+    "gini": 0.2156,
+    "avg_popularity": 46.64,
+    "niche_pct": 33.75,
+    "runs": [
+      {
+        "seed_songs": [
+          "Crystal Bright Dreams (Live)",
+          "Crystal Silent Fire (Live)",
+          "Dancing (feat. Unknown)",
+          "Endless Roads (feat. Unknown)",
+          "Frozen Midnight Flames",
+          "Burning Roses (Remix)",
+          "Crystal Falling Lights",
+          "Midnight (Deluxe)",
+          "Lost Wings (Live)",
+          "Wild Rising Chains (Remix)"
+        ],
+        "recommendations": [
+          {
+            "name": "Shadows of Roses (Remix)",
+            "artist": "Daniel Caesar",
+            "genre": "r&b",
+            "popularity": 41.0
+          },
+          {
+            "name": "The Rain (feat. Unknown)",
+            "artist": "Frank Ocean",
+            "genre": "r&b",
+            "popularity": 44.0
+          },
+          {
+            "name": "Dancing Fire (Deluxe)",
+            "artist": "Thelonious Monk",
+            "genre": "jazz",
+            "popularity": 9.0
+          },
+          {
+            "name": "The Roads (feat. Unknown)",
+            "artist": "Summer Walker",
+            "genre": "r&b",
+            "popularity": 73.0
+          },
+          {
+            "name": "Silent Midnight Chains (Remix)",
+            "artist": "Khalid",
+            "genre": "r&b",
+            "popularity": 71.0
+          },
+          {
+            "name": "The Memories (Acoustic)",
+            "artist": "Daniel Caesar",
+            "genre": "r&b",
+            "popularity": 63.0
+          },
+          {
+            "name": "Endless Echoes",
+            "artist": "Mac DeMarco",
+            "genre": "indie",
+            "popularity": 52.0
+          },
+          {
+            "name": "Lost Horizons",
+            "artist": "Alvvays",
+            "genre": "indie",
+            "popularity": 10.0
+          },
+          {
+            "name": "The Thunder (Remix)",
+            "artist": "Chris Stapleton",
+            "genre": "country",
+            "popularity": 27.0
+          },
+          {
+            "name": "Wild Endless Wings (Deluxe)",
+            "artist": "Morgan Wallen",
+            "genre": "country",
+            "popularity": 55.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "The Heart (Remix)",
+          "The Flames",
+          "The Roses",
+          "Roses of Wings",
+          "Bright",
+          "Dancing Golden Horizons (Deluxe)",
+          "The Skies (feat. Unknown)",
+          "The Shadows",
+          "The Chains (Live)",
+          "Echoes of Heart (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Fire of Chains (Acoustic)",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 53.0
+          },
+          {
+            "name": "Midnight Eyes (Deluxe)",
+            "artist": "Lil Nas X",
+            "genre": "hip-hop",
+            "popularity": 80.0
+          },
+          {
+            "name": "Chains of Fire",
+            "artist": "Wallows",
+            "genre": "indie",
+            "popularity": 18.0
+          },
+          {
+            "name": "The Rain (feat. Unknown)",
+            "artist": "Frank Ocean",
+            "genre": "r&b",
+            "popularity": 44.0
+          },
+          {
+            "name": "Broken (feat. Unknown)",
+            "artist": "Billie Eilish",
+            "genre": "pop",
+            "popularity": 95.0
+          },
+          {
+            "name": "Fading Roads (Remix)",
+            "artist": "U2",
+            "genre": "rock",
+            "popularity": 66.0
+          },
+          {
+            "name": "The Rain (Deluxe)",
+            "artist": "Rosal\u00eda",
+            "genre": "latin",
+            "popularity": 86.0
+          },
+          {
+            "name": "Dancing Hidden Thunder",
+            "artist": "Zach Bryan",
+            "genre": "country",
+            "popularity": 52.0
+          },
+          {
+            "name": "The Waves (Remix)",
+            "artist": "Daddy Yankee",
+            "genre": "latin",
+            "popularity": 53.0
+          },
+          {
+            "name": "The Flames",
+            "artist": "Mitski",
+            "genre": "indie",
+            "popularity": 24.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Wild Lights (Remix)",
+          "The Roses (feat. Unknown)",
+          "Broken Neon Lights",
+          "Midnight Rising Heart",
+          "Fire of Echoes",
+          "Rising Chains (Remix)",
+          "Dark Echoes (feat. Unknown)",
+          "The Flames",
+          "Dreams of Rain"
+        ],
+        "recommendations": [
+          {
+            "name": "Silent Falling Shadows",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 44.0
+          },
+          {
+            "name": "Hidden (Remix)",
+            "artist": "Coldplay",
+            "genre": "rock",
+            "popularity": 72.0
+          },
+          {
+            "name": "Silent Electric Echoes (feat. Unknown)",
+            "artist": "Post Malone",
+            "genre": "pop",
+            "popularity": 49.0
+          },
+          {
+            "name": "Electric Frozen Thunder (Remix)",
+            "artist": "Wallows",
+            "genre": "indie",
+            "popularity": 51.0
+          },
+          {
+            "name": "Wild (Remix)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 20.0
+          },
+          {
+            "name": "Whispers of Rain (Acoustic)",
+            "artist": "Green Day",
+            "genre": "rock",
+            "popularity": 84.0
+          },
+          {
+            "name": "Hidden Broken Rain",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 34.0
+          },
+          {
+            "name": "The Flames",
+            "artist": "Mitski",
+            "genre": "indie",
+            "popularity": 24.0
+          },
+          {
+            "name": "Crystal (feat. Unknown)",
+            "artist": "Kacey Musgraves",
+            "genre": "country",
+            "popularity": 24.0
+          },
+          {
+            "name": "Endless Lights",
+            "artist": "The Weeknd",
+            "genre": "pop",
+            "popularity": 77.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Horizons of Waves",
+          "Echoes of Rain (Deluxe)",
+          "Chains of Chains (Remix)",
+          "Lost Silent Stars",
+          "The Memories (Deluxe)",
+          "Rising Fire (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Fire of Eyes",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 44.0
+          },
+          {
+            "name": "Chains of Chains (Acoustic)",
+            "artist": "Carrie Underwood",
+            "genre": "country",
+            "popularity": 44.0
+          },
+          {
+            "name": "Sacred (Acoustic)",
+            "artist": "Kacey Musgraves",
+            "genre": "country",
+            "popularity": 26.0
+          },
+          {
+            "name": "The Wings (Live)",
+            "artist": "Chris Stapleton",
+            "genre": "country",
+            "popularity": 29.0
+          },
+          {
+            "name": "The Lights (feat. Unknown)",
+            "artist": "Zach Bryan",
+            "genre": "country",
+            "popularity": 32.0
+          },
+          {
+            "name": "Electric Dreams (Live)",
+            "artist": "Tame Impala",
+            "genre": "indie",
+            "popularity": 22.0
+          },
+          {
+            "name": "Lost",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 61.0
+          },
+          {
+            "name": "Wings of Fire (Live)",
+            "artist": "Kacey Musgraves",
+            "genre": "country",
+            "popularity": 33.0
+          },
+          {
+            "name": "The Skies (Remix)",
+            "artist": "Mitski",
+            "genre": "indie",
+            "popularity": 21.0
+          },
+          {
+            "name": "Endless Echoes",
+            "artist": "Mac DeMarco",
+            "genre": "indie",
+            "popularity": 52.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "The Roses",
+          "Whispers of Eyes (Acoustic)",
+          "Wings of Shadows (Live)",
+          "Chains of Chains (Remix)",
+          "Endless Bright Whispers (Remix)",
+          "Silent Dark Thunder (Deluxe)"
+        ],
+        "recommendations": [
+          {
+            "name": "Silent Falling Shadows",
+            "artist": "Sia",
+            "genre": "pop",
+            "popularity": 44.0
+          },
+          {
+            "name": "The Echoes",
+            "artist": "Linkin Park",
+            "genre": "rock",
+            "popularity": 83.0
+          },
+          {
+            "name": "Wild Memories",
+            "artist": "Clairo",
+            "genre": "indie",
+            "popularity": 35.0
+          },
+          {
+            "name": "The Dreams (Deluxe)",
+            "artist": "The Killers",
+            "genre": "rock",
+            "popularity": 67.0
+          },
+          {
+            "name": "Frozen Hidden Heart",
+            "artist": "Linkin Park",
+            "genre": "rock",
+            "popularity": 59.0
+          },
+          {
+            "name": "The Heart (feat. Unknown)",
+            "artist": "Harry Styles",
+            "genre": "pop",
+            "popularity": 85.0
+          },
+          {
+            "name": "Golden (Remix)",
+            "artist": "Ariana Grande",
+            "genre": "pop",
+            "popularity": 66.0
+          },
+          {
+            "name": "The Dreams (Deluxe)",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 30.0
+          },
+          {
+            "name": "Dancing Chains (Deluxe)",
+            "artist": "Green Day",
+            "genre": "rock",
+            "popularity": 49.0
+          },
+          {
+            "name": "The Eyes (Remix)",
+            "artist": "Bon Iver",
+            "genre": "indie",
+            "popularity": 10.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Lost Wings (Live)",
+          "Heart of Roads (Live)",
+          "Lost Roses (Deluxe)",
+          "Roses of Chains (Acoustic)",
+          "Falling Wild Chains (Remix)",
+          "Shadows of Memories",
+          "Burning Chains (Acoustic)"
+        ],
+        "recommendations": [
+          {
+            "name": "Burning Dark Shadows",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 62.0
+          },
+          {
+            "name": "Shadows of Roses (Remix)",
+            "artist": "Daniel Caesar",
+            "genre": "r&b",
+            "popularity": 41.0
+          },
+          {
+            "name": "The Chains (Remix)",
+            "artist": "Frank Ocean",
+            "genre": "r&b",
+            "popularity": 51.0
+          },
+          {
+            "name": "Midnight Wild Rain",
+            "artist": "John Coltrane",
+            "genre": "jazz",
+            "popularity": 12.0
+          },
+          {
+            "name": "Wild",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 53.0
+          },
+          {
+            "name": "Bright (Remix)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 22.0
+          },
+          {
+            "name": "Dancing (feat. Unknown)",
+            "artist": "Blake Shelton",
+            "genre": "country",
+            "popularity": 44.0
+          },
+          {
+            "name": "Sacred (Deluxe)",
+            "artist": "Dua Lipa",
+            "genre": "pop",
+            "popularity": 62.0
+          },
+          {
+            "name": "The Eyes (feat. Unknown)",
+            "artist": "SZA",
+            "genre": "r&b",
+            "popularity": 55.0
+          },
+          {
+            "name": "The Wings",
+            "artist": "Beach House",
+            "genre": "indie",
+            "popularity": 54.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Heart of Thunder (Remix)",
+          "The Echoes",
+          "Golden Dancing Memories",
+          "Flames of Chains",
+          "The Dreams (Acoustic)",
+          "Neon Dancing Skies (Acoustic)",
+          "Silent Chains (Acoustic)",
+          "Golden Lights (Remix)",
+          "Endless Electric Eyes (feat. Unknown)"
+        ],
+        "recommendations": [
+          {
+            "name": "Burning Endless Memories",
+            "artist": "Alicia Keys",
+            "genre": "r&b",
+            "popularity": 45.0
+          },
+          {
+            "name": "The Lights (feat. Unknown)",
+            "artist": "Zach Bryan",
+            "genre": "country",
+            "popularity": 32.0
+          },
+          {
+            "name": "Echoes of Heart (feat. Unknown)",
+            "artist": "Mac DeMarco",
+            "genre": "indie",
+            "popularity": 50.0
+          },
+          {
+            "name": "Shadows of Roses (Remix)",
+            "artist": "Daniel Caesar",
+            "genre": "r&b",
+            "popularity": 41.0
+          },
+          {
+            "name": "Broken Silent Shadows (Remix)",
+            "artist": "Khalid",
+            "genre": "r&b",
+            "popularity": 63.0
+          },
+          {
+            "name": "Stars of Echoes",
+            "artist": "Giveon",
+            "genre": "r&b",
+            "popularity": 43.0
+          },
+          {
+            "name": "Electric Broken Fire (Live)",
+            "artist": "Brent Faiyaz",
+            "genre": "r&b",
+            "popularity": 34.0
+          },
+          {
+            "name": "The Fire",
+            "artist": "Giveon",
+            "genre": "r&b",
+            "popularity": 64.0
+          },
+          {
+            "name": "The Echoes (Acoustic)",
+            "artist": "Carrie Underwood",
+            "genre": "country",
+            "popularity": 44.0
+          },
+          {
+            "name": "Lost Memories",
+            "artist": "Morgan Wallen",
+            "genre": "country",
+            "popularity": 25.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Fading (Live)",
+          "Rain of Eyes",
+          "Burning Shadows",
+          "Midnight Memories (feat. Unknown)",
+          "Silent Silent Memories (Acoustic)"
+        ],
+        "recommendations": [
+          {
+            "name": "Lost",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 61.0
+          },
+          {
+            "name": "Roads of Echoes",
+            "artist": "Kacey Musgraves",
+            "genre": "country",
+            "popularity": 29.0
+          },
+          {
+            "name": "Bright Midnight Flames (Live)",
+            "artist": "Tame Impala",
+            "genre": "indie",
+            "popularity": 28.0
+          },
+          {
+            "name": "Hidden Silent Shadows (Remix)",
+            "artist": "Maluma",
+            "genre": "latin",
+            "popularity": 82.0
+          },
+          {
+            "name": "Endless Lights (Deluxe)",
+            "artist": "Luke Combs",
+            "genre": "country",
+            "popularity": 46.0
+          },
+          {
+            "name": "Burning Endless Memories",
+            "artist": "Alicia Keys",
+            "genre": "r&b",
+            "popularity": 45.0
+          },
+          {
+            "name": "Fire of Eyes",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 44.0
+          },
+          {
+            "name": "The Lights (feat. Unknown)",
+            "artist": "Brent Faiyaz",
+            "genre": "r&b",
+            "popularity": 32.0
+          },
+          {
+            "name": "The Skies (Deluxe)",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 46.0
+          },
+          {
+            "name": "Hidden Broken Rain",
+            "artist": "Jason Aldean",
+            "genre": "country",
+            "popularity": 34.0
+          }
+        ]
+      }
+    ],
+    "per_run_ild": [
+      0.018,
+      0.0132,
+      0.0193,
+      0.0196,
+      0.025,
+      0.019,
+      0.0197,
+      0.0162
+    ],
+    "per_run_gini": [
+      0.2771,
+      0.2363,
+      0.2595,
+      0.194,
+      0.2428,
+      0.1825,
+      0.1499,
+      0.1828
+    ],
+    "per_run_avg_pop": [
+      44.5,
+      57.1,
+      47.9,
+      36.4,
+      52.8,
+      45.6,
+      44.1,
+      44.7
+    ],
+    "per_run_niche_pct": [
+      30.0,
+      20.0,
+      40.0,
+      60.0,
+      30.0,
+      20.0,
+      30.0,
+      40.0
+    ]
+  }
+}
