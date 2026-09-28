@@ -22,12 +22,20 @@ async function loadResultsData() {
         }
 
         const data = await response.json();
-        renderRecommendations(data);
+        renderRecommendations(normalizeResultsData(data));
     } catch (e) {
         console.error('Error fetching results.json:', e);
         // Fallback for local file testing without server
         useFallbackData();
     }
+}
+
+function normalizeResultsData(data) {
+    return {
+        greedy: data.greedy,
+        content_filtering: data.content_filtering || data.similarity,
+        graph_dpp_rerank: data.graph_dpp_rerank || data.hybrid,
+    };
 }
 
 // Fallback data if JSON cannot be loaded (e.g. file:// protocol testing)

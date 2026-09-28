@@ -1,6 +1,9 @@
 """
 Generate matplotlib visualisation plots from experiment results.
 Saves PNG images to output/ directory for the web frontend.
+
+Compatible with both the old (1,960-track audio-feature) dataset
+and the new (3,000-track) solomonameh/spotify-music-dataset results.
 """
 
 import json
@@ -13,7 +16,12 @@ import numpy as np
 
 def load_results(path="output/results.json"):
     with open(path, "r") as f:
-        return json.load(f)
+        results = json.load(f)
+        return {
+            "greedy": results.get("greedy", {}),
+            "content_filtering": results.get("content_filtering") or results.get("similarity", {}),
+            "graph_dpp_rerank": results.get("graph_dpp_rerank") or results.get("hybrid", {})
+        }
 
 
 def setup_style():
@@ -33,8 +41,9 @@ def setup_style():
     })
 
 
-ALGO_NAMES = ["Greedy\n(Popularity)", "Similarity\n(CF)", "Hybrid\n(DPP)"]
-ALGO_KEYS = ["greedy", "similarity", "hybrid"]
+ALGO_NAMES = ["Greedy\n(Popularity)", "Content Filtering", "Graph DPP Rerank"]
+# Keys must match recommendation_engine.py run_experiment() output dictionary
+ALGO_KEYS = ["greedy", "content_filtering", "graph_dpp_rerank"]
 BAR_COLORS = ["#ff6b6b", "#4ecdc4", "#a855f7"]
 
 

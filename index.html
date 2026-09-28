@@ -45,7 +45,7 @@
             </p>
             <div class="hero-stats">
                 <div class="stat-pill">
-                    <span class="stat-number" data-count="1960">0</span>
+                    <span class="stat-number" data-count="3000">0</span>
                     <span class="stat-label">Tracks Analyzed</span>
                 </div>
                 <div class="stat-pill">
@@ -53,7 +53,7 @@
                     <span class="stat-label">Algorithms</span>
                 </div>
                 <div class="stat-pill">
-                    <span class="stat-number" data-count="8">0</span>
+                    <span class="stat-number" data-count="50">0</span>
                     <span class="stat-label">Experiment Runs</span>
                 </div>
                 <div class="stat-pill">
@@ -116,7 +116,7 @@
                         <h3 class="algo-name">Content Filtering</h3>
                         <span class="algo-type">Content Filtering</span>
                         <p class="algo-desc">
-                            Computes cosine content_filtering between liked songs and candidates.
+                            Computes cosine similarity between liked songs and candidates.
                             Returns top K=10 most similar tracks. Better relevance, but echo chamber risk.
                         </p>
                         <div class="algo-traits">
@@ -141,7 +141,7 @@
                         <h3 class="algo-name">Graph DPP Rerank</h3>
                         <span class="algo-type">Content Filtering + DPP Re-ranking</span>
                         <p class="algo-desc">
-                            Gets top N=50 via content_filtering, then applies Determinantal Point Process re-ranking
+                            Gets top N=50 via content similarity, then applies Determinantal Point Process re-ranking
                             to maximise diversity. Enforces ≥20% niche song fairness constraint.
                         </p>
                         <div class="algo-traits">
@@ -164,7 +164,7 @@
                 <div class="section-header">
                     <span class="section-tag">Evaluation</span>
                     <h2 class="section-title">Key Metrics at a Glance</h2>
-                    <p class="section-desc">Averaged results over 8 independent experiment runs with random seed songs</p>
+                    <p class="section-desc">Averaged results over 50 independent experiment runs with random seed songs</p>
                 </div>
 
                 <div class="metrics-dashboard">
@@ -177,38 +177,38 @@
                         <div class="metric-body">
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 13%"></div>
+                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 40%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">ILD (Diversity)</span>
-                                    <span class="metric-value">0.0347</span>
+                                    <span class="metric-value">0.0253</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 3%"></div>
+                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 43%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Popularity Concentration Index</span>
-                                    <span class="metric-value">0.0070</span>
+                                    <span class="metric-value">0.1821</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 96%"></div>
+                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 45%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Avg Popularity</span>
-                                    <span class="metric-value">95.90</span>
+                                    <span class="metric-value">45.42</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 0%"></div>
+                                    <div class="metric-bar metric-bar-greedy" style="--bar-width: 60%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Niche Songs</span>
-                                    <span class="metric-value">0.00%</span>
+                                    <span class="metric-value">60.00%</span>
                                 </div>
                             </div>
                         </div>
@@ -223,38 +223,38 @@
                         <div class="metric-body">
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 2.5%"></div>
+                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 16%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">ILD (Diversity)</span>
-                                    <span class="metric-value">0.0064</span>
+                                    <span class="metric-value">0.0099</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 65%"></div>
+                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 34%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Popularity Concentration Index</span>
-                                    <span class="metric-value">0.1632</span>
+                                    <span class="metric-value">0.1460</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 49%"></div>
+                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 5%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Avg Popularity</span>
-                                    <span class="metric-value">48.69</span>
+                                    <span class="metric-value">5.35</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 26%"></div>
+                                    <div class="metric-bar metric-bar-content_filtering" style="--bar-width: 100%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Niche Songs</span>
-                                    <span class="metric-value">26.25%</span>
+                                    <span class="metric-value">100.00%</span>
                                 </div>
                             </div>
                         </div>
@@ -269,11 +269,11 @@
                         <div class="metric-body">
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-graph_dpp_rerank" style="--bar-width: 7.5%"></div>
+                                    <div class="metric-bar metric-bar-graph_dpp_rerank" style="--bar-width: 100%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">ILD (Diversity)</span>
-                                    <span class="metric-value">0.0187</span>
+                                    <span class="metric-value">0.0635</span>
                                 </div>
                             </div>
                             <div class="metric-item">
@@ -282,25 +282,25 @@
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Popularity Concentration Index</span>
-                                    <span class="metric-value">0.2156</span>
+                                    <span class="metric-value">0.3673</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-graph_dpp_rerank" style="--bar-width: 47%"></div>
+                                    <div class="metric-bar metric-bar-graph_dpp_rerank" style="--bar-width: 7%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Avg Popularity</span>
-                                    <span class="metric-value">46.64</span>
+                                    <span class="metric-value">6.57</span>
                                 </div>
                             </div>
                             <div class="metric-item">
                                 <div class="metric-bar-container">
-                                    <div class="metric-bar metric-bar-graph_dpp_rerank" style="--bar-width: 34%"></div>
+                                    <div class="metric-bar metric-bar-graph_dpp_rerank" style="--bar-width: 100%"></div>
                                 </div>
                                 <div class="metric-info">
                                     <span class="metric-label">Niche Songs</span>
-                                    <span class="metric-value">33.75%</span>
+                                    <span class="metric-value">100.00%</span>
                                 </div>
                             </div>
                         </div>
@@ -316,27 +316,27 @@
                         <span class="console-title">Experiment Output</span>
                     </div>
                     <pre class="console-body"><code>Algorithm: Greedy (Popularity)
-  ILD (Diversity):     0.0347
-  Popularity Concentration Index:          0.0070
-  Avg Popularity:      95.90
-  Niche Songs (%):     0.00%
+  ILD (Diversity):     0.0253
+  Popularity Concentration Index:          0.1821
+  Avg Popularity:      45.42
+  Niche Songs (%):     60.00%
 
 Algorithm: Content Filtering (CF)
-  ILD (Diversity):     0.0064
-  Popularity Concentration Index:          0.1632
-  Avg Popularity:      48.69
-  Niche Songs (%):     26.25%
+  ILD (Diversity):     0.0099
+  Popularity Concentration Index:          0.1460
+  Avg Popularity:      5.35
+  Niche Songs (%):     100.00%
 
 Algorithm: Graph DPP Rerank (DPP)
-  ILD (Diversity):     0.0187
-  Popularity Concentration Index:          0.2156
-  Avg Popularity:      46.64
-  Niche Songs (%):     33.75%
+  ILD (Diversity):     0.0635
+  Popularity Concentration Index:          0.3673
+  Avg Popularity:      6.57
+  Niche Songs (%):     100.00%
 
 ────────────────────────────────────────────────────────────
-🏆 Highest Diversity (ILD):  Greedy (Popularity)  (0.0347)
-🏆 Best Niche Coverage:      Graph DPP Rerank (DPP)         (33.75%)
-🏆 Lowest Popularity Bias:   Graph DPP Rerank (DPP)         (46.64)
+🏆 Highest Diversity (ILD):  Graph DPP Rerank (DPP)  (0.0635)
+🏆 Best Niche Coverage:      Content Filtering / Graph DPP Rerank (100.00%)
+🏆 Lowest Popularity Bias:   Content Filtering (CF)    (5.35)
 ────────────────────────────────────────────────────────────</code></pre>
                 </div>
             </div>
@@ -348,7 +348,7 @@ Algorithm: Graph DPP Rerank (DPP)
                 <div class="section-header">
                     <span class="section-tag">Visual Analysis</span>
                     <h2 class="section-title">Experiment Visualizations</h2>
-                    <p class="section-desc">Interactive charts generated from 8 experiment runs across all algorithms</p>
+                    <p class="section-desc">Interactive charts generated from 50 experiment runs across all algorithms</p>
                 </div>
 
                 <div class="charts-grid">
@@ -408,31 +408,31 @@ Algorithm: Graph DPP Rerank (DPP)
                         <tbody>
                             <tr>
                                 <td class="td-label">ILD (Diversity) ↑</td>
-                                <td class="td-best">0.0347</td>
-                                <td>0.0064</td>
-                                <td>0.0187</td>
-                                <td class="td-winner"><span class="winner-badge winner-greedy">Greedy</span></td>
+                                <td>0.0253</td>
+                                <td>0.0099</td>
+                                <td class="td-best">0.0635</td>
+                                <td class="td-winner"><span class="winner-badge winner-graph_dpp_rerank">Graph DPP Rerank</span></td>
                             </tr>
                             <tr>
                                 <td class="td-label">Popularity Concentration Index ↓</td>
-                                <td class="td-best">0.0070</td>
-                                <td>0.1632</td>
-                                <td>0.2156</td>
-                                <td class="td-winner"><span class="winner-badge winner-greedy">Greedy</span></td>
+                                <td>0.1821</td>
+                                <td class="td-best">0.1460</td>
+                                <td>0.3673</td>
+                                <td class="td-winner"><span class="winner-badge winner-content_filtering">Content Filtering</span></td>
                             </tr>
                             <tr>
                                 <td class="td-label">Avg Popularity</td>
-                                <td>95.90</td>
-                                <td>48.69</td>
-                                <td class="td-best">46.64</td>
-                                <td class="td-winner"><span class="winner-badge winner-graph_dpp_rerank">Graph DPP Rerank</span></td>
+                                <td>45.42</td>
+                                <td class="td-best">5.35</td>
+                                <td>6.57</td>
+                                <td class="td-winner"><span class="winner-badge winner-content_filtering">Content Filtering</span></td>
                             </tr>
                             <tr>
                                 <td class="td-label">Niche Songs % ↑</td>
-                                <td>0.00%</td>
-                                <td>26.25%</td>
-                                <td class="td-best">33.75%</td>
-                                <td class="td-winner"><span class="winner-badge winner-graph_dpp_rerank">Graph DPP Rerank</span></td>
+                                <td>60.00%</td>
+                                <td class="td-best">100.00%</td>
+                                <td class="td-best">100.00%</td>
+                                <td class="td-winner"><span class="winner-badge winner-content_filtering">Content Filtering / Graph DPP Rerank</span></td>
                             </tr>
                             <tr>
                                 <td class="td-label">Popularity Bias</td>
@@ -475,9 +475,9 @@ Algorithm: Graph DPP Rerank (DPP)
                         <div class="conclusion-icon">🔬</div>
                         <h3>Key Finding</h3>
                         <p>
-                            The <strong>Greedy algorithm</strong> achieves the highest raw ILD diversity (0.0347) because it selects
-                            from a global pool of popular songs spanning different genres. However, it recommends
-                            <strong>zero niche songs</strong> and has extreme popularity bias (avg 95.9).
+                            The <strong>Greedy algorithm</strong> recommends mainstream tracks with moderate diversity (ILD 0.0253)
+                            and 60% niche song coverage on this dataset. It still shows higher average popularity (45.42)
+                            than the content-based approaches.
                         </p>
                     </div>
 
@@ -485,9 +485,9 @@ Algorithm: Graph DPP Rerank (DPP)
                         <div class="conclusion-icon">💡</div>
                         <h3>Critical Insight</h3>
                         <p>
-                            <strong>Content Filtering-based filtering</strong> creates an echo chamber effect with the lowest ILD (0.0064),
+                            <strong>Content Filtering-based filtering</strong> creates an echo chamber effect with the lowest ILD (0.0099),
                             confirming that pure content filtering traps users in narrow taste profiles.
-                            However, it naturally discovers some niche content (26.25%).
+                            It achieves full niche coverage (100%) and the lowest popularity bias (5.35).
                         </p>
                     </div>
 
@@ -496,9 +496,9 @@ Algorithm: Graph DPP Rerank (DPP)
                         <h3>Best Overall: Graph DPP Rerank</h3>
                         <p>
                             The <strong>Graph DPP Rerank</strong> algorithm achieves the best balance:
-                            competitive diversity (ILD 0.0187), <strong>lowest popularity bias</strong> (46.64),
-                            and <strong>highest niche representation</strong> (33.75%). The DPP re-ranking
-                            combined with the fairness constraint creates the most equitable recommendations.
+                            <strong>highest diversity</strong> (ILD 0.0635), <strong>full niche representation</strong> (100%),
+                            and low popularity bias (6.57). The DPP re-ranking
+                            combined with the fairness constraint creates the most diverse and equitable recommendations.
                         </p>
                     </div>
 
@@ -522,7 +522,7 @@ Algorithm: Graph DPP Rerank (DPP)
                             <div class="formula-math">
                                 ILD = <span class="frac"><span class="num">1</span><span class="den">|L|(|L|−1)</span></span> ∑<sub>i≠j</sub> (1 − sim(i,j))
                             </div>
-                            <p>Where sim(i,j) = cosine content_filtering between feature vectors</p>
+                            <p>Where sim(i,j) = cosine similarity between feature vectors</p>
                         </div>
                         <div class="formula-item">
                             <h4>Popularity Concentration Index</h4>
@@ -536,7 +536,7 @@ Algorithm: Graph DPP Rerank (DPP)
                             <div class="formula-math">
                                 L<sub>ij</sub> = q<sub>i</sub> · q<sub>j</sub> · S<sub>ij</sub>
                             </div>
-                            <p>Quality-weighted content_filtering kernel for determinantal point process</p>
+                            <p>Quality-weighted similarity kernel for determinantal point process</p>
                         </div>
                     </div>
                 </div>
@@ -565,7 +565,7 @@ Algorithm: Graph DPP Rerank (DPP)
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Dataset: Spotify Tracks (Algozee Kaggle) • 1,960 tracks • 12 genres • 2024</p>
+                <p>Dataset: Spotify Tracks (solomonameh/spotify-music-dataset) • 3,000 tracks • 11 genres • 2024</p>
             </div>
         </div>
     </footer>

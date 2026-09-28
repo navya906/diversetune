@@ -1,630 +1,634 @@
 {
   "greedy": {
-    "ild": 0.0347,
-    "gini": 0.007,
-    "avg_popularity": 95.9,
+    "ild": 0.6971,
+    "gini": 0.0,
+    "avg_popularity": 68.0,
     "niche_pct": 0.0,
     "runs": [
       {
         "seed_songs": [
-          "Crystal Bright Dreams (Live)",
-          "Crystal Silent Fire (Live)",
-          "Dancing (feat. Unknown)",
-          "Endless Roads (feat. Unknown)",
-          "Frozen Midnight Flames",
-          "Burning Roses (Remix)",
-          "Crystal Falling Lights",
-          "Midnight (Deluxe)",
-          "Lost Wings (Live)",
-          "Wild Rising Chains (Remix)"
+          "Cosmos",
+          "Upon Your Heart",
+          "Sawa",
+          "SimpsonWave1995",
+          "Flou",
+          "Time After Time",
+          "Defiance",
+          "Trip to Valhalla",
+          "#3",
+          "Smells Like Teen Spirit - Remastered 2021"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       },
       {
         "seed_songs": [
-          "The Heart (Remix)",
-          "The Flames",
-          "The Roses",
-          "Roses of Wings",
-          "Bright",
-          "Dancing Golden Horizons (Deluxe)",
-          "The Skies (feat. Unknown)",
-          "The Shadows",
-          "The Chains (Live)",
-          "Echoes of Heart (feat. Unknown)"
+          "Estoy que muerdo",
+          "Elevation",
+          "Soak Garri",
+          "Good Life {Freestyle}",
+          "citynights",
+          "Keep on Moving",
+          "Stardust",
+          "Fly Me To The Moon",
+          "FADE UP"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       },
       {
         "seed_songs": [
-          "Wild Lights (Remix)",
-          "The Roses (feat. Unknown)",
-          "Broken Neon Lights",
-          "Midnight Rising Heart",
-          "Fire of Echoes",
-          "Rising Chains (Remix)",
-          "Dark Echoes (feat. Unknown)",
-          "The Flames",
-          "Dreams of Rain"
+          "The Mist: Pt. 2",
+          "Therapy Session",
+          "Noctis",
+          "B\u00e9same",
+          "Hanging on to Nothing",
+          "Obinasom",
+          "Hadi Yavrum",
+          "Cheat On Me (feat. Dave)",
+          "Normally (feat. NSG)"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       },
       {
         "seed_songs": [
-          "Horizons of Waves",
-          "Echoes of Rain (Deluxe)",
-          "Chains of Chains (Remix)",
-          "Lost Silent Stars",
-          "The Memories (Deluxe)",
-          "Rising Fire (feat. Unknown)"
+          "Breezeblocks",
+          "Nack Nostalgia",
+          "\u670b\u53cb - \u96fb\u5f71\u300c\u9f8d\u5144\u864e\u5f1f\u300d\u6b4c\u66f2",
+          "Fotograf\u00eda",
+          "Transformers Prime",
+          "glow",
+          "Vur Patlas\u0131n"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       },
       {
         "seed_songs": [
-          "The Roses",
-          "Whispers of Eyes (Acoustic)",
-          "Wings of Shadows (Live)",
-          "Chains of Chains (Remix)",
-          "Endless Bright Whispers (Remix)",
-          "Silent Dark Thunder (Deluxe)"
+          "Don't Care",
+          "Worship Medley I",
+          "Oigo Tu Voz",
+          "No Stress in Cres",
+          "Astral Chill",
+          "Comme d'habitude"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       },
       {
         "seed_songs": [
-          "Lost Wings (Live)",
-          "Heart of Roads (Live)",
-          "Lost Roses (Deluxe)",
-          "Roses of Chains (Acoustic)",
-          "Falling Wild Chains (Remix)",
-          "Shadows of Memories",
-          "Burning Chains (Acoustic)"
+          "\u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489",
+          "Where I Find My Mind",
+          "Me Gusta",
+          "Love Songs",
+          "Arigato",
+          "Not Giving You Up",
+          "Savage (feat. Flux Pavilion & MAX)"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       },
       {
         "seed_songs": [
-          "Heart of Thunder (Remix)",
-          "The Echoes",
-          "Golden Dancing Memories",
-          "Flames of Chains",
-          "The Dreams (Acoustic)",
-          "Neon Dancing Skies (Acoustic)",
-          "Silent Chains (Acoustic)",
-          "Golden Lights (Remix)",
-          "Endless Electric Eyes (feat. Unknown)"
+          "Darling",
+          "Commitment Issues",
+          "Money & Love",
+          "Waiting",
+          "In My Head",
+          "Off My Face",
+          "Night Driver",
+          "Hold On Loosely"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       },
       {
         "seed_songs": [
-          "Fading (Live)",
-          "Rain of Eyes",
-          "Burning Shadows",
-          "Midnight Memories (feat. Unknown)",
-          "Silent Silent Memories (Acoustic)"
+          "Strength of a Thousand Men",
+          "Myth",
+          "Ta reine",
+          "Delincuente",
+          "Face \u00e0 la mer",
+          "Ramenez la coupe \u00e0 la maison",
+          "La Paga",
+          "Papi (Bhabi)",
+          "No Stress in Cres",
+          "glow"
         ],
         "recommendations": [
           {
-            "name": "Bright Dark Roses (feat. Unknown)",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 98.0
+            "name": "Breezeblocks",
+            "artist": "alt-J",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Stars of Stars (feat. Unknown)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Happier (feat. Clementine Douglas)",
+            "artist": "The Blessed Madonna, Clementine Douglas",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Memories (feat. Unknown)",
-            "artist": "Kanye West",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "Baller",
+            "artist": "Shubh, Ikky",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Broken Crystal Fire (Deluxe)",
-            "artist": "Kendrick Lamar",
-            "genre": "hip-hop",
-            "popularity": 97.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Heart",
-            "artist": "21 Savage",
-            "genre": "hip-hop",
-            "popularity": 96.0
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
           },
           {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Boy Is Mine",
+            "artist": "James Mac, Vall, Rosalie",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "The Fire",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "Can I Kick It?",
+            "artist": "A Tribe Called Quest",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Hidden Eyes",
-            "artist": "Drake",
-            "genre": "hip-hop",
-            "popularity": 95.0
+            "name": "2 Times",
+            "artist": "Dimitri Vegas, Steve Aoki, Ann Lee, Sound Of Legend",
+            "genre": "Electronic",
+            "popularity": 68.0
           },
           {
-            "name": "Golden Dreams (Remix)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 95.0
+            "name": "The Viper",
+            "artist": "BabyChiefDoit",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           },
           {
-            "name": "Sacred Echoes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 94.0
+            "name": "Dear Mama",
+            "artist": "2Pac",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
           }
         ]
       }
     ],
     "per_run_ild": [
-      0.0347,
-      0.0347,
-      0.0347,
-      0.0347,
-      0.0347,
-      0.0347,
-      0.0347,
-      0.0347
+      0.6971,
+      0.6971,
+      0.6971,
+      0.6971,
+      0.6971,
+      0.6971,
+      0.6971,
+      0.6971
     ],
     "per_run_gini": [
-      0.007,
-      0.007,
-      0.007,
-      0.007,
-      0.007,
-      0.007,
-      0.007,
-      0.007
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
     ],
     "per_run_avg_pop": [
-      95.9,
-      95.9,
-      95.9,
-      95.9,
-      95.9,
-      95.9,
-      95.9,
-      95.9
+      68.0,
+      68.0,
+      68.0,
+      68.0,
+      68.0,
+      68.0,
+      68.0,
+      68.0
     ],
     "per_run_niche_pct": [
       0.0,
@@ -637,1279 +641,1287 @@
       0.0
     ]
   },
-  "similarity": {
-    "ild": 0.0064,
-    "gini": 0.1632,
-    "avg_popularity": 48.69,
-    "niche_pct": 26.25,
+  "content_filtering": {
+    "ild": 0.0506,
+    "gini": 0.1916,
+    "avg_popularity": 36.09,
+    "niche_pct": 57.5,
     "runs": [
       {
         "seed_songs": [
-          "Crystal Bright Dreams (Live)",
-          "Crystal Silent Fire (Live)",
-          "Dancing (feat. Unknown)",
-          "Endless Roads (feat. Unknown)",
-          "Frozen Midnight Flames",
-          "Burning Roses (Remix)",
-          "Crystal Falling Lights",
-          "Midnight (Deluxe)",
-          "Lost Wings (Live)",
-          "Wild Rising Chains (Remix)"
+          "Cosmos",
+          "Upon Your Heart",
+          "Sawa",
+          "SimpsonWave1995",
+          "Flou",
+          "Time After Time",
+          "Defiance",
+          "Trip to Valhalla",
+          "#3",
+          "Smells Like Teen Spirit - Remastered 2021"
         ],
         "recommendations": [
           {
-            "name": "Shadows of Roses (Remix)",
-            "artist": "Daniel Caesar",
-            "genre": "r&b",
-            "popularity": 41.0
-          },
-          {
-            "name": "The Skies (Deluxe)",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 46.0
-          },
-          {
-            "name": "Sacred (Live)",
-            "artist": "Beach House",
-            "genre": "indie",
-            "popularity": 31.0
-          },
-          {
-            "name": "Endless Eyes (Acoustic)",
-            "artist": "Luke Bryan",
-            "genre": "country",
-            "popularity": 38.0
-          },
-          {
-            "name": "The Flames (Deluxe)",
-            "artist": "Brent Faiyaz",
-            "genre": "r&b",
-            "popularity": 35.0
-          },
-          {
-            "name": "Lost",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 61.0
-          },
-          {
-            "name": "Bright Dark Chains (Acoustic)",
-            "artist": "H.E.R.",
-            "genre": "r&b",
-            "popularity": 60.0
-          },
-          {
-            "name": "Neon (Remix)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 51.0
-          },
-          {
-            "name": "Bright Midnight Flames (Live)",
-            "artist": "Tame Impala",
-            "genre": "indie",
-            "popularity": 28.0
-          },
-          {
-            "name": "Neon Thunder (Remix)",
-            "artist": "Miranda Lambert",
-            "genre": "country",
-            "popularity": 51.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "The Heart (Remix)",
-          "The Flames",
-          "The Roses",
-          "Roses of Wings",
-          "Bright",
-          "Dancing Golden Horizons (Deluxe)",
-          "The Skies (feat. Unknown)",
-          "The Shadows",
-          "The Chains (Live)",
-          "Echoes of Heart (feat. Unknown)"
-        ],
-        "recommendations": [
-          {
-            "name": "Fire of Chains (Acoustic)",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 53.0
-          },
-          {
-            "name": "The Whispers (Remix)",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 83.0
-          },
-          {
-            "name": "Bright",
-            "artist": "Karol G",
-            "genre": "latin",
-            "popularity": 78.0
-          },
-          {
-            "name": "The Lights (Deluxe)",
-            "artist": "Ariana Grande",
-            "genre": "pop",
-            "popularity": 44.0
-          },
-          {
-            "name": "The Memories",
-            "artist": "Miranda Lambert",
-            "genre": "country",
-            "popularity": 25.0
-          },
-          {
-            "name": "Rising Broken Rain",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 52.0
-          },
-          {
-            "name": "Silent Falling Shadows",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 44.0
-          },
-          {
-            "name": "Wild Echoes",
-            "artist": "The Weeknd",
-            "genre": "pop",
-            "popularity": 72.0
-          },
-          {
-            "name": "Neon Burning Rain (Acoustic)",
-            "artist": "Rauw Alejandro",
-            "genre": "latin",
-            "popularity": 43.0
-          },
-          {
-            "name": "The Skies",
-            "artist": "Becky G",
-            "genre": "latin",
-            "popularity": 83.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Wild Lights (Remix)",
-          "The Roses (feat. Unknown)",
-          "Broken Neon Lights",
-          "Midnight Rising Heart",
-          "Fire of Echoes",
-          "Rising Chains (Remix)",
-          "Dark Echoes (feat. Unknown)",
-          "The Flames",
-          "Dreams of Rain"
-        ],
-        "recommendations": [
-          {
-            "name": "Silent Falling Shadows",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 44.0
-          },
-          {
-            "name": "Thunder of Flames",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 54.0
-          },
-          {
-            "name": "Silent (Live)",
-            "artist": "Linkin Park",
-            "genre": "rock",
-            "popularity": 60.0
-          },
-          {
-            "name": "Neon (Deluxe)",
-            "artist": "The Killers",
-            "genre": "rock",
-            "popularity": 51.0
-          },
-          {
-            "name": "The Whispers (Remix)",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 83.0
-          },
-          {
-            "name": "Lost Lost Wings (Deluxe)",
-            "artist": "The Killers",
-            "genre": "rock",
-            "popularity": 83.0
-          },
-          {
-            "name": "Fire of Chains (Acoustic)",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 53.0
-          },
-          {
-            "name": "Frozen Fading Horizons",
-            "artist": "Green Day",
-            "genre": "rock",
-            "popularity": 56.0
-          },
-          {
-            "name": "Hidden Stars (feat. Unknown)",
-            "artist": "Foo Fighters",
-            "genre": "rock",
-            "popularity": 41.0
-          },
-          {
-            "name": "Rising Hidden Dreams (Acoustic)",
-            "artist": "Muse",
-            "genre": "rock",
-            "popularity": 72.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Horizons of Waves",
-          "Echoes of Rain (Deluxe)",
-          "Chains of Chains (Remix)",
-          "Lost Silent Stars",
-          "The Memories (Deluxe)",
-          "Rising Fire (feat. Unknown)"
-        ],
-        "recommendations": [
-          {
-            "name": "Fire of Eyes",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 44.0
-          },
-          {
-            "name": "Electric Echoes",
-            "artist": "Chris Stapleton",
-            "genre": "country",
-            "popularity": 52.0
-          },
-          {
-            "name": "Dreams of Eyes (feat. Unknown)",
-            "artist": "Alvvays",
-            "genre": "indie",
-            "popularity": 44.0
-          },
-          {
-            "name": "Rising",
-            "artist": "Summer Walker",
-            "genre": "r&b",
-            "popularity": 44.0
-          },
-          {
-            "name": "Skies of Stars (feat. Unknown)",
-            "artist": "Thelonious Monk",
-            "genre": "jazz",
-            "popularity": 45.0
-          },
-          {
-            "name": "Hidden Waves (Deluxe)",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 48.0
-          },
-          {
-            "name": "The Chains (Deluxe)",
-            "artist": "Carrie Underwood",
-            "genre": "country",
-            "popularity": 25.0
-          },
-          {
-            "name": "Fading Falling Echoes (Remix)",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 42.0
-          },
-          {
-            "name": "Golden Lights (Remix)",
-            "artist": "Fleet Foxes",
-            "genre": "indie",
-            "popularity": 19.0
-          },
-          {
-            "name": "Dark Wings",
-            "artist": "Kacey Musgraves",
-            "genre": "country",
-            "popularity": 27.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "The Roses",
-          "Whispers of Eyes (Acoustic)",
-          "Wings of Shadows (Live)",
-          "Chains of Chains (Remix)",
-          "Endless Bright Whispers (Remix)",
-          "Silent Dark Thunder (Deluxe)"
-        ],
-        "recommendations": [
-          {
-            "name": "Silent Falling Shadows",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 44.0
-          },
-          {
-            "name": "Frozen Fading Horizons",
-            "artist": "Green Day",
-            "genre": "rock",
-            "popularity": 56.0
-          },
-          {
-            "name": "Crystal",
-            "artist": "Alvvays",
-            "genre": "indie",
-            "popularity": 41.0
-          },
-          {
-            "name": "Wild (Remix)",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 20.0
-          },
-          {
-            "name": "The Flames",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 61.0
-          },
-          {
-            "name": "Silent (Live)",
-            "artist": "Linkin Park",
-            "genre": "rock",
-            "popularity": 60.0
-          },
-          {
-            "name": "Neon (Deluxe)",
-            "artist": "The Killers",
-            "genre": "rock",
-            "popularity": 51.0
-          },
-          {
-            "name": "Lost Lost Wings (Deluxe)",
-            "artist": "The Killers",
-            "genre": "rock",
-            "popularity": 83.0
-          },
-          {
-            "name": "Thunder of Flames",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 54.0
-          },
-          {
-            "name": "The Chains (Live)",
-            "artist": "Imagine Dragons",
-            "genre": "rock",
-            "popularity": 50.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Lost Wings (Live)",
-          "Heart of Roads (Live)",
-          "Lost Roses (Deluxe)",
-          "Roses of Chains (Acoustic)",
-          "Falling Wild Chains (Remix)",
-          "Shadows of Memories",
-          "Burning Chains (Acoustic)"
-        ],
-        "recommendations": [
-          {
-            "name": "Burning Dark Shadows",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 62.0
-          },
-          {
-            "name": "The Shadows",
-            "artist": "Giveon",
-            "genre": "r&b",
-            "popularity": 64.0
-          },
-          {
-            "name": "Electric",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 31.0
-          },
-          {
-            "name": "The Heart (Deluxe)",
-            "artist": "Morgan Wallen",
-            "genre": "country",
-            "popularity": 22.0
-          },
-          {
-            "name": "Dreams of Eyes (feat. Unknown)",
-            "artist": "Alvvays",
-            "genre": "indie",
-            "popularity": 44.0
-          },
-          {
-            "name": "Eyes of Wings (Acoustic)",
-            "artist": "SZA",
-            "genre": "r&b",
-            "popularity": 57.0
-          },
-          {
-            "name": "Sacred (Acoustic)",
-            "artist": "Kacey Musgraves",
-            "genre": "country",
-            "popularity": 26.0
-          },
-          {
-            "name": "Rising (Deluxe)",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 37.0
-          },
-          {
-            "name": "The Waves",
-            "artist": "Summer Walker",
-            "genre": "r&b",
-            "popularity": 73.0
-          },
-          {
-            "name": "Roads of Echoes",
-            "artist": "Kacey Musgraves",
-            "genre": "country",
-            "popularity": 29.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Heart of Thunder (Remix)",
-          "The Echoes",
-          "Golden Dancing Memories",
-          "Flames of Chains",
-          "The Dreams (Acoustic)",
-          "Neon Dancing Skies (Acoustic)",
-          "Silent Chains (Acoustic)",
-          "Golden Lights (Remix)",
-          "Endless Electric Eyes (feat. Unknown)"
-        ],
-        "recommendations": [
-          {
-            "name": "Burning Endless Memories",
-            "artist": "Alicia Keys",
-            "genre": "r&b",
-            "popularity": 45.0
-          },
-          {
-            "name": "Wild Echoes (Deluxe)",
-            "artist": "Jason Aldean",
-            "genre": "country",
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
             "popularity": 47.0
           },
           {
-            "name": "Wild",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 53.0
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
           },
           {
-            "name": "Wild Shadows (feat. Unknown)",
-            "artist": "Mitski",
-            "genre": "indie",
-            "popularity": 30.0
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
           },
           {
-            "name": "Electric (Deluxe)",
-            "artist": "John Coltrane",
-            "genre": "jazz",
-            "popularity": 45.0
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
           },
           {
-            "name": "Rising (Deluxe)",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 37.0
-          },
-          {
-            "name": "Dark Rain (Deluxe)",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 56.0
-          },
-          {
-            "name": "The Flames (Deluxe)",
-            "artist": "Brent Faiyaz",
-            "genre": "r&b",
-            "popularity": 35.0
-          },
-          {
-            "name": "Fire of Eyes",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 44.0
-          },
-          {
-            "name": "Dreams of Eyes (feat. Unknown)",
-            "artist": "Alvvays",
-            "genre": "indie",
-            "popularity": 44.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Fading (Live)",
-          "Rain of Eyes",
-          "Burning Shadows",
-          "Midnight Memories (feat. Unknown)",
-          "Silent Silent Memories (Acoustic)"
-        ],
-        "recommendations": [
-          {
-            "name": "Lost",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 61.0
-          },
-          {
-            "name": "Sacred (Deluxe)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 62.0
-          },
-          {
-            "name": "The Thunder (Remix)",
-            "artist": "Chris Stapleton",
-            "genre": "country",
-            "popularity": 27.0
-          },
-          {
-            "name": "Sacred (Remix)",
-            "artist": "Summer Walker",
-            "genre": "r&b",
-            "popularity": 30.0
-          },
-          {
-            "name": "Roses of Skies",
-            "artist": "Carrie Underwood",
-            "genre": "country",
-            "popularity": 24.0
-          },
-          {
-            "name": "Dark Rain (Deluxe)",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 56.0
-          },
-          {
-            "name": "Silent (Remix)",
-            "artist": "Bon Iver",
-            "genre": "indie",
-            "popularity": 28.0
-          },
-          {
-            "name": "The Shadows",
-            "artist": "Giveon",
-            "genre": "r&b",
-            "popularity": 64.0
-          },
-          {
-            "name": "Roses of Chains (Acoustic)",
-            "artist": "Post Malone",
-            "genre": "pop",
-            "popularity": 94.0
-          },
-          {
-            "name": "The Stars",
-            "artist": "Mac DeMarco",
-            "genre": "indie",
-            "popularity": 42.0
-          }
-        ]
-      }
-    ],
-    "per_run_ild": [
-      0.0077,
-      0.0036,
-      0.0056,
-      0.0068,
-      0.0102,
-      0.0062,
-      0.0059,
-      0.0056
-    ],
-    "per_run_gini": [
-      0.1412,
-      0.1832,
-      0.1305,
-      0.1421,
-      0.1554,
-      0.2191,
-      0.095,
-      0.2389
-    ],
-    "per_run_avg_pop": [
-      44.2,
-      57.7,
-      59.7,
-      39.0,
-      52.0,
-      44.5,
-      43.6,
-      48.8
-    ],
-    "per_run_niche_pct": [
-      40.0,
-      10.0,
-      0.0,
-      30.0,
-      10.0,
-      50.0,
-      30.0,
-      40.0
-    ]
-  },
-  "hybrid": {
-    "ild": 0.0187,
-    "gini": 0.2156,
-    "avg_popularity": 46.64,
-    "niche_pct": 33.75,
-    "runs": [
-      {
-        "seed_songs": [
-          "Crystal Bright Dreams (Live)",
-          "Crystal Silent Fire (Live)",
-          "Dancing (feat. Unknown)",
-          "Endless Roads (feat. Unknown)",
-          "Frozen Midnight Flames",
-          "Burning Roses (Remix)",
-          "Crystal Falling Lights",
-          "Midnight (Deluxe)",
-          "Lost Wings (Live)",
-          "Wild Rising Chains (Remix)"
-        ],
-        "recommendations": [
-          {
-            "name": "Shadows of Roses (Remix)",
-            "artist": "Daniel Caesar",
-            "genre": "r&b",
-            "popularity": 41.0
-          },
-          {
-            "name": "The Rain (feat. Unknown)",
-            "artist": "Frank Ocean",
-            "genre": "r&b",
-            "popularity": 44.0
-          },
-          {
-            "name": "Dancing Fire (Deluxe)",
-            "artist": "Thelonious Monk",
-            "genre": "jazz",
-            "popularity": 9.0
-          },
-          {
-            "name": "The Roads (feat. Unknown)",
-            "artist": "Summer Walker",
-            "genre": "r&b",
-            "popularity": 73.0
-          },
-          {
-            "name": "Silent Midnight Chains (Remix)",
-            "artist": "Khalid",
-            "genre": "r&b",
-            "popularity": 71.0
-          },
-          {
-            "name": "The Memories (Acoustic)",
-            "artist": "Daniel Caesar",
-            "genre": "r&b",
-            "popularity": 63.0
-          },
-          {
-            "name": "Endless Echoes",
-            "artist": "Mac DeMarco",
-            "genre": "indie",
-            "popularity": 52.0
-          },
-          {
-            "name": "Lost Horizons",
-            "artist": "Alvvays",
-            "genre": "indie",
-            "popularity": 10.0
-          },
-          {
-            "name": "The Thunder (Remix)",
-            "artist": "Chris Stapleton",
-            "genre": "country",
-            "popularity": 27.0
-          },
-          {
-            "name": "Wild Endless Wings (Deluxe)",
-            "artist": "Morgan Wallen",
-            "genre": "country",
-            "popularity": 55.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "The Heart (Remix)",
-          "The Flames",
-          "The Roses",
-          "Roses of Wings",
-          "Bright",
-          "Dancing Golden Horizons (Deluxe)",
-          "The Skies (feat. Unknown)",
-          "The Shadows",
-          "The Chains (Live)",
-          "Echoes of Heart (feat. Unknown)"
-        ],
-        "recommendations": [
-          {
-            "name": "Fire of Chains (Acoustic)",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 53.0
-          },
-          {
-            "name": "Midnight Eyes (Deluxe)",
-            "artist": "Lil Nas X",
-            "genre": "hip-hop",
-            "popularity": 80.0
-          },
-          {
-            "name": "Chains of Fire",
-            "artist": "Wallows",
-            "genre": "indie",
-            "popularity": 18.0
-          },
-          {
-            "name": "The Rain (feat. Unknown)",
-            "artist": "Frank Ocean",
-            "genre": "r&b",
-            "popularity": 44.0
-          },
-          {
-            "name": "Broken (feat. Unknown)",
-            "artist": "Billie Eilish",
-            "genre": "pop",
-            "popularity": 95.0
-          },
-          {
-            "name": "Fading Roads (Remix)",
-            "artist": "U2",
-            "genre": "rock",
-            "popularity": 66.0
-          },
-          {
-            "name": "The Rain (Deluxe)",
-            "artist": "Rosal\u00eda",
-            "genre": "latin",
-            "popularity": 86.0
-          },
-          {
-            "name": "Dancing Hidden Thunder",
-            "artist": "Zach Bryan",
-            "genre": "country",
-            "popularity": 52.0
-          },
-          {
-            "name": "The Waves (Remix)",
-            "artist": "Daddy Yankee",
-            "genre": "latin",
-            "popularity": 53.0
-          },
-          {
-            "name": "The Flames",
-            "artist": "Mitski",
-            "genre": "indie",
-            "popularity": 24.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Wild Lights (Remix)",
-          "The Roses (feat. Unknown)",
-          "Broken Neon Lights",
-          "Midnight Rising Heart",
-          "Fire of Echoes",
-          "Rising Chains (Remix)",
-          "Dark Echoes (feat. Unknown)",
-          "The Flames",
-          "Dreams of Rain"
-        ],
-        "recommendations": [
-          {
-            "name": "Silent Falling Shadows",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 44.0
-          },
-          {
-            "name": "Hidden (Remix)",
-            "artist": "Coldplay",
-            "genre": "rock",
-            "popularity": 72.0
-          },
-          {
-            "name": "Silent Electric Echoes (feat. Unknown)",
-            "artist": "Post Malone",
-            "genre": "pop",
-            "popularity": 49.0
-          },
-          {
-            "name": "Electric Frozen Thunder (Remix)",
-            "artist": "Wallows",
-            "genre": "indie",
-            "popularity": 51.0
-          },
-          {
-            "name": "Wild (Remix)",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 20.0
-          },
-          {
-            "name": "Whispers of Rain (Acoustic)",
-            "artist": "Green Day",
-            "genre": "rock",
-            "popularity": 84.0
-          },
-          {
-            "name": "Hidden Broken Rain",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 34.0
-          },
-          {
-            "name": "The Flames",
-            "artist": "Mitski",
-            "genre": "indie",
-            "popularity": 24.0
-          },
-          {
-            "name": "Crystal (feat. Unknown)",
-            "artist": "Kacey Musgraves",
-            "genre": "country",
-            "popularity": 24.0
-          },
-          {
-            "name": "Endless Lights",
-            "artist": "The Weeknd",
-            "genre": "pop",
-            "popularity": 77.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Horizons of Waves",
-          "Echoes of Rain (Deluxe)",
-          "Chains of Chains (Remix)",
-          "Lost Silent Stars",
-          "The Memories (Deluxe)",
-          "Rising Fire (feat. Unknown)"
-        ],
-        "recommendations": [
-          {
-            "name": "Fire of Eyes",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 44.0
-          },
-          {
-            "name": "Chains of Chains (Acoustic)",
-            "artist": "Carrie Underwood",
-            "genre": "country",
-            "popularity": 44.0
-          },
-          {
-            "name": "Sacred (Acoustic)",
-            "artist": "Kacey Musgraves",
-            "genre": "country",
-            "popularity": 26.0
-          },
-          {
-            "name": "The Wings (Live)",
-            "artist": "Chris Stapleton",
-            "genre": "country",
-            "popularity": 29.0
-          },
-          {
-            "name": "The Lights (feat. Unknown)",
-            "artist": "Zach Bryan",
-            "genre": "country",
-            "popularity": 32.0
-          },
-          {
-            "name": "Electric Dreams (Live)",
-            "artist": "Tame Impala",
-            "genre": "indie",
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
             "popularity": 22.0
           },
           {
-            "name": "Lost",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 61.0
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "Wings of Fire (Live)",
-            "artist": "Kacey Musgraves",
-            "genre": "country",
-            "popularity": 33.0
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "The Skies (Remix)",
-            "artist": "Mitski",
-            "genre": "indie",
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Hajikwai",
+            "artist": "Naarly, Thabza De Soul, Idd Aziz",
+            "genre": "Electronic",
+            "popularity": 37.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Estoy que muerdo",
+          "Elevation",
+          "Soak Garri",
+          "Good Life {Freestyle}",
+          "citynights",
+          "Keep on Moving",
+          "Stardust",
+          "Fly Me To The Moon",
+          "FADE UP"
+        ],
+        "recommendations": [
+          {
+            "name": "Hold On Tight",
+            "artist": "Boney James",
+            "genre": "Jazz",
+            "popularity": 51.0
+          },
+          {
+            "name": "Washington D.C. Hospital Center Blues",
+            "artist": "Skip James",
+            "genre": "Jazz",
             "popularity": 21.0
           },
           {
-            "name": "Endless Echoes",
-            "artist": "Mac DeMarco",
-            "genre": "indie",
-            "popularity": 52.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "The Roses",
-          "Whispers of Eyes (Acoustic)",
-          "Wings of Shadows (Live)",
-          "Chains of Chains (Remix)",
-          "Endless Bright Whispers (Remix)",
-          "Silent Dark Thunder (Deluxe)"
-        ],
-        "recommendations": [
-          {
-            "name": "Silent Falling Shadows",
-            "artist": "Sia",
-            "genre": "pop",
-            "popularity": 44.0
-          },
-          {
-            "name": "The Echoes",
-            "artist": "Linkin Park",
-            "genre": "rock",
-            "popularity": 83.0
-          },
-          {
-            "name": "Wild Memories",
-            "artist": "Clairo",
-            "genre": "indie",
-            "popularity": 35.0
-          },
-          {
-            "name": "The Dreams (Deluxe)",
-            "artist": "The Killers",
-            "genre": "rock",
-            "popularity": 67.0
-          },
-          {
-            "name": "Frozen Hidden Heart",
-            "artist": "Linkin Park",
-            "genre": "rock",
-            "popularity": 59.0
-          },
-          {
-            "name": "The Heart (feat. Unknown)",
-            "artist": "Harry Styles",
-            "genre": "pop",
-            "popularity": 85.0
-          },
-          {
-            "name": "Golden (Remix)",
-            "artist": "Ariana Grande",
-            "genre": "pop",
-            "popularity": 66.0
-          },
-          {
-            "name": "The Dreams (Deluxe)",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 30.0
-          },
-          {
-            "name": "Dancing Chains (Deluxe)",
-            "artist": "Green Day",
-            "genre": "rock",
+            "name": "Boneyizm",
+            "artist": "Boney James",
+            "genre": "Jazz",
             "popularity": 49.0
           },
           {
-            "name": "The Eyes (Remix)",
-            "artist": "Bon Iver",
-            "genre": "indie",
-            "popularity": 10.0
+            "name": "Hard Time Killing Floor Blues",
+            "artist": "Skip James",
+            "genre": "Jazz",
+            "popularity": 35.0
+          },
+          {
+            "name": "Hard Time Killing Floor Blues",
+            "artist": "Skip James",
+            "genre": "Jazz",
+            "popularity": 35.0
+          },
+          {
+            "name": "Devil Got My Woman - 1994 Remastered",
+            "artist": "Skip James",
+            "genre": "Jazz",
+            "popularity": 18.0
+          },
+          {
+            "name": "Devil Got My Woman - 1994 Remastered",
+            "artist": "Skip James",
+            "genre": "Jazz",
+            "popularity": 18.0
+          },
+          {
+            "name": "Devil Got My Woman - 1994 Remastered",
+            "artist": "Skip James",
+            "genre": "Jazz",
+            "popularity": 18.0
+          },
+          {
+            "name": "Surrender (feat. Boney James)",
+            "artist": "Jonathan Butler, Boney James",
+            "genre": "Jazz",
+            "popularity": 47.0
+          },
+          {
+            "name": "Surrender (feat. Boney James)",
+            "artist": "Jonathan Butler, Boney James",
+            "genre": "Jazz",
+            "popularity": 47.0
           }
         ]
       },
       {
         "seed_songs": [
-          "Lost Wings (Live)",
-          "Heart of Roads (Live)",
-          "Lost Roses (Deluxe)",
-          "Roses of Chains (Acoustic)",
-          "Falling Wild Chains (Remix)",
-          "Shadows of Memories",
-          "Burning Chains (Acoustic)"
+          "The Mist: Pt. 2",
+          "Therapy Session",
+          "Noctis",
+          "B\u00e9same",
+          "Hanging on to Nothing",
+          "Obinasom",
+          "Hadi Yavrum",
+          "Cheat On Me (feat. Dave)",
+          "Normally (feat. NSG)"
         ],
         "recommendations": [
           {
-            "name": "Burning Dark Shadows",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 62.0
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
           },
           {
-            "name": "Shadows of Roses (Remix)",
-            "artist": "Daniel Caesar",
-            "genre": "r&b",
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "The Mist: Pt. 1",
+            "artist": "Frans Bak, Mari Samuelsen, Hakon Samuelsen, Keld Haaning Ibsen, TrondheimSolistene",
+            "genre": "Classical",
+            "popularity": 20.0
+          },
+          {
+            "name": "The Mist: Pt. 1",
+            "artist": "Frans Bak, Mari Samuelsen, Hakon Samuelsen, Keld Haaning Ibsen, TrondheimSolistene",
+            "genre": "Classical",
+            "popularity": 20.0
+          },
+          {
+            "name": "Dreams II",
+            "artist": "Ajebo Hustlers, Zlatan, Blaqbonez",
+            "genre": "Classical",
             "popularity": 41.0
           },
           {
-            "name": "The Chains (Remix)",
-            "artist": "Frank Ocean",
-            "genre": "r&b",
-            "popularity": 51.0
+            "name": "Dreams II",
+            "artist": "Ajebo Hustlers, Zlatan, Blaqbonez",
+            "genre": "Classical",
+            "popularity": 41.0
           },
           {
-            "name": "Midnight Wild Rain",
-            "artist": "John Coltrane",
-            "genre": "jazz",
-            "popularity": 12.0
+            "name": "Dreams II",
+            "artist": "Ajebo Hustlers, Zlatan, Blaqbonez",
+            "genre": "Classical",
+            "popularity": 41.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Breezeblocks",
+          "Nack Nostalgia",
+          "\u670b\u53cb - \u96fb\u5f71\u300c\u9f8d\u5144\u864e\u5f1f\u300d\u6b4c\u66f2",
+          "Fotograf\u00eda",
+          "Transformers Prime",
+          "glow",
+          "Vur Patlas\u0131n"
+        ],
+        "recommendations": [
+          {
+            "name": "Rose Tattoo",
+            "artist": "Dropkick Murphys",
+            "genre": "Rock",
+            "popularity": 59.0
           },
           {
-            "name": "Wild",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 53.0
+            "name": "Rose Tattoo",
+            "artist": "Dropkick Murphys",
+            "genre": "Rock",
+            "popularity": 59.0
           },
           {
-            "name": "Bright (Remix)",
-            "artist": "Luke Combs",
-            "genre": "country",
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          },
+          {
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          },
+          {
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          },
+          {
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          },
+          {
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          },
+          {
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
+          },
+          {
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
+          },
+          {
+            "name": "Fotograf\u00eda",
+            "artist": "Juanes, Nelly Furtado",
+            "genre": "Rock",
+            "popularity": 68.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Don't Care",
+          "Worship Medley I",
+          "Oigo Tu Voz",
+          "No Stress in Cres",
+          "Astral Chill",
+          "Comme d'habitude"
+        ],
+        "recommendations": [
+          {
+            "name": "Into The Night",
+            "artist": "Tonic Walter",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Into The Night",
+            "artist": "Tonic Walter",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Kolwa",
+            "artist": "Euggy, Suraj, Mumba Yachi",
+            "genre": "Electronic",
             "popularity": 22.0
           },
           {
-            "name": "Dancing (feat. Unknown)",
-            "artist": "Blake Shelton",
-            "genre": "country",
-            "popularity": 44.0
+            "name": "Kolwa",
+            "artist": "Euggy, Suraj, Mumba Yachi",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "Sacred (Deluxe)",
-            "artist": "Dua Lipa",
-            "genre": "pop",
-            "popularity": 62.0
+            "name": "Kolwa",
+            "artist": "Euggy, Suraj, Mumba Yachi",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "The Eyes (feat. Unknown)",
-            "artist": "SZA",
-            "genre": "r&b",
-            "popularity": 55.0
+            "name": "Kolwa",
+            "artist": "Euggy, Suraj, Mumba Yachi",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "The Wings",
-            "artist": "Beach House",
-            "genre": "indie",
+            "name": "Kolwa",
+            "artist": "Euggy, Suraj, Mumba Yachi",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Indulgence",
+            "artist": "Nora En Pure",
+            "genre": "Electronic",
+            "popularity": 46.0
+          },
+          {
+            "name": "Take A Chance - Original Mix",
+            "artist": "Mr. Flagio",
+            "genre": "Electronic",
+            "popularity": 35.0
+          },
+          {
+            "name": "Take A Chance - Original Mix",
+            "artist": "Mr. Flagio",
+            "genre": "Electronic",
+            "popularity": 35.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "\u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489",
+          "Where I Find My Mind",
+          "Me Gusta",
+          "Love Songs",
+          "Arigato",
+          "Not Giving You Up",
+          "Savage (feat. Flux Pavilion & MAX)"
+        ],
+        "recommendations": [
+          {
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
+          },
+          {
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
+          },
+          {
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
+          },
+          {
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
+          },
+          {
+            "name": "Sawa",
+            "artist": "Ahmed Spins, Idd Aziz",
+            "genre": "Electronic",
+            "popularity": 51.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Darling",
+          "Commitment Issues",
+          "Money & Love",
+          "Waiting",
+          "In My Head",
+          "Off My Face",
+          "Night Driver",
+          "Hold On Loosely"
+        ],
+        "recommendations": [
+          {
+            "name": "Fusil",
+            "artist": "SCH",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "6.45i",
+            "artist": "SCH",
+            "genre": "Electronic",
+            "popularity": 25.0
+          },
+          {
+            "name": "6.45i",
+            "artist": "SCH",
+            "genre": "Electronic",
+            "popularity": 25.0
+          },
+          {
+            "name": "Me Acostumbre (feat. Bad Bunny)",
+            "artist": "Arc\u00e1ngel, Bad Bunny",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
+          },
+          {
+            "name": "Me Acostumbre (feat. Bad Bunny)",
+            "artist": "Arc\u00e1ngel, Bad Bunny",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
+          },
+          {
+            "name": "Me Acostumbre (feat. Bad Bunny)",
+            "artist": "Arc\u00e1ngel, Bad Bunny",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
+          },
+          {
+            "name": "Khabib",
+            "artist": "Central Cee",
+            "genre": "Hip-Hop",
+            "popularity": 38.0
+          },
+          {
+            "name": "Khabib",
+            "artist": "Central Cee",
+            "genre": "Hip-Hop",
+            "popularity": 38.0
+          },
+          {
+            "name": "Khabib",
+            "artist": "Central Cee",
+            "genre": "Hip-Hop",
+            "popularity": 38.0
+          },
+          {
+            "name": "Ungrateful",
+            "artist": "Central Cee",
+            "genre": "Hip-Hop",
             "popularity": 54.0
           }
         ]
       },
       {
         "seed_songs": [
-          "Heart of Thunder (Remix)",
-          "The Echoes",
-          "Golden Dancing Memories",
-          "Flames of Chains",
-          "The Dreams (Acoustic)",
-          "Neon Dancing Skies (Acoustic)",
-          "Silent Chains (Acoustic)",
-          "Golden Lights (Remix)",
-          "Endless Electric Eyes (feat. Unknown)"
+          "Strength of a Thousand Men",
+          "Myth",
+          "Ta reine",
+          "Delincuente",
+          "Face \u00e0 la mer",
+          "Ramenez la coupe \u00e0 la maison",
+          "La Paga",
+          "Papi (Bhabi)",
+          "No Stress in Cres",
+          "glow"
         ],
         "recommendations": [
           {
-            "name": "Burning Endless Memories",
-            "artist": "Alicia Keys",
-            "genre": "r&b",
-            "popularity": 45.0
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "The Lights (feat. Unknown)",
-            "artist": "Zach Bryan",
-            "genre": "country",
-            "popularity": 32.0
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "Echoes of Heart (feat. Unknown)",
-            "artist": "Mac DeMarco",
-            "genre": "indie",
-            "popularity": 50.0
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "Shadows of Roses (Remix)",
-            "artist": "Daniel Caesar",
-            "genre": "r&b",
-            "popularity": 41.0
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "Broken Silent Shadows (Remix)",
-            "artist": "Khalid",
-            "genre": "r&b",
-            "popularity": 63.0
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
           },
           {
-            "name": "Stars of Echoes",
-            "artist": "Giveon",
-            "genre": "r&b",
-            "popularity": 43.0
+            "name": "Hajikwai",
+            "artist": "Naarly, Thabza De Soul, Idd Aziz",
+            "genre": "Electronic",
+            "popularity": 37.0
           },
           {
-            "name": "Electric Broken Fire (Live)",
-            "artist": "Brent Faiyaz",
-            "genre": "r&b",
-            "popularity": 34.0
+            "name": "Hajikwai",
+            "artist": "Naarly, Thabza De Soul, Idd Aziz",
+            "genre": "Electronic",
+            "popularity": 37.0
           },
           {
-            "name": "The Fire",
-            "artist": "Giveon",
-            "genre": "r&b",
-            "popularity": 64.0
+            "name": "Hajikwai",
+            "artist": "Naarly, Thabza De Soul, Idd Aziz",
+            "genre": "Electronic",
+            "popularity": 37.0
           },
           {
-            "name": "The Echoes (Acoustic)",
-            "artist": "Carrie Underwood",
-            "genre": "country",
-            "popularity": 44.0
+            "name": "Hajikwai",
+            "artist": "Naarly, Thabza De Soul, Idd Aziz",
+            "genre": "Electronic",
+            "popularity": 37.0
           },
           {
-            "name": "Lost Memories",
-            "artist": "Morgan Wallen",
-            "genre": "country",
-            "popularity": 25.0
-          }
-        ]
-      },
-      {
-        "seed_songs": [
-          "Fading (Live)",
-          "Rain of Eyes",
-          "Burning Shadows",
-          "Midnight Memories (feat. Unknown)",
-          "Silent Silent Memories (Acoustic)"
-        ],
-        "recommendations": [
-          {
-            "name": "Lost",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 61.0
-          },
-          {
-            "name": "Roads of Echoes",
-            "artist": "Kacey Musgraves",
-            "genre": "country",
-            "popularity": 29.0
-          },
-          {
-            "name": "Bright Midnight Flames (Live)",
-            "artist": "Tame Impala",
-            "genre": "indie",
-            "popularity": 28.0
-          },
-          {
-            "name": "Hidden Silent Shadows (Remix)",
-            "artist": "Maluma",
-            "genre": "latin",
-            "popularity": 82.0
-          },
-          {
-            "name": "Endless Lights (Deluxe)",
-            "artist": "Luke Combs",
-            "genre": "country",
-            "popularity": 46.0
-          },
-          {
-            "name": "Burning Endless Memories",
-            "artist": "Alicia Keys",
-            "genre": "r&b",
-            "popularity": 45.0
-          },
-          {
-            "name": "Fire of Eyes",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 44.0
-          },
-          {
-            "name": "The Lights (feat. Unknown)",
-            "artist": "Brent Faiyaz",
-            "genre": "r&b",
-            "popularity": 32.0
-          },
-          {
-            "name": "The Skies (Deluxe)",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 46.0
-          },
-          {
-            "name": "Hidden Broken Rain",
-            "artist": "Jason Aldean",
-            "genre": "country",
-            "popularity": 34.0
+            "name": "Kolwa",
+            "artist": "Euggy, Suraj, Mumba Yachi",
+            "genre": "Electronic",
+            "popularity": 22.0
           }
         ]
       }
     ],
     "per_run_ild": [
-      0.018,
-      0.0132,
-      0.0193,
-      0.0196,
-      0.025,
-      0.019,
-      0.0197,
-      0.0162
+      0.0003,
+      0.0061,
+      0.0015,
+      0.0026,
+      0.0035,
+      0.0002,
+      0.3908,
+      0.0001
     ],
     "per_run_gini": [
-      0.2771,
-      0.2363,
-      0.2595,
-      0.194,
-      0.2428,
-      0.1825,
-      0.1499,
-      0.1828
+      0.1836,
+      0.2174,
+      0.0939,
+      0.3144,
+      0.2153,
+      0.1894,
+      0.1902,
+      0.1286
     ],
     "per_run_avg_pop": [
-      44.5,
-      57.1,
+      33.5,
+      33.9,
+      36.3,
+      40.2,
+      34.0,
+      34.9,
       47.9,
-      36.4,
-      52.8,
+      28.0
+    ],
+    "per_run_niche_pct": [
+      60.0,
+      60.0,
+      20.0,
+      50.0,
+      70.0,
+      50.0,
+      50.0,
+      100.0
+    ]
+  },
+  "graph_dpp_rerank": {
+    "ild": 0.1472,
+    "gini": 0.1903,
+    "avg_popularity": 42.94,
+    "niche_pct": 36.25,
+    "runs": [
+      {
+        "seed_songs": [
+          "Cosmos",
+          "Upon Your Heart",
+          "Sawa",
+          "SimpsonWave1995",
+          "Flou",
+          "Time After Time",
+          "Defiance",
+          "Trip to Valhalla",
+          "#3",
+          "Smells Like Teen Spirit - Remastered 2021"
+        ],
+        "recommendations": [
+          {
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
+          },
+          {
+            "name": "Indulgence",
+            "artist": "Nora En Pure",
+            "genre": "Electronic",
+            "popularity": 46.0
+          },
+          {
+            "name": "Into The Night",
+            "artist": "Tonic Walter",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Call My Name",
+            "artist": "Franky Wah, Rae Morris",
+            "genre": "Electronic",
+            "popularity": 44.0
+          },
+          {
+            "name": "Into The Night",
+            "artist": "Tonic Walter",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Call My Name",
+            "artist": "Franky Wah, Rae Morris",
+            "genre": "Electronic",
+            "popularity": 44.0
+          },
+          {
+            "name": "Pitbull",
+            "artist": "Booba",
+            "genre": "Electronic",
+            "popularity": 54.0
+          },
+          {
+            "name": "Kolwa",
+            "artist": "Euggy, Suraj, Mumba Yachi",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Autonomy",
+            "artist": "Jakob Ahlbom, Hanna Ekstr\u00f6m, Anna Dager",
+            "genre": "Electronic",
+            "popularity": 34.0
+          },
+          {
+            "name": "Heartbeat",
+            "artist": "Ross Lara",
+            "genre": "Electronic",
+            "popularity": 14.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Estoy que muerdo",
+          "Elevation",
+          "Soak Garri",
+          "Good Life {Freestyle}",
+          "citynights",
+          "Keep on Moving",
+          "Stardust",
+          "Fly Me To The Moon",
+          "FADE UP"
+        ],
+        "recommendations": [
+          {
+            "name": "Hold On Tight",
+            "artist": "Boney James",
+            "genre": "Jazz",
+            "popularity": 51.0
+          },
+          {
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "Crow Jane",
+            "artist": "Skip James",
+            "genre": "Jazz",
+            "popularity": 25.0
+          },
+          {
+            "name": "It Ain't Necessarily So",
+            "artist": "Mary Lou Williams",
+            "genre": "Jazz",
+            "popularity": 49.0
+          },
+          {
+            "name": "Best Of Me",
+            "artist": "Bnxn",
+            "genre": "Classical",
+            "popularity": 50.0
+          },
+          {
+            "name": "Stardust",
+            "artist": "Taylor Scott Davis, VOCES8",
+            "genre": "Classical",
+            "popularity": 35.0
+          },
+          {
+            "name": "Dreams II",
+            "artist": "Ajebo Hustlers, Zlatan, Blaqbonez",
+            "genre": "Classical",
+            "popularity": 41.0
+          },
+          {
+            "name": "A New Day Has Come",
+            "artist": "C\u00e9line Dion",
+            "genre": "Jazz",
+            "popularity": 55.0
+          },
+          {
+            "name": "Crow Jane",
+            "artist": "Skip James",
+            "genre": "Jazz",
+            "popularity": 25.0
+          },
+          {
+            "name": "Best Of Me",
+            "artist": "Bnxn",
+            "genre": "Classical",
+            "popularity": 50.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "The Mist: Pt. 2",
+          "Therapy Session",
+          "Noctis",
+          "B\u00e9same",
+          "Hanging on to Nothing",
+          "Obinasom",
+          "Hadi Yavrum",
+          "Cheat On Me (feat. Dave)",
+          "Normally (feat. NSG)"
+        ],
+        "recommendations": [
+          {
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "Stardust",
+            "artist": "Taylor Scott Davis, VOCES8",
+            "genre": "Classical",
+            "popularity": 35.0
+          },
+          {
+            "name": "POE",
+            "artist": "Ruger, Bnxn",
+            "genre": "Classical",
+            "popularity": 55.0
+          },
+          {
+            "name": "Showa",
+            "artist": "Kizz Daniel",
+            "genre": "Classical",
+            "popularity": 63.0
+          },
+          {
+            "name": "Stardust",
+            "artist": "Taylor Scott Davis, VOCES8",
+            "genre": "Classical",
+            "popularity": 35.0
+          },
+          {
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "Darf ich ...",
+            "artist": "Arvo P\u00e4rt, Mari Samuelsen, TrondheimSolistene",
+            "genre": "Classical",
+            "popularity": 14.0
+          },
+          {
+            "name": "Stardust",
+            "artist": "Taylor Scott Davis, VOCES8",
+            "genre": "Classical",
+            "popularity": 35.0
+          },
+          {
+            "name": "AREA BOYZ PRAYER (feat. Seyi Vibez)",
+            "artist": "NSG, Seyi Vibez",
+            "genre": "Classical",
+            "popularity": 40.0
+          },
+          {
+            "name": "Showa",
+            "artist": "Kizz Daniel",
+            "genre": "Classical",
+            "popularity": 63.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Breezeblocks",
+          "Nack Nostalgia",
+          "\u670b\u53cb - \u96fb\u5f71\u300c\u9f8d\u5144\u864e\u5f1f\u300d\u6b4c\u66f2",
+          "Fotograf\u00eda",
+          "Transformers Prime",
+          "glow",
+          "Vur Patlas\u0131n"
+        ],
+        "recommendations": [
+          {
+            "name": "Rose Tattoo",
+            "artist": "Dropkick Murphys",
+            "genre": "Rock",
+            "popularity": 59.0
+          },
+          {
+            "name": "Mala Gente",
+            "artist": "Juanes",
+            "genre": "Rock",
+            "popularity": 56.0
+          },
+          {
+            "name": "Jump - 2015 Remaster",
+            "artist": "Van Halen",
+            "genre": "Rock",
+            "popularity": 53.0
+          },
+          {
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          },
+          {
+            "name": "Amor Clandestino",
+            "artist": "Man\u00e1",
+            "genre": "Rock",
+            "popularity": 27.0
+          },
+          {
+            "name": "La Paga",
+            "artist": "Juanes",
+            "genre": "Rock",
+            "popularity": 58.0
+          },
+          {
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          },
+          {
+            "name": "Jump - 2015 Remaster",
+            "artist": "Van Halen",
+            "genre": "Rock",
+            "popularity": 53.0
+          },
+          {
+            "name": "La Paga",
+            "artist": "Juanes",
+            "genre": "Rock",
+            "popularity": 58.0
+          },
+          {
+            "name": "A Little Distance",
+            "artist": "Tristeza",
+            "genre": "Rock",
+            "popularity": 16.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Don't Care",
+          "Worship Medley I",
+          "Oigo Tu Voz",
+          "No Stress in Cres",
+          "Astral Chill",
+          "Comme d'habitude"
+        ],
+        "recommendations": [
+          {
+            "name": "Into The Night",
+            "artist": "Tonic Walter",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Fusil",
+            "artist": "SCH",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Autonomy",
+            "artist": "Jakob Ahlbom, Hanna Ekstr\u00f6m, Anna Dager",
+            "genre": "Electronic",
+            "popularity": 34.0
+          },
+          {
+            "name": "Ariana",
+            "artist": "Tony Anderson",
+            "genre": "Electronic",
+            "popularity": 41.0
+          },
+          {
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
+          },
+          {
+            "name": "Ariana",
+            "artist": "Tony Anderson",
+            "genre": "Electronic",
+            "popularity": 41.0
+          },
+          {
+            "name": "Ta reine",
+            "artist": "Ang\u00e8le",
+            "genre": "Electronic",
+            "popularity": 59.0
+          },
+          {
+            "name": "Len\u00e7\u00f3is (Love Me) - Notre Dame Remix",
+            "artist": "RY X, Notre Dame",
+            "genre": "Electronic",
+            "popularity": 47.0
+          },
+          {
+            "name": "Robot Is Systematic (Vocal Version)",
+            "artist": "Lectric Workers",
+            "genre": "Electronic",
+            "popularity": 14.0
+          },
+          {
+            "name": "Ta reine",
+            "artist": "Ang\u00e8le",
+            "genre": "Electronic",
+            "popularity": 59.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "\u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489 \u0338 \u0321 \u0489 \u0489.\u00b7\u0e51\u0d95\u0e31 \u0489",
+          "Where I Find My Mind",
+          "Me Gusta",
+          "Love Songs",
+          "Arigato",
+          "Not Giving You Up",
+          "Savage (feat. Flux Pavilion & MAX)"
+        ],
+        "recommendations": [
+          {
+            "name": "La m\u00e9moire et la mer",
+            "artist": "L\u00e9o Ferr\u00e9",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Mais je t'aime",
+            "artist": "Grand Corps Malade, Camille Lellouche",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Deep",
+            "artist": "Peter Sandberg",
+            "genre": "Electronic",
+            "popularity": 37.0
+          },
+          {
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Resonance - Slowed & Reverb",
+            "artist": "noturgf",
+            "genre": "Electronic",
+            "popularity": 62.0
+          },
+          {
+            "name": "Deep",
+            "artist": "Peter Sandberg",
+            "genre": "Electronic",
+            "popularity": 37.0
+          },
+          {
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Mais je t'aime",
+            "artist": "Grand Corps Malade, Camille Lellouche",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Deep",
+            "artist": "Peter Sandberg",
+            "genre": "Electronic",
+            "popularity": 37.0
+          },
+          {
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Darling",
+          "Commitment Issues",
+          "Money & Love",
+          "Waiting",
+          "In My Head",
+          "Off My Face",
+          "Night Driver",
+          "Hold On Loosely"
+        ],
+        "recommendations": [
+          {
+            "name": "Fusil",
+            "artist": "SCH",
+            "genre": "Electronic",
+            "popularity": 57.0
+          },
+          {
+            "name": "Me Acostumbre (feat. Bad Bunny)",
+            "artist": "Arc\u00e1ngel, Bad Bunny",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
+          },
+          {
+            "name": "La Paga",
+            "artist": "Juanes",
+            "genre": "Rock",
+            "popularity": 58.0
+          },
+          {
+            "name": "6.45i",
+            "artist": "SCH",
+            "genre": "Electronic",
+            "popularity": 25.0
+          },
+          {
+            "name": "Obsessed With You",
+            "artist": "Central Cee",
+            "genre": "Hip-Hop",
+            "popularity": 42.0
+          },
+          {
+            "name": "6.45i",
+            "artist": "SCH",
+            "genre": "Electronic",
+            "popularity": 25.0
+          },
+          {
+            "name": "La Paga",
+            "artist": "Juanes",
+            "genre": "Rock",
+            "popularity": 58.0
+          },
+          {
+            "name": "FADE UP",
+            "artist": "ZEG P, Hamza, SCH",
+            "genre": "Electronic",
+            "popularity": 61.0
+          },
+          {
+            "name": "Me Acostumbre (feat. Bad Bunny)",
+            "artist": "Arc\u00e1ngel, Bad Bunny",
+            "genre": "Hip-Hop",
+            "popularity": 68.0
+          },
+          {
+            "name": "Obsessed With You",
+            "artist": "Central Cee",
+            "genre": "Hip-Hop",
+            "popularity": 42.0
+          }
+        ]
+      },
+      {
+        "seed_songs": [
+          "Strength of a Thousand Men",
+          "Myth",
+          "Ta reine",
+          "Delincuente",
+          "Face \u00e0 la mer",
+          "Ramenez la coupe \u00e0 la maison",
+          "La Paga",
+          "Papi (Bhabi)",
+          "No Stress in Cres",
+          "glow"
+        ],
+        "recommendations": [
+          {
+            "name": "Feels Good - Carrots & Beets",
+            "artist": "Electra",
+            "genre": "Electronic",
+            "popularity": 22.0
+          },
+          {
+            "name": "Indulgence",
+            "artist": "Nora En Pure",
+            "genre": "Electronic",
+            "popularity": 46.0
+          },
+          {
+            "name": "Heartbeat",
+            "artist": "Ross Lara",
+            "genre": "Electronic",
+            "popularity": 14.0
+          },
+          {
+            "name": "glow",
+            "artist": "Fred again.., Duskus, Four Tet, Joy Anonymous, Skrillex",
+            "genre": "Electronic",
+            "popularity": 63.0
+          },
+          {
+            "name": "Lonely",
+            "artist": "Nils Hoffmann, Rae Morris",
+            "genre": "Electronic",
+            "popularity": 45.0
+          },
+          {
+            "name": "glow",
+            "artist": "Fred again.., Duskus, Four Tet, Joy Anonymous, Skrillex",
+            "genre": "Electronic",
+            "popularity": 63.0
+          },
+          {
+            "name": "Heartbeat",
+            "artist": "Ross Lara",
+            "genre": "Electronic",
+            "popularity": 14.0
+          },
+          {
+            "name": "glow",
+            "artist": "Fred again.., Duskus, Four Tet, Joy Anonymous, Skrillex",
+            "genre": "Electronic",
+            "popularity": 63.0
+          },
+          {
+            "name": "Autonomy",
+            "artist": "Jakob Ahlbom, Hanna Ekstr\u00f6m, Anna Dager",
+            "genre": "Electronic",
+            "popularity": 34.0
+          },
+          {
+            "name": "Bande organis\u00e9e",
+            "artist": "Kofs, Soso Maness, Elams, Jul, SCH, Naps, Solda, Houari, 13 Organis\u00e9",
+            "genre": "Electronic",
+            "popularity": 64.0
+          }
+        ]
+      }
+    ],
+    "per_run_ild": [
+      0.0053,
+      0.5049,
+      0.0049,
+      0.0068,
+      0.0225,
+      0.0025,
+      0.6238,
+      0.007
+    ],
+    "per_run_gini": [
+      0.1773,
+      0.1342,
+      0.179,
+      0.2374,
+      0.1553,
+      0.22,
+      0.1651,
+      0.2537
+    ],
+    "per_run_avg_pop": [
+      41.9,
+      42.1,
+      42.0,
+      41.2,
       45.6,
-      44.1,
-      44.7
+      37.5,
+      50.4,
+      42.8
     ],
     "per_run_niche_pct": [
       30.0,
-      20.0,
+      30.0,
       40.0,
-      60.0,
-      30.0,
+      40.0,
       20.0,
-      30.0,
+      70.0,
+      20.0,
       40.0
     ]
   }
