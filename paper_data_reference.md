@@ -17,7 +17,7 @@ _Every number below was extracted programmatically from the current files (`outp
 | After genre mapping (107 `gaming` tracks dropped) | 4,359 |
 | Final sample, no replacement | 3,000 |
 
-**Duplicates before vs after:** the pre-fix CSV committed as `3171e19` had 3,000 rows with **1,490** duplicate (name, artists) rows (popularity 11–68, mean 44.3, 11 genres incl. Metal 19 and Country 11). Current CSV: **0** duplicate (name, artists) rows and 0 duplicate track_ids. Cause of the old duplicates: sampling with replacement (see repo_analysis/commit `6ee86c2`).
+**Duplicates before vs after:** the pre-fix CSV committed as `3171e19` had 3,000 rows with **1,490** duplicate (name, artists) rows (popularity 11–68, mean 44.3, 11 genres incl. Metal 19 and Country 11). Current CSV: **0** duplicate (name, artists) rows and 0 duplicate track_ids. Cause of the old duplicates: sampling with replacement (see commit `6ee86c2`).
 
 **Per-genre distribution** (sampled vs available after dedup+mapping, and niche rate = share with popularity < 40):
 
@@ -178,19 +178,19 @@ Complexity table (verbatim from `repo_analysis.md`):
 
 | Stage | Fresh (ms) | Quoted in repo_analysis.md |
 |---|---|---|
-| Retrieval (similarity + sort) | 100.5 | ≈ 100 ms |
+| Retrieval (similarity + sort) | 103.3 | ≈ 100 ms |
 | DPP rerank (kernel + selection) | 10.4 | ≈ 11 ms |
-| MMR selection | 1.75 | ≈ 1.7 ms |
+| MMR selection | 1.86 | ≈ 1.7 ms |
 | Greedy | 1.3 | ≈ 2 ms |
 
 **N-scaling of `dpp_rerank` and `_mmr_select`** (K=10):
 
 | N | DPP (ms) | MMR (ms) |
 |---|---|---|
-| 25 | 3.5 | 0.76 |
-| 50 | 10.1 | 1.73 |
-| 100 | 33.0 | 3.70 |
-| 200 | 113.8 | 7.56 |
+| 25 | 3.4 | 0.77 |
+| 50 | 10.6 | 1.79 |
+| 100 | 32.9 | 3.86 |
+| 200 | 113.6 | 7.75 |
 
 **`slogdet` call counts** (N=50) against Σ_{k<K}(N−k):
 
@@ -200,7 +200,7 @@ Complexity table (verbatim from `repo_analysis.md`):
 | 10 | 455 | 455 |
 | 20 | 810 | 810 |
 
-**Single `slogdet` cost vs matrix size** (µs, mean of 200 calls): 10×10: 3.6, 50×50: 12.9, 100×100: 43.2, 200×200: 777.4, 400×400: 8874.7.
+**Single `slogdet` cost vs matrix size** (µs, mean of 200 calls): 10×10: 5.6, 50×50: 15.4, 100×100: 40.9, 200×200: 844.7, 400×400: 12112.4.
 
 Notes: (i) at K=10 the determinants are ≤10×10 and dominated by call overhead, so wall-clock grows ~N·K and ~N², not K⁴; (ii) the O(N·K²) DPP cost requires an incremental Cholesky update (Chen, Zhang & Zhou, NeurIPS 2018), which this code does not implement; (iii) the experiment recomputes retrieval 6× per seed set (CF, MMR×3, MMR+floor, DPP).
 
@@ -238,10 +238,12 @@ Orphans in `output/`: archive_20260929, old_results.json.
 ## 7. Repo / reproducibility references
 
 - **Repository:** https://github.com/navya906/diversetune (branch `Main`).
-- **Current HEAD:** `d67113fa97a48a3aa936f0382801bb3e520d078c` (Merge pull request #2 from navya906/phase6-complexity-limitations).
+- **HEAD when this file was generated:** `f0830bc358fd89b541887eaa91be94d5ff368e50` (Add verified data reference for paper writeup). This file is committed together with the code, so cite the commit that contains it (`git log -1 -- paper_data_reference.md`), not an earlier one.
 - **Commit history:**
 
 ```
+f0830bc 2026-10-04 Add verified data reference for paper writeup
+258a328 2026-10-04 repo_analysis: correct the MMR lambda-curve wording
 d67113f 2026-10-04 Merge pull request #2 from navya906/phase6-complexity-limitations
 092b0c7 2026-10-04 Add complexity analysis and Limitations (Phase 6)
 8906c4c 2026-10-04 repo_analysis: drop completed items from remaining work
@@ -252,23 +254,20 @@ fbb12f9 2026-10-04 Repo hygiene (Phase 5): gitignore, untrack generated files, R
 6f75d28 2026-04-09 Cleanup: Remove pycache, output logs, and add gitignore
 47e0041 2026-04-09 initial commit
 ```
-- **Dataset:** Kaggle `solomonameh/spotify-music-dataset`, kagglehub cache path `.../versions/1/` (Kaggle dataset version 1). Files used:
+- **Dataset:** Kaggle `solomonameh/spotify-music-dataset`, kagglehub cache version `1`. Files used:
   - `high_popularity_spotify_data.csv`: 1,686 rows, 730,216 bytes, sha256 `ba70ab2da48003ee…`
   - `low_popularity_spotify_data.csv`: 3,145 rows, 1,364,298 bytes, sha256 `6b9d478cc8f5582d…`
 - **Seeds / runs:** dataset sampling seed 42 (`integrate_new_dataset.py --seed`, default 42); experiment `SEED = 42`, `NUM_RUNS = 30` (`recommendation_engine.py`), seed-song set sizes drawn uniformly 5–10 from `random.Random(42)`; K = 10, N = 50, niche threshold popularity < 40, niche floor ≥ 20% (2 of 10).
 - **Dependencies** (`requirements.txt`): numpy==2.1.3, pandas==2.3.0, scipy==1.15.3, matplotlib==3.10.8, kagglehub==0.3.12; Python 3.12.10.
-- **Reproduce:** `pip install -r requirements.txt && python run_pipeline.py --plots` (or `--skip-dl` to reuse `data/song_track.csv`).
+- **Reproduce:** `pip install -r requirements.txt && python run_pipeline.py --plots` (or `--skip-dl` to reuse `data/song_track.csv`), then `python generate_paper_data.py`.
 - **Baseline snapshot:** `baseline/baseline_results.json` (exists); the pre-fix run (8 seed sets, duplicated rows, popularity capped at 68); **do not cite** — see `baseline/README.md`. Keys: ['greedy', 'content_filtering', 'graph_dpp_rerank'].
 
 ## 8. Flags: things to check or not in the repo
 
-- Final commit: the request says `092b0c7`; that is the last *content* commit (Phase 6), but current `Main` HEAD is `d67113f` (the PR #2 merge commit, identical tree). Cite one deliberately.
-- Baseline path: the request says `data/baseline_results.json`; the actual path is `baseline/baseline_results.json` (moved in Phase 5 so it stays tracked while `output/` is ignored). `output/old_results.json` is a stale untracked local copy of the same file and is no longer read by any script.
-- Duplicate count before dedup: the audit figure "1,488 of 3,000" came from the uncommitted working-tree CSV; the CSV committed as `3171e19` has 1,490. Use 1,490 if you cite the committed pre-fix state, and state which file.
-- The 1,488/1,490 figure is for the **old sampled CSV** (duplicates created by sampling with replacement), not duplicates in the raw Kaggle data; the raw merged data had 365 duplicate (name, artists) rows of 4,831.
-- Rock 8% / World 44% niche rates are **not in `dataset_report.md`** (it has no per-genre popularity); they are computed here from `data/song_track.csv` (sample, not the full dedup pool).
-- Popularity std is not in `dataset_report.md`; computed here from the CSV.
-- Timing numbers and `slogdet` counts come from an ad-hoc benchmark; **no benchmark script is committed**, and `output/results.json` does not contain timings. Section 4 re-measured them here. Timings are machine-dependent (cite as indicative, not as constants); call counts are exact.
+- Baseline: `baseline/baseline_results.json` is tracked (moved there so it survives `output/` being git-ignored); `output/old_results.json` may exist locally as a stale untracked copy and is not read by any script.
+- Duplicate count before dedup: the committed pre-fix CSV (`3171e19`) has 1,490 duplicate (name, artists) rows. These were created by sampling with replacement and are not duplicates in the raw Kaggle data (raw merged data: 365 duplicates of 4,831 rows). An earlier audit quoted 1,488, measured on an uncommitted working copy; cite the committed figure and name the file.
+- Per-genre niche rates (e.g. Rock vs World) and popularity std are **not in `dataset_report.md`**; they are computed here from `data/song_track.csv` (the sample, not the full dedup pool).
+- Timings and `slogdet` counts are re-measured by this script on the generating machine (they are not stored in `results.json`). Timings are machine-dependent (cite as indicative, not as constants); call counts are exact.
 - Possible wording error in `repo_analysis.md`: it says some ILD differences between MMR λ values are "nominally significant". In `results.json` all three λ-pair ILD differences survive Bonferroni (raw p 8.7e-5, 1.9e-9, 2.0e-5 vs α/84 = 5.95e-4): ILD decreases monotonically with λ, significant but practically tiny (0.120 → 0.113, ≈0.04 std). Describe it that way in the paper ("significant but negligible"), not as "within noise".
 - Figure numbers in Section 5 are suggestions; the repo has no paper-figure mapping. `fairness_comparison.png` shows Gini, which is degenerate for Greedy (near-identical popularity), so consider omitting or caveating it.
 - `output/` (results.json, PNGs) is git-ignored and exists only locally; the numbers in this document are not recoverable from GitHub without re-running the pipeline (deterministic with seed 42, but re-run before final submission).
