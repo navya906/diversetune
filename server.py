@@ -58,7 +58,7 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
 
             track_id = max(0, min(track_id, len(tracks) - 1))
 
-            greedy         = greedy_recommend(tracks, K=5)
+            greedy         = greedy_recommend(tracks, K=5, liked_indices=[track_id])
             similar        = content_filtering_recommend(tracks, [track_id], K=5)
             graph_dpp_recs = graph_dpp_rerank_recommend(tracks, [track_id], K=5, min_niche_pct=0.20)
 

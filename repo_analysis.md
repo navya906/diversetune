@@ -1,107 +1,94 @@
-# DiverseTune Repository Analysis
+# DiverseTune — Repository Analysis
 
-> **Project:** DAA Experimental Study — Music Recommendation Diversity Analysis  
-> **Last Updated:** 29 September 2026
+> DAA experimental study: diversity and fairness of music-recommendation re-ranking.
+> All numbers below are generated from `output/results.json` (30 runs, K=10, RNG seed 42, 3,000 tracks, 10 genres). The previous analysis (8 runs, defective data) has been withdrawn; its archive is in `output/archive_20260929/` and must not be cited.
 
----
+## Status
 
-## 🏗️ Architecture & Working State
+| Component | State |
+|---|---|
+| Dataset build (`integrate_new_dataset.py`) | Working. Deduped on (name, artists), no sampling with replacement, per-genre floor enforced and asserted. |
+| Experiment (`recommendation_engine.py`) | Working. Four method families (7 configurations), 30 paired runs, seed songs excluded and asserted, results reproducible. |
+| Plots (`generate_plots.py`) | Working. Five comparison charts plus an MMR λ chart. |
+| Web UI / server | **Not updated for the new methods.** `server.py` and `app.js` still serve only Greedy, CF and DPP. `app.js` still contains hard-coded fallback mock data and old-key shims (Phase 5). |
+| Tests | None. |
+| Validity of conclusions | Limited — see "Caveats". The experiment runs correctly; what it can support is narrower than earlier write-ups claimed. |
 
-The repository is built as a complete end-to-end data pipeline and web application for comparing music recommendation algorithms. 
+## Setup of the experiment
 
-**Status:** ✅ **Fully Functional End-to-End**
+- **Data:** Kaggle `solomonameh/spotify-music-dataset`, low- and high-popularity files merged (popularity 11–100, mean 53.0). 4,831 raw rows → 4,466 after dedup → 3,000 sampled without replacement. Genres: Ambient 470, World 437, Electronic 385, Pop 379, Latin 370, Hip-Hop 347, Rock 281, Jazz 162, Classical 93, Indie-Folk 76. Details and the label-quality audit are in `data/dataset_report.md`.
+- **Seed sets:** 30 random sets of 5–10 liked tracks drawn from `random.Random(42)`. Seed tracks are excluded from every method's candidates.
+- **Similarity:** cosine over a 14-d vector (10 genre one-hot, normalised duration, explicit flag, artist-rarity). Popularity is never in the similarity.
+- **Niche:** popularity < 40 (25.2% of the dataset).
+- **Methods:** Greedy (top popularity, ties by track id); Content Filtering (CF); MMR at λ = 0.5 / 0.7 / 0.9 over the top-50 CF pool, no popularity floor; **MMR+floor** (MMR 0.7 plus the same ≥20%-niche enforcement as DPP, shared code `enforce_niche_floor`); Graph DPP Rerank (top-50 pool, greedy log-det MAP, then the niche floor).
 
-### 1. Data Pipeline (`integrate_new_dataset.py`, `fetch_dataset.py`)
-- **Working:** Successfully fetches the `solomonameh/spotify-music-dataset` dataset from Kaggle.
-- **Working:** Maps 100+ raw genres into a clean 11-genre taxonomy.
-- **Working:** Enforces a stratified sample of 3,000 tracks (minimum 50 per genre), normalizes duration, and outputs cleanly to `data/song_track.csv`.
+## Results (mean ± std over 30 runs)
 
-### 2. Algorithm Engine (`recommendation_engine.py`)
-- **Working:** Successfully loads the dataset and builds a 14-dimensional feature vector per track.
-- **Working:** Evaluates three algorithms effectively:
-  - **Greedy:** Popularity baseline.
-  - **Content Filtering:** Cosine similarity.
-  - **Graph DPP Rerank:** Determinantal Point Process for diversity with a ≥20% niche fairness constraint.
-- **Working:** Evaluation metrics (ILD, Gini, Avg Popularity, Niche %) are calculated across 8 randomized seed sets (K=10) and properly exported to `output/results.json`.
+| Method | ILD | Gini | Avg popularity | Niche % |
+|---|---|---|---|---|
+| Greedy | 0.002 ± 0.000 | 0.015 ± 0.000 | 93.7 ± 0.1 | 0.0 ± 0.0 |
+| Content Filtering | 0.070 ± 0.166 | 0.167 ± 0.078 | 53.1 ± 14.8 | 26.0 ± 26.7 |
+| MMR λ=0.5 | 0.120 ± 0.212 | 0.187 ± 0.083 | 53.4 ± 13.1 | 26.7 ± 22.5 |
+| MMR λ=0.7 | 0.117 ± 0.207 | 0.186 ± 0.076 | 53.5 ± 12.6 | 25.7 ± 22.2 |
+| MMR λ=0.9 | 0.113 ± 0.203 | 0.178 ± 0.076 | 53.0 ± 14.4 | 27.7 ± 26.2 |
+| MMR 0.7 + floor | 0.110 ± 0.210 | 0.200 ± 0.063 | 51.7 ± 11.5 | 31.0 ± 17.7 |
+| Graph DPP Rerank | 0.149 ± 0.236 | 0.205 ± 0.058 | 50.8 ± 11.0 | 30.7 ± 19.5 |
 
-### 3. Visualization (`generate_plots.py`)
-- **Working:** Successfully reads the `results.json` file and outputs 5 comparative `matplotlib` charts into `output/`. 
-- **Working:** Gracefully falls back if old keys like `similarity` or `hybrid` are present in the JSON, making it robust against schema changes.
+ILD and niche % are strongly bimodal (std exceeds the mean for ILD), so medians are more representative:
 
-### 4. Web Server & UI (`server.py`, `index.html`, `search.html`, `app.js`, `index.css`)
-- **Working:** Python `http.server` handles both static file serving and JSON APIs (`/api/search` and `/api/recommend`). 
-- **Working:** The frontend logic in `app.js` smoothly interfaces with the backend to provide fast, interactive searches and side-by-side recommendation algorithm comparisons.
-
-### 5. Orchestrator (`run_pipeline.py`)
-- **Working:** CLI-driven script that ties the entire process together sequentially, allowing conditional skips (e.g., `--skip-dl`).
-
----
-
-## 📊 Current Results & Methodology
-
-### Seed Data
-The experiment utilizes 8 randomized seed sets, each containing 5–10 "liked" songs drawn uniformly from the 3,000-track dataset. We use random seed data rather than hardcoded playlists to ensure the algorithms are evaluated across a diverse range of starting states (from highly popular mainstream tracks to deep niche cuts). This simulates different types of users accurately.
-
-### Algorithms Used
-We compare three fundamentally different approaches to recommendation:
-1. **Greedy (Popularity):** Ranks candidate tracks entirely by raw popularity. This simulates the baseline "Top 50" radio model. It is prone to the popularity bias but guarantees highly recognizable tracks.
-2. **Content Filtering (Similarity):** Computes the average cosine similarity between a candidate's feature vector (genre, duration, explicit flag, artist rarity) and the liked songs' vectors. This simulates the "More Like This" echo-chamber model.
-3. **Graph DPP Rerank (Hybrid):** Retrieves top-50 candidates via content similarity, then applies a Determinantal Point Process (DPP) to re-rank them. DPP explicitly maximizes the log-determinant of a quality-similarity kernel matrix, mathematically balancing relevance (quality) against diversity. Finally, a strict fairness constraint guarantees ≥20% of the list contains niche tracks (popularity < 40).
-
-### Current Outputs (3,000 Tracks, K=10)
-Based on the latest run in `output/results.json`, here are the averaged metrics across all 8 seed sets:
-
-| Metric | Greedy | Content Filtering | Graph DPP Rerank |
+| Method | ILD median [Q1, Q3] | Niche % median [Q1, Q3] | Runs below the 20% niche floor |
 |---|---|---|---|
-| **Intra-List Diversity (ILD) ⬆** | 0.0253 | 0.0099 | **0.0635** |
-| **Gini Index (Fairness) ⬇** | 0.1821 | **0.1460** | 0.3673 |
-| **Avg Popularity** | 45.42 | 5.35 | 6.57 |
-| **Niche Song % (< 40)** | 60.0% | 100.0% | 100.0% |
+| Greedy | 0.0020 [0.0020, 0.0020] | 0 [0, 0] | 30 / 30 |
+| Content Filtering | 0.0025 [0.0016, 0.0108] | 20 [2.5, 47.5] | 14 / 30 |
+| MMR λ=0.5 | 0.0110 [0.0048, 0.1518] | 20 [10, 40] | 11 / 30 |
+| MMR λ=0.7 | 0.0075 [0.0036, 0.1518] | 20 [10, 40] | 13 / 30 |
+| MMR λ=0.9 | 0.0070 [0.0021, 0.1457] | 20 [10, 47.5] | 12 / 30 |
+| MMR 0.7 + floor | 0.0060 [0.0034, 0.0343] | 20 [20, 40] | **2 / 30** |
+| Graph DPP Rerank | 0.0196 [0.0084, 0.2715] | 20 [20, 30] | **2 / 30** |
 
-**Key Takeaways:**
-- **Graph DPP** decisively wins on **Diversity (ILD)** (0.0635 vs 0.0099 for pure CF), successfully breaking the "echo chamber" effect of standard similarity models by surfacing mathematically distinct tracks.
-- **Content Filtering** performed best on the **Gini Index**, providing the most equal distribution of popularity, but suffered from extremely low diversity (ILD 0.0099), meaning it recommends highly similar, repetitive tracks.
-- Both Content Filtering and Graph DPP achieved 100% niche song representation in this run, heavily favoring lesser-known artists compared to the Greedy baseline (60%).
+In most runs every method except DPP returns a nearly single-genre list (median ILD ≤ 0.011); DPP's median is still only 0.02. Large ILD values come from a minority of runs (8–9 of 30 above 0.1) in which a list spans several genres.
 
----
+## Significance (paired Wilcoxon signed-rank, same seed set per pair)
 
-## 📂 Inputs & Generated Plots
+All 21 method pairs × 4 metrics = **84 tests**; Bonferroni threshold **α/84 = 5.95e-4** (not α/60: with 7 configurations there are 84 tests, not 60). p-values below are raw. "Survives" means p < 5.95e-4.
 
-### Inputs: The Dataset
-The pipeline begins by fetching the `solomonameh/spotify-music-dataset` from Kaggle. The raw data is heavily processed into `data/song_track.csv` to serve as the input for the recommendation engine. 
-- **Format:** CSV with 3,000 tracks (stratified sample).
-- **Columns Available:** `track_id`, `name`, `artists`, `genre` (11 core genres), `popularity` (normalized 0-100), `duration_ms`, `duration_norm`, `explicit`, `album`.
-- **Feature Vector Extraction:** During execution, `recommendation_engine.py` converts these inputs into a 14-dimensional feature vector for each track:
-  - 11 dimensions for One-Hot Encoded Genres.
-  - 1 dimension for Normalized Duration.
-  - 1 dimension for Explicit flag (0 or 1).
-  - 1 dimension for Artist Rarity (1.0 for niche artists, ~0.0 for mainstream artists like BTS/Drake).
+| Comparison (A − B) | ILD: mean / median diff, p | Niche %: mean / median diff, p |
+|---|---|---|
+| DPP − CF | +0.079 / +0.012, p=3.9e-7 **(survives)** | +4.7 / +10, p=0.19 (n.s.) |
+| MMR 0.7 − CF | +0.047 / +0.003, p=3.8e-5 **(survives)** | −0.3 / 0, p=0.60 (n.s.) |
+| DPP − MMR 0.7 | +0.033 / +0.008, p=3.2e-7 **(survives)** | +5.0 / +10, p=0.19 (n.s.) |
+| MMR+floor − MMR 0.7 | −0.007 / 0.000, p=0.0499 (borderline nominal; does **not** survive) | +5.3 / 0, p=0.0015 (nominal only; does **not** survive) |
+| MMR+floor − DPP | −0.040 / −0.010, p=5.1e-6 **(survives)** | +0.3 / 0, p=0.89 (n.s.) |
+| DPP − MMR 0.5 | +0.029 / +0.007, p=2.1e-5 **(survives)** | +4.0 / 0, p=0.24 (n.s.) |
+| DPP − MMR 0.9 | +0.037 / +0.011, p=1.9e-9 **(survives)** | +3.0 / +10, p=0.28 (n.s.) |
 
-### Outputs: Generated Visualizations
-Running the `generate_plots.py` script parses `output/results.json` and outputs 5 PNG charts into the `output/` directory. These are directly displayed on the frontend:
-1. **`diversity_comparison.png`:** A bar chart comparing the Intra-List Diversity (ILD) of the three algorithms. (Graph DPP typically wins here).
-2. **`fairness_comparison.png`:** A bar chart comparing the Gini Index of popularity distributions. A lower Gini score indicates fairer, more equitable exposure for all artists.
-3. **`popularity_comparison.png`:** A bar chart showing the average raw popularity (0-100) of the recommendations produced by each algorithm.
-4. **`niche_percentage.png`:** A bar chart showing what percentage of recommended songs classify as "niche" (popularity < 40).
-5. **`tradeoff_chart.png`:** A dual-axis line graph plotting Diversity (ILD) against Avg Popularity to visually illustrate the trade-off between recommending recognizable hits and providing high-variance, diverse tracks.
+Among comparisons not involving Greedy, **the only results that survive Bonferroni are ILD differences.** No niche-%, Gini or popularity difference between CF, MMR, MMR+floor and DPP survives. (Greedy differs from every other method on all four metrics; those results are large and survive.) Nominal-only results (raw p < 0.05 but not surviving) are exploratory: for example DPP vs CF on Gini (p=0.0024, DPP less equal) and MMR+floor vs MMR on Gini/avg-popularity (p≈0.002).
 
----
+## What the results support
 
-## ⚠️ Discrepancies & Technical Debt
+1. **Greedy is a genuinely low-diversity baseline.** Its top 10 are all Pop at popularity 90–100 (ILD 0.002, avg popularity 93.7, 0% niche). The old Greedy ILD of 0.83 was an artifact of the 68-point popularity ceiling and arbitrary tie-breaking.
+2. **Re-ranking raises ILD above plain CF, and DPP raises it above MMR — but by small amounts.** All of DPP, MMR and MMR+floor beat CF on ILD, and DPP beats every MMR variant and MMR+floor, all surviving Bonferroni. The median differences are 0.003–0.012 in an ILD range where most lists are almost single-genre; the mean differences (0.03–0.08) come from a minority of runs.
+3. **The niche floor, not the DPP kernel, explains DPP's niche behaviour.** MMR+floor matches DPP's niche % (31.0 vs 30.7, p=0.89) and, like DPP, meets the ≥20% floor in 28/30 runs (plain MMR and CF: 11–14 of 30 runs miss it). The cost to ILD of adding the floor to MMR is not detectable (median difference 0; mean −0.007, raw p=0.0499, borderline at the nominal level and far from the Bonferroni threshold).
+4. **DPP's kernel does buy a small ILD advantage over MMR+floor** (−0.040 mean / −0.010 median for MMR+floor, p=5.1e-6, survives). This is the one part of DPP's added cost that the data justifies, and it is small in absolute terms.
+5. **MMR's λ curve is flat.** ILD moves from 0.120 to 0.113 across λ=0.5→0.9 and niche % stays at 26–28 (see `output/mmr_lambda_curve.png`); the λ differences are within run-to-run noise on niche % and, although some ILD differences between λ values are nominally significant, they are tiny.
+6. **DPP is not shown to beat CF on niche representation** (p=0.19) and is nominally *less* equal in Gini. The earlier claim that DPP "decisively wins" is not supported.
 
-While the system is working perfectly, the recent migration from the old `algozee/spotyfy` dataset to the new `solomonameh` dataset left behind some minor inconsistencies. (Note: `cols.json`, `rename.py`, and `fetch_output.txt` were successfully deleted).
+## Caveats
 
-### 1. Backward Compatibility Shims
-Because the project underwent naming changes mid-flight (e.g., renaming "Similarity" to "Content Filtering"), a few files have shims to handle old naming conventions:
-- **`app.js` (Line 36):** `content_filtering: data.content_filtering || data.similarity`
-- **`generate_plots.py` (Line 21):** `results.get("content_filtering") or results.get("similarity", {})`
-- *Assessment:* These are safe and make the system robust against older `results.json` files, but they exist purely as a historical artifact of the migration.
+- **Genre labels are playlist-level, not track-level.** 17% of artists with ≥ 2 tracks appear under more than one genre, and spot checks show mislabels (see `data/dataset_report.md`). The genre one-hot dominates the similarity vector, so "diversity" here partly measures the diversity of those noisy labels.
+- **ILD is almost always near zero** because candidates retrieved by similarity are nearly all the same genre. The experiment therefore has little room to separate re-ranking strategies, which is also why the λ curve is flat.
+- **30 runs from random seed sets** are not real user histories; seed sets of 5–10 random tracks are usually genre-incoherent.
+- **The niche floor is best-effort** and missed in 2/30 runs for both DPP and MMR+floor when the 50-candidate pool had too few niche tracks.
+- **Bonferroni is conservative**; the nominal-only findings should be treated as hypotheses, not results.
+- The Greedy tie-break uses track-id order, and ids are assigned in genre-alphabetical order. Only 3 tracks tie at the cutoff here (all Pop), so it does not affect the result, but it would on other data.
 
-### 2. Pipeline Edge Cases
-- **`output/old_results.json`**: `run_pipeline.py` attempts to copy `results.json` to `old_results.json` for a delta comparison to print in the console. If this file doesn't exist or is empty, the console output simply shows `N/A` for the delta. It's a non-breaking discrepancy but worth noting.
+## Baseline snapshot
 
-### 3. `integrate_kaggle.py`
-- This file was recently rewritten to simply `import integrate_new_dataset` and run its `main()` function. It acts purely as a redirect so that any old scripts or muscle memory calling `python integrate_kaggle.py` don't break. You can eventually delete it once you are used to calling `integrate_new_dataset.py`.
+`output/old_results.json` is the archived **pre-fix** run (8 runs, duplicated rows, popularity capped at 68; known defects listed in `output/archive_20260929/README.md`). `run_pipeline.py` uses it for the delta table. Deltas against it show the effect of the data and algorithm fixes, not an algorithm improvement, and the baseline must not be cited as a result.
 
-### 4. Hardcoded UI States
-- In `app.js` `useFallbackData()`, there is hardcoded JSON data used for testing when the Python server is offline. This mock data uses hardcoded artist names and tracks that might not perfectly align with the new 3,000 track dataset, though it functions correctly for UI design purposes.
+## Remaining work
+
+- Phase 5 (repo hygiene): `.gitignore`, untrack generated files, delete `integrate_kaggle.py`, remove legacy-key shims in `app.js`, add `requirements.txt` and README.
+- Phase 6 (write-up): complexity analysis and Limitations paragraph.
+- Update `server.py` / `index.html` / `app.js` to display MMR and MMR+floor.
+- Optional: audio-feature-based similarity (energy, valence, danceability and others are in the source data) to replace the noisy genre one-hot.

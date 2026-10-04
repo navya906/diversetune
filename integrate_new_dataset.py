@@ -1,312 +1,260 @@
 """
 integrate_new_dataset.py
 ─────────────────────────────────────────────────────────────────────────────
-Downloads solomonameh/spotify-music-dataset from Kaggle, cleans it, maps
-genres to the project's 12-genre taxonomy, stratified-samples to 3,000 tracks,
-and writes data/song_track.csv for the recommendation engine.
+Builds data/song_track.csv for the recommendation engine from the Kaggle
+dataset solomonameh/spotify-music-dataset.
 
-Run once before running recommendation_engine.py / server.py.
+  1. Loads BOTH files shipped with the dataset (low + high popularity) so the
+     popularity range is the full 11-100 instead of the low file's 11-68 cap.
+  2. Maps the dataset's `playlist_genre` values into a 10-genre taxonomy.
+  3. Deduplicates on normalised (name, artists), keeping the most popular row.
+  4. Samples up to 3,000 tracks WITHOUT replacement, guaranteeing a floor of
+     MIN_PER_GENRE tracks per genre (the script fails loudly if it cannot).
+  5. Writes data/song_track.csv (with playlist_name / genre_raw provenance
+     columns) and data/dataset_report.md.
 """
 
 import kagglehub
 import pandas as pd
 import numpy as np
 import os
+import argparse
+import sys
 
 # ─────────────────────────────────────────────
-# TARGET 12-GENRE TAXONOMY (original dataset)
+# TARGET 10-GENRE TAXONOMY
+# Keys are the raw `playlist_genre` values of the source CSVs.
+# Genres that could not reach the 50-track floor on their own were merged:
+#   Metal (49 raw)  -> Rock;  Country (11) + Indie (17) -> Indie-Folk with Folk.
+# `gaming` is a use-case playlist, not a genre, and is dropped.
 # ─────────────────────────────────────────────
 GENRE_MAP = {
-    # Pop
-    "pop": "Pop", "pop-film": "Pop", "k-pop": "Pop", "j-pop": "Pop",
-    "power-pop": "Pop", "synth-pop": "Pop", "indie-pop": "Pop",
-    "electro": "Pop", "cantopop": "Pop", "mandopop": "Pop",
-    "chill": "Pop", "happy": "Pop", "children": "Pop", "gospel": "Pop",
-    "comedy": "Pop", "holidays": "Pop", "disney": "Pop",
-    "show-tunes": "Pop", "kids": "Pop", "summer": "Pop",
-    "movies": "Pop", "romance": "Pop",
+    "pop": "Pop", "k-pop": "Pop", "j-pop": "Pop", "cantopop": "Pop",
+    "mandopop": "Pop", "korean": "Pop",
 
-    # Hip-Hop
-    "hip-hop": "Hip-Hop", "rap": "Hip-Hop", "trap": "Hip-Hop",
-    "r-n-b": "Hip-Hop", "soul": "Hip-Hop", "funk": "Hip-Hop",
+    "hip-hop": "Hip-Hop", "r&b": "Hip-Hop", "soul": "Hip-Hop",
+    "funk": "Hip-Hop", "gospel": "Hip-Hop",
 
-    # Rock
-    "rock": "Rock", "alt-rock": "Rock", "hard-rock": "Rock",
-    "punk-rock": "Rock", "punk": "Rock", "grunge": "Rock",
-    "emo": "Rock", "garage": "Rock", "goth": "Rock",
-    "psych-rock": "Rock", "rock-n-roll": "Rock", "rockabilly": "Rock",
-    "road-trip": "Rock",
+    "rock": "Rock", "punk": "Rock", "metal": "Rock",
 
-    # Electronic
-    "edm": "Electronic", "electronic": "Electronic", "dance": "Electronic",
-    "techno": "Electronic", "house": "Electronic", "deep-house": "Electronic",
-    "progressive-house": "Electronic", "trance": "Electronic",
-    "dubstep": "Electronic", "drum-and-bass": "Electronic",
-    "club": "Electronic", "disco": "Electronic", "dancehall": "Electronic",
-    "afrobeat": "Electronic", "party": "Electronic",
+    "electronic": "Electronic", "disco": "Electronic",
 
-    # Classical
-    "classical": "Classical", "opera": "Classical", "piano": "Classical",
-    "acoustic": "Classical", "new-age": "Classical", "sleep": "Classical",
-    "study": "Classical", "ambient": "Classical",
+    "classical": "Classical",
 
-    # Jazz
-    "jazz": "Jazz", "blues": "Jazz", "bossanova": "Jazz", "brazil": "Jazz",
+    "jazz": "Jazz", "blues": "Jazz",
 
-    # Country
-    "country": "Country", "honky-tonk": "Country", "bluegrass": "Country",
+    "latin": "Latin", "brazilian": "Latin",
 
-    # Latin
-    "latin": "Latin", "salsa": "Latin", "samba": "Latin",
-    "reggaeton": "Latin", "spanish": "Latin", "forro": "Latin",
-    "pagode": "Latin", "mpb": "Latin", "sertanejo": "Latin",
-    "tango": "Latin",
+    "ambient": "Ambient", "lofi": "Ambient", "wellness": "Ambient",
 
-    # Metal
-    "metal": "Metal", "heavy-metal": "Metal", "black-metal": "Metal",
-    "death-metal": "Metal", "metalcore": "Metal", "grindcore": "Metal",
+    "world": "World", "arabic": "World", "turkish": "World",
+    "indian": "World", "afrobeats": "World", "reggae": "World",
+    "soca": "World",
 
-    # Indie
-    "indie": "Indie", "alternative": "Indie", "folk": "Indie",
-    "singer-songwriter": "Indie", "british": "Indie", "sad": "Indie",
-
-    # Reggae / World
-    "reggae": "Reggae", "world-music": "Reggae", "ska": "Reggae",
-    "turkish": "Reggae", "german": "Reggae", "french": "Reggae",
-    "swedish": "Reggae", "iranian": "Reggae", "malay": "Reggae",
-    "anime": "Reggae", "j-dance": "Reggae", "j-idol": "Reggae",
-    "j-rock": "Reggae",
+    "folk": "Indie-Folk", "indie": "Indie-Folk", "country": "Indie-Folk",
 }
 
 TARGET_GENRES = [
-    "Pop", "Hip-Hop", "Rock", "Electronic",
-    "Classical", "Jazz", "Country", "Latin",
-    "Metal", "Indie", "Reggae",
+    "Pop", "Hip-Hop", "Rock", "Electronic", "Classical",
+    "Jazz", "Latin", "Ambient", "World", "Indie-Folk",
 ]
 TARGET_TOTAL = 3000
 MIN_PER_GENRE = 50
 
 
 def download_dataset():
+    """Return every CSV in the Kaggle dataset (low- AND high-popularity files)."""
     print("Downloading solomonameh/spotify-music-dataset from Kaggle ...")
     path = kagglehub.dataset_download("solomonameh/spotify-music-dataset")
     print(f"  Cached at: {path}")
-
-    csv_file = None
-    for root, dirs, files in os.walk(path):
-        for fname in sorted(files):
-            if fname.endswith(".csv"):
-                candidate = os.path.join(root, fname)
-                if csv_file is None or os.path.getsize(candidate) > os.path.getsize(csv_file):
-                    csv_file = candidate
-
-    if csv_file is None:
+    csvs = []
+    for root, _, files in os.walk(path):
+        csvs += [os.path.join(root, f) for f in sorted(files) if f.endswith(".csv")]
+    if not csvs:
         raise FileNotFoundError("No CSV found in the downloaded dataset path.")
+    for c in csvs:
+        print(f"  Using file: {c}")
+    return csvs
 
-    print(f"  Using file: {csv_file}")
-    return csv_file
 
-
-def load_and_clean(csv_file):
-    df = pd.read_csv(csv_file, low_memory=False)
-    print(f"\n--- Raw dataset ---")
-    print(f"Shape  : {df.shape}")
-    print(f"Columns: {list(df.columns)}")
-
-    col_lower = {c.lower(): c for c in df.columns}
-
-    def pick(candidates):
-        for c in candidates:
-            if c in col_lower:
-                return col_lower[c]
-        return None
-
-    id_col      = pick(["id", "track_id", "spotify_id"])
-    name_col    = pick(["name", "track_name", "title"])
-    genre_col   = pick(["genre", "track_genre", "genres", "playlist_genre"])
-    artists_col = pick(["artists", "artist", "artist_name", "track_artist"])
-    album_col   = pick(["album", "album_name", "track_album_name"])
-    pop_col     = pick(["popularity", "pop", "track_popularity"])
-    dur_col     = pick(["duration_ms", "duration"])
-    exp_col     = pick(["explicit"])
-
-    required = {"id": id_col, "name": name_col, "genre": genre_col,
-                "artists": artists_col, "popularity": pop_col}
-    missing = [k for k, v in required.items() if v is None]
+def load_raw(csv_files):
+    """Concatenate all source CSVs into one frame with the project's column names."""
+    frames = []
+    for f in csv_files:
+        d = pd.read_csv(f, low_memory=False)
+        print(f"  {os.path.basename(f)}: {d.shape[0]:,} rows")
+        frames.append(d)
+    df = pd.concat(frames, ignore_index=True)
+    rename = {"track_name": "name", "track_artist": "artists",
+              "track_album_name": "album", "track_popularity": "popularity",
+              "playlist_genre": "genre"}
+    missing = [c for c in list(rename) + ["track_id", "duration_ms"] if c not in df.columns]
     if missing:
-        print(f"\nWARN: Could not find columns for: {missing}")
-        print(f"      Available: {list(df.columns)}")
         raise KeyError(f"Missing required columns: {missing}")
-
-    rename = {}
-    if id_col and id_col != "id":               rename[id_col]      = "id"
-    if name_col != "name":                      rename[name_col]    = "name"
-    if genre_col != "genre":                    rename[genre_col]   = "genre"
-    if artists_col != "artists":                rename[artists_col] = "artists"
-    if pop_col != "popularity":                 rename[pop_col]     = "popularity"
-    if dur_col and dur_col != "duration_ms":    rename[dur_col]     = "duration_ms"
-    if exp_col and exp_col != "explicit":       rename[exp_col]     = "explicit"
-    if album_col and album_col != "album":      rename[album_col]   = "album"
-
-    if rename:
-        df = df.rename(columns=rename)
-
-    keep = ["id", "name", "genre", "artists", "popularity"]
-    for c in ["duration_ms", "explicit", "album"]:
-        if c in df.columns:
-            keep.append(c)
-
-    df = df[[c for c in keep if c in df.columns]].copy()
-
-    # Drop duplicates
-    before = len(df)
-    df = df.drop_duplicates(subset=["name", "artists"])
-    print(f"After dedup (name+artists): {len(df):,}  (dropped {before - len(df):,})")
-
-    # Drop nulls
-    df = df.dropna(subset=["genre", "popularity"])
-    print(f"After dropping null genre/popularity: {len(df):,}")
-
-    # Coerce types
-    df["popularity"] = pd.to_numeric(df["popularity"], errors="coerce")
-    df = df.dropna(subset=["popularity"])
-    df["popularity"] = df["popularity"].clip(0, 100)
-
-    if "duration_ms" in df.columns:
-        df["duration_ms"] = pd.to_numeric(df["duration_ms"], errors="coerce").fillna(180000)
-    else:
-        df["duration_ms"] = 180000
-
-    if "explicit" in df.columns:
-        df["explicit"] = df["explicit"].map(
-            lambda x: 1 if str(x).strip().lower() in ("true", "1", "yes") else 0
-        ).fillna(0).astype(int)
-    else:
+    df = df.rename(columns=rename)
+    if "explicit" not in df.columns:
         df["explicit"] = 0
-
-    print(f"\n--- Popularity describe ---")
-    print(df["popularity"].describe().round(2))
-
-    print(f"\n--- Raw genre value_counts (top 30) ---")
-    print(df["genre"].value_counts().head(30).to_string())
-
+    if "playlist_name" not in df.columns:
+        df["playlist_name"] = ""
     return df
+
+
+def _norm(series):
+    return series.astype(str).str.lower().str.strip()
+
+
+def clean_and_dedupe(df):
+    """Dedupe on normalised (name, artists), keeping the most popular row."""
+    df = df.copy()
+    df["popularity"] = pd.to_numeric(df["popularity"], errors="coerce")
+    df = df.dropna(subset=["name", "artists", "genre", "popularity"])
+    df["popularity"] = df["popularity"].clip(0, 100)
+    df["duration_ms"] = pd.to_numeric(df["duration_ms"], errors="coerce").fillna(180000)
+    df["explicit"] = df["explicit"].map(
+        lambda x: 1 if str(x).strip().lower() in ("true", "1", "yes") else 0).astype(int)
+
+    before = len(df)
+    df["_k1"], df["_k2"] = _norm(df["name"]), _norm(df["artists"])
+    # popularity desc, then track_id asc -> deterministic choice among ties
+    df = df.sort_values(["popularity", "track_id"], ascending=[False, True])
+    df = df.drop_duplicates(subset=["_k1", "_k2"], keep="first")
+    df = df.drop(columns=["_k1", "_k2"])
+    dupes = before - len(df)
+    print(f"After dedup on (name, artists): {len(df):,}  (dropped {dupes:,})")
+    return df, dupes
 
 
 def map_genres(df):
     df = df.copy()
-    df["genre_raw"] = df["genre"].str.strip().str.lower()
+    df["genre_raw"] = _norm(df["genre"])
     df["genre"] = df["genre_raw"].map(GENRE_MAP)
 
-    unmapped = df[df["genre"].isna()]["genre_raw"].value_counts()
-    if not unmapped.empty:
-        print(f"\nWARN: Unmapped genres (will be dropped):")
-        print(unmapped.head(20).to_string())
+    audit = []
+    for raw in sorted(df["genre_raw"].unique()):
+        sub = df[df["genre_raw"] == raw]
+        audit.append({
+            "raw_genre": raw,
+            "mapped_to": GENRE_MAP.get(raw, "DROPPED"),
+            "n_tracks": len(sub),
+            "sample_artists": " | ".join(sub["artists"].dropna().unique()[:5]),
+        })
+    os.makedirs("data", exist_ok=True)
+    pd.DataFrame(audit).to_csv("data/genre_mapping.csv", index=False)
+    print("[Audit] Wrote data/genre_mapping.csv")
 
-    df = df.dropna(subset=["genre"])
-    df = df.drop(columns=["genre_raw"])
-
-    print(f"\n--- Genre distribution after mapping ---")
-    print(df["genre"].value_counts().to_string())
-    print(f"\nTotal mapped tracks: {len(df):,}")
-    return df
+    dropped = df[df["genre"].isna()]["genre_raw"].value_counts()
+    if not dropped.empty:
+        print("Dropped (unmapped) raw genres:", dropped.to_dict())
+    return df.dropna(subset=["genre"])
 
 
-def stratified_sample(df, total=TARGET_TOTAL):
-    genre_counts  = df["genre"].value_counts()
-    present_genres = genre_counts.index.tolist()
-
-    proportions = genre_counts / genre_counts.sum()
-    alloc = (proportions * total).astype(int)
-
-    remainder = total - alloc.sum()
-    for g in genre_counts.index:
-        if remainder <= 0:
-            break
+def allocate(avail, total, floor):
+    """Per-genre sample sizes: proportional, never above availability, >= floor."""
+    avail = avail.astype(int)
+    short = avail[avail < floor]
+    if not short.empty:
+        raise ValueError(f"Genres below the {floor}-track floor: {short.to_dict()}. "
+                         "Merge or drop them in GENRE_MAP.")
+    if avail.sum() <= total:
+        return avail.copy()
+    alloc = pd.Series(floor, index=avail.index)
+    # distribute the remainder proportionally to spare capacity (largest remainder)
+    spare = avail - floor
+    quota = spare / spare.sum() * (total - alloc.sum())
+    alloc += np.floor(quota).astype(int)
+    rem = int(total - alloc.sum())
+    for g in (quota - np.floor(quota)).sort_values(ascending=False).index[:rem]:
         alloc[g] += 1
-        remainder -= 1
+    return alloc
 
-    # Enforce minimum
-    for g in present_genres:
-        available = len(df[df["genre"] == g])
-        if available < MIN_PER_GENRE:
-            print(f"  WARN: Genre '{g}' has only {available} tracks (below N={MIN_PER_GENRE}).")
-        alloc[g] = max(alloc[g], min(MIN_PER_GENRE, available))
 
-    # Re-normalise if minimums push total over target
-    alloc_total = alloc.sum()
-    if alloc_total > total:
-        excess = int(alloc_total - total)
-        for g in genre_counts.index:
-            trim = min(int(alloc[g]) - MIN_PER_GENRE, excess)
-            if trim > 0:
-                alloc[g] -= trim
-                excess   -= trim
-            if excess <= 0:
-                break
-
-    frames = []
-    for g in present_genres:
-        subset = df[df["genre"] == g]
-        n = int(alloc.get(g, 0))
-        if n <= 0:
-            continue
-        replace = n > len(subset)
-        sampled = subset.sample(n=n, replace=replace, random_state=42)
-        frames.append(sampled)
-
-    result = pd.concat(frames).sample(frac=1, random_state=42).reset_index(drop=True)
-
-    print(f"\n--- Genre distribution after stratified sampling to {total} ---")
-    gc = result["genre"].value_counts()
-    print(gc.to_string())
-
-    print(f"\n--- N>={MIN_PER_GENRE} candidate check ---")
-    for g, cnt in gc.items():
-        status = "OK " if cnt >= MIN_PER_GENRE else "LOW"
-        print(f"  [{status}]  {g}: {cnt}")
-
+def stratified_sample(df, seed=42, total=TARGET_TOTAL):
+    alloc = allocate(df["genre"].value_counts(), total, MIN_PER_GENRE)
+    frames = [df[df["genre"] == g].sample(n=int(n), replace=False, random_state=seed)
+              for g, n in alloc.items()]
+    result = pd.concat(frames).sample(frac=1, random_state=seed).reset_index(drop=True)
+    print(f"\n--- Genre distribution after sampling (no replacement, floor {MIN_PER_GENRE}) ---")
+    print(result["genre"].value_counts().to_string())
     return result
 
 
 def build_csv(df):
-    df = df.copy()
+    df = df.copy().sort_values(["genre", "name", "artists"]).reset_index(drop=True)
     df["track_id"] = ["sp_" + str(i) for i in range(len(df))]
-
-    dur_min = df["duration_ms"].min()
-    dur_max = df["duration_ms"].max()
-    dur_range = dur_max - dur_min
-    df["duration_norm"] = (
-        (df["duration_ms"] - dur_min) / dur_range
-        if dur_range > 0 else 0.0
-    )
-
-    out_cols = [
-        "track_id", "name", "artists", "genre",
-        "popularity", "duration_ms", "duration_norm", "explicit"
-    ]
-    if "album" in df.columns:
-        out_cols.append("album")
-
+    rng = df["duration_ms"].max() - df["duration_ms"].min()
+    df["duration_norm"] = (df["duration_ms"] - df["duration_ms"].min()) / rng if rng > 0 else 0.0
+    out_cols = ["track_id", "name", "artists", "genre", "popularity",
+                "duration_ms", "duration_norm", "explicit", "album",
+                "playlist_name", "genre_raw"]
     os.makedirs("data", exist_ok=True)
     df[out_cols].to_csv("data/song_track.csv", index=False)
     print(f"\n[OK] Wrote {len(df):,} tracks -> data/song_track.csv")
-    print(f"     Columns: {out_cols}")
-
-    print(f"\n--- Popularity stats (final {TARGET_TOTAL}-track sample) ---")
-    print(df["popularity"].describe().round(2))
-
     return df
 
 
-def main():
-    csv_file = download_dataset()
-    df = load_and_clean(csv_file)
+def verify(final):
+    """Hard checks on the written CSV; the report records these numbers."""
+    stats = {
+        "rows": len(final),
+        "dup_name_artist": int(final.assign(a=_norm(final["name"]), b=_norm(final["artists"]))
+                               .duplicated(["a", "b"]).sum()),
+        "dup_track_id": int(final["track_id"].duplicated().sum()),
+        "min_genre": int(final["genre"].value_counts().min()),
+    }
+    assert stats["dup_name_artist"] == 0, "duplicate (name, artists) rows remain"
+    assert stats["dup_track_id"] == 0
+    assert stats["min_genre"] >= MIN_PER_GENRE, "genre floor violated"
+    return stats
+
+
+def write_dataset_report(csvs, n_raw, dupes, n_dedup, n_mapped, final, stats, seed):
+    """Dataset facts only; quality findings are appended by diagnostic.py."""
+    pop = final["popularity"]
+    with open("data/dataset_report.md", "w", encoding="utf-8") as f:
+        f.write("# Dataset Report\n\n")
+        f.write("_Generated by `integrate_new_dataset.py`; the quality section is "
+                "appended by `diagnostic.py`._\n\n")
+        f.write("## Source and pipeline\n")
+        f.write("- Source: Kaggle `solomonameh/spotify-music-dataset`, files: "
+                + ", ".join(f"`{os.path.basename(c)}`" for c in csvs) + "\n")
+        f.write(f"- Sampling seed: {seed}\n")
+        f.write(f"- Raw rows (all files): {n_raw:,}\n")
+        f.write(f"- Removed as duplicate (name, artists): {dupes:,}\n")
+        f.write(f"- After dedup: {n_dedup:,}\n")
+        f.write(f"- After genre mapping (unmapped genres dropped): {n_mapped:,}\n")
+        f.write(f"- Final sample (without replacement): {stats['rows']:,}\n\n")
+        f.write("## Checks on `data/song_track.csv`\n")
+        f.write(f"- Duplicate (name, artists) rows: {stats['dup_name_artist']}\n")
+        f.write(f"- Duplicate track_id rows: {stats['dup_track_id']}\n")
+        f.write(f"- Smallest genre: {stats['min_genre']} tracks (floor = {MIN_PER_GENRE})\n\n")
+        f.write("## Genre distribution\n| Genre | Count |\n|---|---|\n")
+        for g, c in final["genre"].value_counts().items():
+            f.write(f"| {g} | {c} |\n")
+        f.write("\n## Popularity\n")
+        f.write(f"- Min: {pop.min():.0f}\n- Max: {pop.max():.0f}\n")
+        f.write(f"- Mean: {pop.mean():.2f}\n- Median: {pop.median():.0f}\n")
+        f.write(f"- Share below 40 (the engine's niche threshold): {(pop < 40).mean():.1%}\n")
+
+
+def main(seed=42):
+    csvs = download_dataset()
+    raw = load_raw(csvs)
+    n_raw = len(raw)
+    df, dupes = clean_and_dedupe(raw)
+    n_dedup = len(df)
     df = map_genres(df)
-    df = stratified_sample(df, total=TARGET_TOTAL)
+    n_mapped = len(df)
+    df = stratified_sample(df, seed=seed)
     build_csv(df)
-    print("\n[DONE] Dataset integration complete. Run recommendation_engine.py next.\n")
+
+    final = pd.read_csv("data/song_track.csv")
+    stats = verify(final)
+    write_dataset_report(csvs, n_raw, dupes, n_dedup, n_mapped, final, stats, seed)
+    print("\n[DONE] Dataset integration complete.")
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--seed", type=int, default=42, help="Random seed for sampling")
+    args = parser.parse_args()
+    main(seed=args.seed)

@@ -1,0 +1,36 @@
+raw_genre,mapped_to,n_tracks,sample_artists
+afrobeats,World,72,"Tyla | Wizkid, Brent Faiyaz | Davido, YG Marley | Wizkid | Asake, Wizkid"
+ambient,Ambient,319,Mitski | Cigarettes After Sex | Coldplay | Lana Del Rey | Taylor Swift
+arabic,World,184,"Juice WRLD | Metro Boomin, Travis Scott, Young Thug | Lil Baby, Gunna | Polo G | Internet Money, Gunna, Don Toliver, NAV"
+blues,Jazz,78,"Eminem, Rihanna | Justin Bieber, Ludacris | Eminem, Dido | Sean Kingston | Destiny's Child"
+brazilian,Latin,147,"Mc Pogba, DJ Guih Da ZO | THE BOX, Mc Brinquedo, MC Cebezinho, MC Tuto, Mc Laranjinha, DJ Oreia | DJ TOPO, Seu Jorge, Mc Leozin, MC G15 | MC L da Vinte, MC Gury | Ichiss"
+cantopop,Pop,27,Vivian Lai | Jacky Cheung | Beyond | Alan Tam | Sandy Lam
+classical,Classical,116,"Ludovico Einaudi, Daniel Hope, I Virtuosi Italiani | Gibran Alcocer | Hans Zimmer | Fabrizio Paterlini | Ben Crosland"
+country,Indie-Folk,11,"Kenny Rogers | George Strait | Waylon Jennings, Willie Nelson | Johnny Cash | Randy Travis"
+disco,Electronic,9,Pino D'Angiò | Mr. Flagio | B.W.H. | Electra | Casco
+electronic,Electronic,558,"The Chainsmokers, Coldplay | CYRIL | Pitbull, AFROJACK, Ne-Yo, Nayer | The Chainsmokers, Halsey | DJ Snake, Justin Bieber"
+folk,Indie-Folk,64,Michael Marcagi | Richy Mitch & The Coal Miners | Patrick Watson | Chance Peña | Adrianne Lenker
+funk,Hip-Hop,28,"Macross 82-99 | Vantage | Neon Vectors, Macross 82-99 | サクラSAKURA-LEE | TANUKI"
+gaming,DROPPED,107,"Travis Scott, Playboi Carti | Benson Boone | Hanumankind, Kalmi | d4vd | David Guetta, Bebe Rexha"
+gospel,Hip-Hop,34,"Moses Bliss, Festizie, Chizie, Neeja, S.O.N Music, Ajay Asika | Jesus Image | S.O.N Music, Neeja | Dunsin Oyekan, Lawrence Oyor | Moses Bliss, Neeja, Ajay Asika, Festizie, S.O.N Music, Chizie"
+hip-hop,Hip-Hop,354,"Tyler, The Creator, Teezo Touchdown | Tyler, The Creator | Tyler, The Creator, ScHoolboy Q, Santigold | Future, Metro Boomin, Travis Scott, Playboi Carti | A$AP Rocky, Imogen Heap, Clams Casino"
+indian,World,56,"Pritam, Arijit Singh | Avvy Sra, Karan Aujla, Jaani | Akon, Hamsika Iyer | Tanishk Bagchi, Jubin Nautiyal, Asees Kaur | Badshah, Diljit Dosanjh, Aastha Gill"
+indie,Indie-Folk,16,Tame Impala | Parcels | Royel Otis | The Jungle Giants | DOPE LEMON
+j-pop,Pop,23,Creepy Nuts | Mrs. GREEN APPLE | Yuuri | Kenshi Yonezu | YOASOBI
+jazz,Jazz,145,"Nat King Cole | Ella Fitzgerald, Louis Armstrong | Galt MacDermot | Frank Sinatra, Count Basie | lorleaf"
+k-pop,Pop,17,"LISA | ZICO, JENNIE | BABYMONSTER | NewJeans | aespa"
+korean,Pop,32,"Stevie Wonder | ECLIPSE | Crush | V | CHANYEOL, Punch"
+latin,Latin,397,"Tito Double P | Fuerza Regida | Tito Double P, Peso Pluma | Feid, ATL Jacob | FloyyMenor, Cris Mj"
+lofi,Ambient,299,"Kina, Snøw | Kina, Adriana Proenza | RŮDE | Sihu | Zupa Fitz"
+mandopop,Pop,14,"邱軍 | 高爾宣 OSN, Patrick Brasca | 王赫野, 姚晓棠 | 陳華 | DIOR 大穎"
+metal,Rock,30,System Of A Down | Slipknot | Metallica | Deftones | Rob Zombie
+pop,Pop,445,"Lady Gaga, Bruno Mars | ROSÉ, Bruno Mars | Billie Eilish | Chappell Roan | Oscar Maydon, Fuerza Regida"
+punk,Rock,69,Gorillaz | Evanescence | blink-182 | Jimmy Eat World | Green Day
+r&b,Hip-Hop,50,"Frank Ocean | SZA | Miguel | Daniel Caesar, H.E.R. | Alicia Keys"
+reggae,World,23,Bob Marley & The Wailers | Chaka Demus & Pliers | Damian Marley | Sublime | Sticky Fingers
+rock,Rock,307,Radiohead | Tears For Fears | Arctic Monkeys | Fleetwood Mac | Creedence Clearwater Revival
+soca,World,14,"J Capri, Charly Black | Skinny Fabulous, Machel Montano, Bunji Garlin | Erphaan Alves | GBM Nutron | Machel Montano"
+soul,Hip-Hop,43,"Daniel Caesar | Snoh Aalegra | Cleo Sol | Beyoncé | Alex Isley, Masego, Jack Dine"
+turkish,World,70,"Semicenk | Simge | Semicenk, Doğu Swag | Zeynep Bastık | Ebru Yaşar, Siyam, Zeyd"
+wellness,Ambient,80,Wicker Whales | Lavinium | Miriam van Steeg | Nessa Wright | Jonas Sandberg
+world,World,228,"Jósean Log | Los Ángeles Azules, Natalia Lafourcade | Bad Bunny | Calle 13 | Micro TDH"

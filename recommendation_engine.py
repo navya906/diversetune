@@ -1,11 +1,11 @@
 """
 recommendation_engine.py
 ─────────────────────────────────────────────────────────────────────────────
-Implements Greedy, Content Filtering (Similarity), and Hybrid (DPP)
+Implements Greedy, Content Filtering (Similarity), MMR and Hybrid (DPP)
 recommendation algorithms on the new Spotify dataset.
 
 Feature vector (NO audio features):
-  - One-hot encoded genre         (11 dimensions)
+  - One-hot encoded genre         (10 dimensions)
   - Normalised duration_ms        (1 dimension, pre-computed in CSV)
   - Explicit flag (binary)        (1 dimension)
   - Artist co-occurrence (Jaccard): encoded as a normalised count column
@@ -21,6 +21,8 @@ import os
 import random
 import numpy as np
 from collections import Counter
+from itertools import combinations
+from scipy.stats import wilcoxon
 
 random.seed(42)
 np.random.seed(42)
@@ -29,11 +31,10 @@ np.random.seed(42)
 # 1. DATA LOADING & PREPROCESSING
 # ─────────────────────────────────────────────
 
-# Canonical genre list (11 genres after mapping)
+# Canonical genre list (10 genres; must match TARGET_GENRES in integrate_new_dataset.py)
 GENRE_LIST = [
-    "Pop", "Hip-Hop", "Rock", "Electronic",
-    "Classical", "Jazz", "Country", "Latin",
-    "Metal", "Indie", "Reggae",
+    "Pop", "Hip-Hop", "Rock", "Electronic", "Classical",
+    "Jazz", "Latin", "Ambient", "World", "Indie-Folk",
 ]
 
 
@@ -64,7 +65,7 @@ def _artist_jaccard_features(tracks):
 def load_and_preprocess(csv_path="data/song_track.csv"):
     """
     Load CSV, build feature vectors from:
-      - One-hot genre (11 dims)
+      - One-hot genre (10 dims)
       - duration_norm (1 dim, already in CSV)
       - explicit binary (1 dim)
       - artist_pop_norm (1 dim — normalised artist frequency, captures rarity)
@@ -123,7 +124,7 @@ def load_and_preprocess(csv_path="data/song_track.csv"):
             genre_vec[g_idx] = 1.0
 
         row["feature_vec"] = np.concatenate([
-            genre_vec,                                  # 11 dims
+            genre_vec,                                  # 10 dims
             [row["duration_norm"]],                     # 1 dim
             [float(row["explicit"])],                   # 1 dim
             [row["artist_pop_norm"]],                   # 1 dim  ← artist freq
@@ -162,33 +163,63 @@ def pairwise_cosine_matrix(vecs):
 # 3.(A) GREEDY ALGORITHM — Popularity-based
 # ─────────────────────────────────────────────
 
-def greedy_recommend(tracks, K=10):
-    """Rank songs by popularity, return top K."""
-    sorted_tracks = sorted(tracks, key=lambda t: t["popularity"], reverse=True)
-    return sorted_tracks[:K]
+def _track_num(t):
+    """Numeric part of 'sp_123' -> 123, used as a deterministic tie-breaker."""
+    try:
+        return int(str(t["track_id"]).split("_")[-1])
+    except ValueError:
+        return 0
+
+
+def greedy_recommend(tracks, K=10, liked_indices=()):
+    """
+    Rank songs by popularity (desc), return top K, excluding the seed songs.
+    Ties are broken deterministically by ascending track_id number.
+    NOTE: track_ids are assigned in genre-alphabetical order by the dataset
+    builder, so a tie is resolved in favour of the alphabetically earlier genre.
+    """
+    liked = set(liked_indices)
+    pool = [t for i, t in enumerate(tracks) if i not in liked]
+    pool.sort(key=lambda t: (-t["popularity"], _track_num(t)))
+    return pool[:K]
 
 
 # ─────────────────────────────────────────────
 # 3.(B) SIMILARITY-BASED — Content Filtering
 # ─────────────────────────────────────────────
 
-def content_filtering_recommend(tracks, liked_indices, K=10):
+def similarity_scores(tracks, liked_indices):
     """
-    For each candidate (not in liked), compute average cosine similarity
-    to the liked songs. Return top K most similar.
+    Relevance of every non-seed track: mean cosine similarity to the seed songs,
+    sorted descending (ties keep dataset order). Shared by Content Filtering,
+    DPP and MMR so the comparison isolates the re-ranking strategy.
     """
     liked_set  = set(liked_indices)
     liked_vecs = [tracks[i]["feature_vec"] for i in liked_indices]
-
     scores = []
     for idx, track in enumerate(tracks):
         if idx in liked_set:
             continue
         avg_sim = float(np.mean([cosine_similarity(track["feature_vec"], lv) for lv in liked_vecs]))
         scores.append((idx, avg_sim))
-
     scores.sort(key=lambda x: x[1], reverse=True)
-    return [tracks[i] for i, _ in scores[:K]]
+    return scores
+
+
+def retrieve_candidates(tracks, liked_indices, N=50):
+    """Top-N most similar non-seed tracks, each annotated with `_relevance`."""
+    candidates = []
+    for i, sim in similarity_scores(tracks, liked_indices)[:N]:
+        t = dict(tracks[i])
+        t["_relevance"] = sim
+        t["_orig_idx"]  = i
+        candidates.append(t)
+    return candidates
+
+
+def content_filtering_recommend(tracks, liked_indices, K=10):
+    """Top K tracks by mean cosine similarity to the liked (seed) songs."""
+    return [tracks[i] for i, _ in similarity_scores(tracks, liked_indices)[:K]]
 
 
 # ─────────────────────────────────────────────
@@ -237,35 +268,62 @@ def dpp_rerank(candidates, K=10, lambda_div=0.5):
     return [candidates[i] for i in selected]
 
 
-def graph_dpp_rerank_recommend(tracks, liked_indices, K=10, N=50, min_niche_pct=0.20):
+# ─────────────────────────────────────────────
+# 3.(D) MMR — Maximal Marginal Relevance (Carbonell & Goldstein, 1998)
+# ─────────────────────────────────────────────
+
+MMR_LAMBDA = 0.7
+MMR_LAMBDAS = (0.5, 0.7, 0.9)
+
+
+def _mmr_select(cands, K, lam):
+    r"""
+    Greedy MMR selection from a candidate pool:
+        next = argmax_{d_i in R\S} [ lam * Sim(d_i, seed)
+                                     - (1 - lam) * max_{d_j in S} Sim(d_i, d_j) ]
+    Sim(d_i, seed) is the candidate's `_relevance` (mean cosine to the seed songs),
+    Sim(d_i, d_j) is cosine on the same feature vectors. Cost: O(N*K) cosine
+    evaluations (max-similarity is updated incrementally).
     """
-    Step 1: Get top N candidates via content similarity.
-    Step 2: DPP re-rank to top K.
-    Step 3: Enforce fairness constraint (>=20% niche songs, popularity < 40).
+    if len(cands) <= K:
+        return list(cands)
+    selected  = []
+    remaining = list(range(len(cands)))
+    max_sim   = np.zeros(len(cands))
+    for _ in range(K):
+        best = max(remaining,
+                   key=lambda i: lam * cands[i]["_relevance"] - (1 - lam) * max_sim[i])
+        selected.append(best)
+        remaining.remove(best)
+        for i in remaining:
+            max_sim[i] = max(max_sim[i],
+                             cosine_similarity(cands[i]["feature_vec"], cands[best]["feature_vec"]))
+    return [cands[i] for i in selected]
+
+
+def mmr_recommend(tracks, liked_indices, K=10, N=50, lam=MMR_LAMBDA):
+    """Plain MMR over the top-N pool (literature definition: NO popularity floor)."""
+    return _mmr_select(retrieve_candidates(tracks, liked_indices, N), K, lam)
+
+
+def mmr_floor_recommend(tracks, liked_indices, K=10, N=50, lam=MMR_LAMBDA, min_niche_pct=0.20):
+    """MMR + the identical niche-floor enforcement used by Hybrid DPP (ablation)."""
+    cands = retrieve_candidates(tracks, liked_indices, N)
+    return enforce_niche_floor(_mmr_select(cands, K, lam), cands, K, min_niche_pct)
+
+
+NICHE_THRESHOLD = 40   # popularity below this counts as "niche" (also used by the metrics)
+
+
+def enforce_niche_floor(reranked, candidates, K, min_niche_pct=0.20):
     """
-    liked_set  = set(liked_indices)
-    liked_vecs = [tracks[i]["feature_vec"] for i in liked_indices]
-
-    scores = []
-    for idx, track in enumerate(tracks):
-        if idx in liked_set:
-            continue
-        avg_sim = float(np.mean([cosine_similarity(track["feature_vec"], lv) for lv in liked_vecs]))
-        scores.append((idx, avg_sim))
-
-    scores.sort(key=lambda x: x[1], reverse=True)
-    candidates = []
-    for i, sim in scores[:N]:
-        t = dict(tracks[i])
-        t["feature_vec"]  = tracks[i]["feature_vec"]
-        t["_relevance"]   = sim
-        t["_orig_idx"]    = i
-        candidates.append(t)
-
-    reranked = dpp_rerank(candidates, K=K)
-
-    # Fairness: ensure >= min_niche_pct niche songs
-    niche_count    = sum(1 for t in reranked if t["popularity"] < 40)
+    Fairness constraint shared by Hybrid DPP and MMR+floor: guarantee at least
+    max(1, int(K * min_niche_pct)) niche tracks by swapping the least relevant
+    non-niche picks for the most relevant unselected niche candidates.
+    Best effort: if the candidate pool has too few niche tracks, the floor is missed.
+    """
+    reranked = list(reranked)
+    niche_count    = sum(1 for t in reranked if t["popularity"] < NICHE_THRESHOLD)
     required_niche = max(1, int(K * min_niche_pct))
 
     if niche_count < required_niche:
@@ -273,17 +331,27 @@ def graph_dpp_rerank_recommend(tracks, liked_indices, K=10, N=50, min_niche_pct=
         selected_ids = {t["track_id"] for t in reranked}
         niche_pool   = [
             c for c in candidates
-            if c["popularity"] < 40 and c["track_id"] not in selected_ids
+            if c["popularity"] < NICHE_THRESHOLD and c["track_id"] not in selected_ids
         ]
         niche_pool.sort(key=lambda x: x.get("_relevance", 0), reverse=True)
 
-        popular_in_list = [i for i, t in enumerate(reranked) if t["popularity"] >= 40]
+        popular_in_list = [i for i, t in enumerate(reranked) if t["popularity"] >= NICHE_THRESHOLD]
         popular_in_list.sort(key=lambda i: reranked[i].get("_relevance", 0))
 
         for j in range(min(needed, len(niche_pool), len(popular_in_list))):
             reranked[popular_in_list[j]] = niche_pool[j]
-
     return reranked
+
+
+def graph_dpp_rerank_recommend(tracks, liked_indices, K=10, N=50, min_niche_pct=0.20):
+    """
+    Step 1: Get top N candidates via content similarity.
+    Step 2: DPP re-rank to top K.
+    Step 3: Enforce fairness constraint (>=20% niche songs, popularity < 40).
+    """
+    candidates = retrieve_candidates(tracks, liked_indices, N)
+    reranked = dpp_rerank(candidates, K=K)
+    return enforce_niche_floor(reranked, candidates, K, min_niche_pct)
 
 
 # ─────────────────────────────────────────────
@@ -327,7 +395,7 @@ def popularity_metrics(recs):
     """Compute average popularity and % of niche songs (popularity < 40)."""
     pops     = [r["popularity"] for r in recs]
     avg      = float(np.mean(pops))
-    niche_pct = sum(1 for p in pops if p < 40) / len(pops) * 100
+    niche_pct = sum(1 for p in pops if p < NICHE_THRESHOLD) / len(pops) * 100
     return avg, float(niche_pct)
 
 
@@ -335,161 +403,175 @@ def popularity_metrics(recs):
 # 5. EXPERIMENT RUNNER
 # ─────────────────────────────────────────────
 
-def run_experiment(tracks, num_seeds=8, K=10):
-    """
-    Run all 3 algorithms across num_seeds randomised seed sets.
-    Returns averaged metrics + per-run details.
-    """
-    results = {
-        "greedy":     {"ild": [], "gini": [], "avg_pop": [], "niche_pct": [], "runs": []},
-        "content_filtering": {"ild": [], "gini": [], "avg_pop": [], "niche_pct": [], "runs": []},
-        "graph_dpp_rerank":     {"ild": [], "gini": [], "avg_pop": [], "niche_pct": [], "runs": []},
-    }
+SEED = 42          # master RNG seed for drawing seed-song sets (documented in README)
+NUM_RUNS = 30      # number of random seed-song sets per experiment
+METRICS = ("ild", "gini", "avg_popularity", "niche_pct")
 
+# Every strategy has the same signature: fn(tracks, liked_indices, K) -> list of tracks.
+# Seed songs (liked_indices) are excluded from each strategy's candidate pool.
+STRATEGIES = {
+    "greedy":            lambda tracks, liked, K: greedy_recommend(tracks, K, liked),
+    "content_filtering": lambda tracks, liked, K: content_filtering_recommend(tracks, liked, K),
+    "graph_dpp_rerank":  lambda tracks, liked, K: graph_dpp_rerank_recommend(tracks, liked, K),
+}
+STRATEGIES["mmr_floor"] = lambda tracks, liked, K: mmr_floor_recommend(tracks, liked, K)
+for _lam in MMR_LAMBDAS:
+    STRATEGIES[f"mmr_{_lam}"] = (lambda lam: lambda tracks, liked, K: mmr_recommend(tracks, liked, K, lam=lam))(_lam)
+
+
+def evaluate(recs):
+    """All list-level metrics for one recommendation list."""
+    pops = [r["popularity"] for r in recs]
+    avg, niche = popularity_metrics(recs)
+    return {"ild": intra_list_diversity(recs),
+            "gini": popularity_concentration_index(pops),
+            "avg_popularity": avg, "niche_pct": niche}
+
+
+def run_experiment(tracks, num_seeds=NUM_RUNS, K=10, seed=SEED, strategies=None):
+    """
+    Run every strategy over num_seeds random seed-song sets (5-10 liked songs
+    each, drawn from a dedicated RNG(seed) so results are reproducible).
+    Returns mean and sample std (ddof=1) per metric, plus per-run values.
+    """
+    strategies = strategies or STRATEGIES
+    rng = random.Random(seed)
     all_indices = list(range(len(tracks)))
-    seed_sets   = []
-    for _ in range(num_seeds):
-        size = random.randint(5, 10)
-        seed_sets.append(random.sample(all_indices, size))
+    seed_sets = [rng.sample(all_indices, rng.randint(5, 10)) for _ in range(num_seeds)]
 
+    per_run = {name: [] for name in strategies}
+    examples = {name: [] for name in strategies}
     for run_idx, liked in enumerate(seed_sets):
         seed_names = [tracks[i]["name"] for i in liked]
-        print(f"\n-- Run {run_idx + 1}/{num_seeds} --")
-        print(f"   Seed songs: {seed_names[:3]}{'...' if len(seed_names) > 3 else ''}")
+        print(f"-- Run {run_idx + 1}/{num_seeds}: {len(liked)} seed songs")
+        liked_ids = {tracks[i]["track_id"] for i in liked}
+        for name, fn in strategies.items():
+            recs = fn(tracks, liked, K)
+            assert not liked_ids & {r["track_id"] for r in recs}, f"{name} leaked a seed song"
+            per_run[name].append(evaluate(recs))
+            examples[name].append({
+                "seed_songs": seed_names,
+                "recommendations": [
+                    {"name": r["name"], "artist": r["artists"],
+                     "genre": r["genre"], "popularity": round(r["popularity"], 1)}
+                    for r in recs],
+            })
 
-        # (A) Greedy
-        greedy_recs = greedy_recommend(tracks, K)
-        g_ild  = intra_list_diversity(greedy_recs)
-        g_gini = popularity_concentration_index([r["popularity"] for r in greedy_recs])
-        g_avg, g_niche = popularity_metrics(greedy_recs)
-        results["greedy"]["ild"].append(g_ild)
-        results["greedy"]["gini"].append(g_gini)
-        results["greedy"]["avg_pop"].append(g_avg)
-        results["greedy"]["niche_pct"].append(g_niche)
-        results["greedy"]["runs"].append({
-            "seed_songs": seed_names,
-            "recommendations": [
-                {"name": r["name"], "artist": r["artists"],
-                 "genre": r["genre"], "popularity": round(r["popularity"], 1)}
-                for r in greedy_recs
-            ]
-        })
-
-        # (B) Similarity
-        sim_recs = content_filtering_recommend(tracks, liked, K)
-        s_ild  = intra_list_diversity(sim_recs)
-        s_gini = popularity_concentration_index([r["popularity"] for r in sim_recs])
-        s_avg, s_niche = popularity_metrics(sim_recs)
-        results["content_filtering"]["ild"].append(s_ild)
-        results["content_filtering"]["gini"].append(s_gini)
-        results["content_filtering"]["avg_pop"].append(s_avg)
-        results["content_filtering"]["niche_pct"].append(s_niche)
-        results["content_filtering"]["runs"].append({
-            "seed_songs": seed_names,
-            "recommendations": [
-                {"name": r["name"], "artist": r["artists"],
-                 "genre": r["genre"], "popularity": round(r["popularity"], 1)}
-                for r in sim_recs
-            ]
-        })
-
-        # (C) Hybrid (DPP)
-        hyb_recs = graph_dpp_rerank_recommend(tracks, liked, K)
-        h_ild  = intra_list_diversity(hyb_recs)
-        h_gini = popularity_concentration_index([r["popularity"] for r in hyb_recs])
-        h_avg, h_niche = popularity_metrics(hyb_recs)
-        results["graph_dpp_rerank"]["ild"].append(h_ild)
-        results["graph_dpp_rerank"]["gini"].append(h_gini)
-        results["graph_dpp_rerank"]["avg_pop"].append(h_avg)
-        results["graph_dpp_rerank"]["niche_pct"].append(h_niche)
-        results["graph_dpp_rerank"]["runs"].append({
-            "seed_songs": seed_names,
-            "recommendations": [
-                {"name": r["name"], "artist": r["artists"],
-                 "genre": r["genre"], "popularity": round(r["popularity"], 1)}
-                for r in hyb_recs
-            ]
-        })
-
-    # Compute averages
     summary = {}
-    for algo in ["greedy", "content_filtering", "graph_dpp_rerank"]:
-        summary[algo] = {
-            "ild":           round(float(np.mean(results[algo]["ild"])),     4),
-            "gini":          round(float(np.mean(results[algo]["gini"])),    4),
-            "avg_popularity":round(float(np.mean(results[algo]["avg_pop"])), 2),
-            "niche_pct":     round(float(np.mean(results[algo]["niche_pct"])),2),
-            "runs":          results[algo]["runs"],
-            "per_run_ild":   [round(v, 4) for v in results[algo]["ild"]],
-            "per_run_gini":  [round(v, 4) for v in results[algo]["gini"]],
-            "per_run_avg_pop":   [round(v, 2) for v in results[algo]["avg_pop"]],
-            "per_run_niche_pct": [round(v, 2) for v in results[algo]["niche_pct"]],
-        }
-
+    for name in strategies:
+        entry = {"n_runs": num_seeds, "rng_seed": seed, "K": K}
+        for m in METRICS:
+            entry.update(describe([r[m] for r in per_run[name]], m))
+        entry["runs"] = examples[name]
+        entry["per_run_ild"] = [round(r["ild"], 4) for r in per_run[name]]
+        entry["per_run_gini"] = [round(r["gini"], 4) for r in per_run[name]]
+        entry["per_run_avg_pop"] = [round(r["avg_popularity"], 2) for r in per_run[name]]
+        entry["per_run_niche_pct"] = [round(r["niche_pct"], 2) for r in per_run[name]]
+        summary[name] = entry
+    summary["_paired"] = paired_comparisons(per_run)
     return summary
+
+
+def describe(values, metric):
+    """Mean/std plus robust stats (ILD and niche% are bimodal, so median/IQR matter)."""
+    v = np.asarray(values, dtype=float)
+    q1, med, q3 = np.percentile(v, [25, 50, 75])
+    return {metric: round(float(v.mean()), 4),
+            metric + "_std": round(float(v.std(ddof=1)), 4) if len(v) > 1 else 0.0,
+            metric + "_median": round(float(med), 4),
+            metric + "_q1": round(float(q1), 4),
+            metric + "_q3": round(float(q3), 4),
+            metric + "_iqr": round(float(q3 - q1), 4)}
+
+
+def paired_comparisons(per_run):
+    """
+    For every pair (A, B) of methods and every metric: per-run differences
+    A_i - B_i (same seed set i), mean/median difference, and a two-sided paired
+    Wilcoxon signed-rank test. p-values are raw (uncorrected); with
+    len(pairs) * len(METRICS) tests, apply a multiplicity correction before
+    claiming significance for any single one.
+    """
+    out = {}
+    for a, b in combinations(per_run, 2):
+        entry = {}
+        for m in METRICS:
+            x = np.array([r[m] for r in per_run[a]])
+            y = np.array([r[m] for r in per_run[b]])
+            d = x - y
+            n_nonzero = int(np.count_nonzero(np.abs(d) > 1e-12))
+            if n_nonzero == 0:
+                p = 1.0           # identical in every run
+            else:
+                p = float(wilcoxon(x, y).pvalue)
+            entry[m] = {
+                "diffs": [round(float(v), 4) for v in d],
+                "mean_diff": round(float(d.mean()), 4),
+                "median_diff": round(float(np.median(d)), 4),
+                "n_nonzero": n_nonzero,
+                "wilcoxon_p": float(f"{p:.3g}"),
+                "a_wins": int((d > 1e-12).sum()), "b_wins": int((d < -1e-12).sum()),
+            }
+        out[f"{a}__minus__{b}"] = entry
+    n_tests = len(out) * len(METRICS)
+    alpha = 0.05 / n_tests
+    for entry in out.values():
+        for m in METRICS:
+            entry[m]["bonferroni_alpha"] = float(f"{alpha:.3g}")
+            entry[m]["significant_bonferroni"] = bool(entry[m]["wilcoxon_p"] < alpha)
+    return out
 
 
 # ─────────────────────────────────────────────
 # 6. COMPARISON TABLE PRINTER
 # ─────────────────────────────────────────────
 
-OLD_RESULTS = {
-    # Baseline from the 1,960-track audio-feature dataset (12 genres).
-    # Update these values if you have the actual old output/results.json.
-    "greedy":     {"ild": None, "gini": None, "avg_popularity": None, "niche_pct": None},
-    "content_filtering": {"ild": None, "gini": None, "avg_popularity": None, "niche_pct": None},
-    "graph_dpp_rerank":     {"ild": None, "gini": None, "avg_popularity": None, "niche_pct": None},
-}
-
-
 def load_old_results(path="output/old_results.json"):
-    """Load previously-saved results for side-by-side comparison."""
+    """Load the baseline snapshot (pre-fix run, see output/archive_20260929/README.md)."""
     if os.path.exists(path):
         with open(path) as f:
             return json.load(f)
     return None
 
 
+ALGO_LABELS = {
+    "greedy":            "Greedy (Popularity)",
+    "content_filtering": "Content Filtering",
+    "mmr_0.5":           "MMR (lambda=0.5)",
+    "mmr_0.7":           "MMR (lambda=0.7)",
+    "mmr_0.9":           "MMR (lambda=0.9)",
+    "mmr_floor":         "MMR 0.7 + niche floor",
+    "graph_dpp_rerank":  "Graph DPP Rerank",
+}
+METRIC_LABELS = {
+    "ild":            "ILD (Diversity)",
+    "gini":           "Gini Index",
+    "avg_popularity": "Avg Popularity",
+    "niche_pct":      "Niche % (<40)",
+}
+
+
 def print_comparison_table(new_summary, old_summary=None):
-    """Print new vs old metric table side by side."""
-    algo_labels = {
-        "greedy":     "Greedy (Popularity)",
-        "content_filtering": "Content Filtering",
-        "graph_dpp_rerank":     "Graph DPP Rerank",
-    }
-    metrics = ["ild", "gini", "avg_popularity", "niche_pct"]
-    metric_labels = {
-        "ild":           "ILD (Diversity)",
-        "gini":          "Gini Index",
-        "avg_popularity":"Avg Popularity",
-        "niche_pct":     "Niche % (<40)",
-    }
-
+    """Print new metrics (mean +/- std) next to the baseline snapshot and the delta."""
     has_old = old_summary is not None
-
-    print("\n" + "=" * 74)
-    if has_old:
-        print(f"{'METRIC':<22} {'OLD (1,960 tracks)':>20}  {'NEW (3,000 tracks)':>20}  {'DELTA':>8}")
-    else:
-        print(f"{'METRIC':<22} {'NEW (3,000 tracks)':>20}")
-    print("=" * 74)
-
-    for algo, label in algo_labels.items():
-        print(f"\n  Algorithm: {label}")
-        print("  " + "-" * 70)
-        for m in metrics:
-            new_val = new_summary[algo].get(m)
-            lbl = metric_labels[m]
-            if has_old and old_summary.get(algo, {}).get(m) is not None:
-                old_val = old_summary[algo][m]
-                delta   = (new_val - old_val) if (new_val is not None and old_val is not None) else None
-                delta_s = f"{delta:+.4f}" if delta is not None else "   N/A"
-                print(f"  {lbl:<22} {old_val:>20.4f}  {new_val:>20.4f}  {delta_s:>8}")
+    print("\n" + "=" * 86)
+    head = f"{'METRIC':<20}{'BASELINE (pre-fix)':>20}{'NEW mean +/- std':>26}{'DELTA':>12}"
+    print(head if has_old else f"{'METRIC':<20}{'NEW mean +/- std':>26}")
+    print("=" * 86)
+    for algo, label in ALGO_LABELS.items():
+        if algo not in new_summary:
+            continue
+        print(f"\n  {label}")
+        print("  " + "-" * 82)
+        for m in METRIC_LABELS:
+            new_val = new_summary[algo][m]
+            new_s = f"{new_val:.4f} +/- {new_summary[algo].get(m + '_std', 0):.4f}"
+            old_val = (old_summary or {}).get(algo, {}).get(m)
+            if has_old and old_val is not None:
+                print(f"  {METRIC_LABELS[m]:<18}{old_val:>20.4f}{new_s:>26}{new_val - old_val:>+12.4f}")
             else:
-                val_s = f"{new_val:.4f}" if new_val is not None else "N/A"
-                print(f"  {lbl:<22} {val_s:>20}")
-
-    print("\n" + "=" * 74)
+                print(f"  {METRIC_LABELS[m]:<18}{'(not in baseline)' if has_old else '':>20}{new_s:>26}{'N/A' if has_old else '':>12}")
+    print("\n" + "=" * 86)
 
 
 # ─────────────────────────────────────────────
@@ -506,8 +588,8 @@ def main():
     for g, cnt in sorted(genre_counts.items(), key=lambda x: -x[1]):
         print(f"  {g:<15}: {cnt}")
 
-    print("\nRunning experiments (8 randomised seed sets, K=10) …")
-    summary = run_experiment(tracks, num_seeds=8, K=10)
+    print("\nRunning experiments ({NUM_RUNS} randomised seed sets, K=10, rng seed {SEED}) …")
+    summary = run_experiment(tracks, num_seeds=NUM_RUNS, K=10)
 
     # Save new results
     os.makedirs("output", exist_ok=True)
@@ -520,15 +602,10 @@ def main():
 
     print_comparison_table(summary, old_summary)
 
-    algo_labels = {
-        "greedy": "Greedy (Popularity)",
-        "content_filtering": "Content Filtering",
-        "graph_dpp_rerank": "Graph DPP Rerank",
-    }
-    best_div  = max(summary, key=lambda a: summary[a]["ild"])
-    best_fair = min(summary, key=lambda a: summary[a]["gini"])
-    print(f"  Highest Diversity (ILD) : {algo_labels[best_div]}  ({summary[best_div]['ild']:.4f})")
-    print(f"  Best Fairness (Gini)    : {algo_labels[best_fair]} ({summary[best_fair]['gini']:.4f})")
+    best_div  = max(ALGO_LABELS.keys() & summary.keys(), key=lambda a: summary[a]["ild"])
+    best_fair = min(ALGO_LABELS.keys() & summary.keys(), key=lambda a: summary[a]["gini"])
+    print(f"  Highest mean ILD : {ALGO_LABELS[best_div]}  ({summary[best_div]['ild']:.4f})")
+    print(f"  Lowest Gini      : {ALGO_LABELS[best_fair]} ({summary[best_fair]['gini']:.4f})")
     print()
 
 

@@ -10,7 +10,7 @@ Usage:
 
 Steps:
   1. (Optional) Download + integrate the new Kaggle dataset
-  2. Run recommendation_engine experiments (8 seeds, K=10)
+  2. Run recommendation_engine experiments (30 seeds, K=10, fixed RNG seed 42)
   3. Print side-by-side metric table (new vs old)
   4. (Optional) Regenerate plots
 """
@@ -68,7 +68,7 @@ def main():
     for g, cnt in sorted(genre_counts.items(), key=lambda x: -x[1]):
         print(f"  {g:<15}: {cnt}")
 
-    summary = run_experiment(tracks, num_seeds=8, K=10)
+    summary = run_experiment(tracks, K=10)
 
     os.makedirs("output", exist_ok=True)
     with open("output/results.json", "w") as f:
@@ -83,12 +83,7 @@ def main():
     if args.plots:
         print("\n=== STEP 3: Regenerating plots ===")
         import generate_plots
-        generate_plots.setup_style()
-        generate_plots.plot_diversity(summary)
-        generate_plots.plot_fairness(summary)
-        generate_plots.plot_popularity(summary)
-        generate_plots.plot_tradeoff(summary)
-        generate_plots.plot_niche_percentage(summary)
+        generate_plots.generate_all(summary)
         print("[OK] Plots saved to output/")
 
     print("\n=== PIPELINE COMPLETE ===\n")

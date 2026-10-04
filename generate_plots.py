@@ -1,9 +1,12 @@
 """
-Generate matplotlib visualisation plots from experiment results.
-Saves PNG images to output/ directory for the web frontend.
+Generate matplotlib plots from output/results.json (written by run_experiment).
 
-Compatible with both the old (1,960-track audio-feature) dataset
-and the new (3,000-track) solomonameh/spotify-music-dataset results.
+Five series are plotted in every comparison chart:
+  Greedy, Content Filtering, MMR (lambda=0.7), MMR + niche floor, Graph DPP Rerank.
+Bars show the mean over the 30 runs, error bars one standard deviation, and the
+white diamond the median (ILD and niche% are bimodal, so mean and median differ).
+The other two MMR lambdas (0.5, 0.9) appear only in mmr_lambda_curve.png to keep
+the main charts readable.
 """
 
 import json
@@ -13,15 +16,23 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
+# (results.json key, axis label, colour). Keys match recommendation_engine.STRATEGIES.
+SERIES = [
+    ("greedy",            "Greedy\n(Popularity)",  "#ff6b6b"),
+    ("content_filtering", "Content\nFiltering",    "#4ecdc4"),
+    ("mmr_0.7",           "MMR\n(λ=0.7)",          "#f59e0b"),
+    ("mmr_floor",         "MMR + niche\nfloor",     "#22c55e"),
+    ("graph_dpp_rerank",  "Graph DPP\nRerank",     "#a855f7"),
+]
+ALGO_KEYS   = [k for k, _, _ in SERIES]
+ALGO_NAMES  = [n for _, n, _ in SERIES]
+BAR_COLORS  = [c for _, _, c in SERIES]
+TEXT = "#e0e0ff"
+
 
 def load_results(path="output/results.json"):
     with open(path, "r") as f:
-        results = json.load(f)
-        return {
-            "greedy": results.get("greedy", {}),
-            "content_filtering": results.get("content_filtering") or results.get("similarity", {}),
-            "graph_dpp_rerank": results.get("graph_dpp_rerank") or results.get("hybrid", {})
-        }
+        return json.load(f)
 
 
 def setup_style():
@@ -30,154 +41,137 @@ def setup_style():
         "figure.facecolor": "#0f0f23",
         "axes.facecolor": "#1a1a3e",
         "axes.edgecolor": "#3d3d7a",
-        "axes.labelcolor": "#e0e0ff",
-        "text.color": "#e0e0ff",
+        "axes.labelcolor": TEXT,
+        "text.color": TEXT,
         "xtick.color": "#b0b0dd",
         "ytick.color": "#b0b0dd",
         "grid.color": "#2a2a5a",
         "grid.alpha": 0.5,
         "font.family": "sans-serif",
-        "font.size": 12,
+        "font.size": 11,
     })
 
 
-ALGO_NAMES = ["Greedy\n(Popularity)", "Content Filtering", "Graph DPP Rerank"]
-# Keys must match recommendation_engine.py run_experiment() output dictionary
-ALGO_KEYS = ["greedy", "content_filtering", "graph_dpp_rerank"]
-BAR_COLORS = ["#ff6b6b", "#4ecdc4", "#a855f7"]
+def _bar_chart(results, metric, ylabel, title, filename, fmt, output_dir, ylim=None):
+    """Mean bars with ±1 std error bars and a median marker."""
+    fig, ax = plt.subplots(figsize=(10, 5.5))
+    means = np.array([results[k][metric] for k in ALGO_KEYS])
+    stds = np.array([results[k].get(metric + "_std", 0.0) for k in ALGO_KEYS])
+    meds = np.array([results[k].get(metric + "_median", results[k][metric]) for k in ALGO_KEYS])
+    x = np.arange(len(ALGO_KEYS))
+
+    ax.bar(x, means, color=BAR_COLORS, width=0.6, edgecolor="#ffffff22", linewidth=1.2, zorder=2)
+    ax.errorbar(x, means, yerr=stds, fmt="none", ecolor="#ffffffcc", capsize=5, linewidth=1.4, zorder=3)
+    ax.scatter(x, meds, marker="D", s=55, color="white", edgecolor="#0f0f23", zorder=4, label="median")
+
+    top = (means + stds).max()
+    for xi, m in zip(x, means):
+        ax.text(xi, (m + stds[xi]) + top * 0.02, fmt.format(m), ha="center", va="bottom",
+                fontsize=10, fontweight="bold", color=TEXT)
+
+    n = results[ALGO_KEYS[0]].get("n_runs", "?")
+    ax.set_xticks(x)
+    ax.set_xticklabels(ALGO_NAMES)
+    ax.set_ylabel(ylabel, fontsize=12)
+    ax.set_title(f"{title}\n(mean ± 1 std, n={n} runs)", fontsize=14, fontweight="bold", pad=12)
+    ax.set_ylim(*(ylim if ylim else (0, top * 1.18)))
+    ax.grid(axis="y", linestyle="--", zorder=0)
+    ax.legend(loc="upper right", framealpha=0.3, facecolor="#1a1a3e", edgecolor="#3d3d7a")
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, filename), dpi=150, bbox_inches="tight")
+    plt.close()
+    print(f"  ✓ {filename}")
 
 
 def plot_diversity(results, output_dir="output"):
-    """Bar chart – ILD Diversity Comparison."""
-    fig, ax = plt.subplots(figsize=(8, 5))
-    values = [results[k]["ild"] for k in ALGO_KEYS]
-    bars = ax.bar(ALGO_NAMES, values, color=BAR_COLORS, width=0.5, edgecolor="#ffffff22", linewidth=1.2)
-
-    for bar, val in zip(bars, values):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.005,
-                f"{val:.4f}", ha="center", va="bottom", fontsize=11, fontweight="bold", color="#e0e0ff")
-
-    ax.set_ylabel("Intra-List Diversity (ILD)", fontsize=13)
-    ax.set_title("Diversity Comparison", fontsize=16, fontweight="bold", pad=15)
-    ax.set_ylim(0, max(values) * 1.25)
-    ax.grid(axis="y", linestyle="--")
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "diversity_comparison.png"), dpi=150, bbox_inches="tight")
-    plt.close()
-    print("  ✓ diversity_comparison.png")
+    _bar_chart(results, "ild", "Intra-List Diversity (ILD)", "Diversity Comparison",
+               "diversity_comparison.png", "{:.3f}", output_dir)
 
 
 def plot_fairness(results, output_dir="output"):
-    """Bar chart – Gini Index (Fairness) Comparison."""
-    fig, ax = plt.subplots(figsize=(8, 5))
-    values = [results[k]["gini"] for k in ALGO_KEYS]
-    bars = ax.bar(ALGO_NAMES, values, color=BAR_COLORS, width=0.5, edgecolor="#ffffff22", linewidth=1.2)
-
-    for bar, val in zip(bars, values):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.005,
-                f"{val:.4f}", ha="center", va="bottom", fontsize=11, fontweight="bold", color="#e0e0ff")
-
-    ax.set_ylabel("Gini Index", fontsize=13)
-    ax.set_title("Fairness Comparison (Lower = Better)", fontsize=16, fontweight="bold", pad=15)
-    ax.set_ylim(0, max(values) * 1.45)
-    ax.grid(axis="y", linestyle="--")
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "fairness_comparison.png"), dpi=150, bbox_inches="tight")
-    plt.close()
-    print("  ✓ fairness_comparison.png")
+    _bar_chart(results, "gini", "Gini Index of list popularity",
+               "Popularity Concentration (Lower = More Equal)",
+               "fairness_comparison.png", "{:.3f}", output_dir)
 
 
 def plot_popularity(results, output_dir="output"):
-    """Bar chart – Average Popularity."""
-    fig, ax = plt.subplots(figsize=(8, 5))
-    values = [results[k]["avg_popularity"] for k in ALGO_KEYS]
-    bars = ax.bar(ALGO_NAMES, values, color=BAR_COLORS, width=0.5, edgecolor="#ffffff22", linewidth=1.2)
+    _bar_chart(results, "avg_popularity", "Average Popularity Score",
+               "Average Popularity of Recommendations",
+               "popularity_comparison.png", "{:.1f}", output_dir, ylim=(0, 110))
 
-    for bar, val in zip(bars, values):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.5,
-                f"{val:.1f}", ha="center", va="bottom", fontsize=11, fontweight="bold", color="#e0e0ff")
 
-    ax.set_ylabel("Average Popularity Score", fontsize=13)
-    ax.set_title("Average Popularity of Recommendations", fontsize=16, fontweight="bold", pad=15)
-    ax.set_ylim(0, 100)
-    ax.grid(axis="y", linestyle="--")
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "popularity_comparison.png"), dpi=150, bbox_inches="tight")
-    plt.close()
-    print("  ✓ popularity_comparison.png")
+def plot_niche_percentage(results, output_dir="output"):
+    _bar_chart(results, "niche_pct", "Niche songs (popularity < 40), %",
+               "Niche Song Representation", "niche_percentage.png", "{:.1f}%", output_dir,
+               ylim=(0, 75))
 
 
 def plot_tradeoff(results, output_dir="output"):
-    """Line graph – ILD vs Popularity trade-off."""
-    fig, ax1 = plt.subplots(figsize=(8, 5))
-
-    x = np.arange(len(ALGO_NAMES))
-    ild_vals = [results[k]["ild"] for k in ALGO_KEYS]
-    pop_vals = [results[k]["avg_popularity"] for k in ALGO_KEYS]
-
-    # ILD line
-    line1 = ax1.plot(x, ild_vals, "o-", color="#a855f7", linewidth=2.5, markersize=10,
-                     label="ILD (Diversity)", zorder=5)
-    ax1.set_ylabel("Intra-List Diversity (ILD)", fontsize=13, color="#a855f7")
-    ax1.tick_params(axis="y", labelcolor="#a855f7")
-    ax1.set_ylim(0, max(ild_vals) * 1.4)
-
-    # Popularity line (secondary axis)
-    ax2 = ax1.twinx()
-    line2 = ax2.plot(x, pop_vals, "s--", color="#ff6b6b", linewidth=2.5, markersize=10,
-                     label="Avg Popularity", zorder=5)
-    ax2.set_ylabel("Average Popularity", fontsize=13, color="#ff6b6b")
-    ax2.tick_params(axis="y", labelcolor="#ff6b6b")
-    ax2.set_ylim(0, 100)
-
-    ax1.set_xticks(x)
-    ax1.set_xticklabels(ALGO_NAMES)
-    ax1.set_title("Diversity vs Popularity Trade-off", fontsize=16, fontweight="bold", pad=15)
-    ax1.grid(axis="both", linestyle="--")
-
-    # Combined legend
-    lines = line1 + line2
-    labels = [l.get_label() for l in lines]
-    ax1.legend(lines, labels, loc="upper center", framealpha=0.3, facecolor="#1a1a3e", edgecolor="#3d3d7a")
-
+    """ILD (median) vs average popularity per method, one point per series."""
+    fig, ax = plt.subplots(figsize=(8.5, 5.5))
+    for key, name, color in SERIES:
+        r = results[key]
+        ax.scatter(r["avg_popularity"], r["ild"], s=170, color=color, edgecolor="white",
+                   linewidth=1.2, zorder=3)
+        ax.annotate(name.replace("\n", " "), (r["avg_popularity"], r["ild"]),
+                    textcoords="offset points", xytext=(9, 7), fontsize=10, color=TEXT)
+    ax.set_xlabel("Average popularity of recommendations", fontsize=12)
+    ax.set_ylabel("Mean Intra-List Diversity (ILD)", fontsize=12)
+    ax.set_title("Diversity vs Popularity Trade-off (per-method means)", fontsize=14,
+                 fontweight="bold", pad=12)
+    ax.set_xlim(40, 100)
+    ax.set_ylim(-0.01, max(results[k]["ild"] for k in ALGO_KEYS) * 1.3)
+    ax.grid(linestyle="--")
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "tradeoff_chart.png"), dpi=150, bbox_inches="tight")
     plt.close()
     print("  ✓ tradeoff_chart.png")
 
 
-def plot_niche_percentage(results, output_dir="output"):
-    """Bar chart – Percentage of Niche Songs."""
-    fig, ax = plt.subplots(figsize=(8, 5))
-    values = [results[k]["niche_pct"] for k in ALGO_KEYS]
-    bars = ax.bar(ALGO_NAMES, values, color=BAR_COLORS, width=0.5, edgecolor="#ffffff22", linewidth=1.2)
-
-    for bar, val in zip(bars, values):
-        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.5,
-                f"{val:.1f}%", ha="center", va="bottom", fontsize=11, fontweight="bold", color="#e0e0ff")
-
-    ax.set_ylabel("Niche Songs (popularity < 40) %", fontsize=13)
-    ax.set_title("Niche Song Representation", fontsize=16, fontweight="bold", pad=15)
-    ax.set_ylim(0, max(max(values) * 1.3, 10))
-    ax.grid(axis="y", linestyle="--")
+def plot_mmr_lambda_curve(results, output_dir="output"):
+    """MMR relevance/diversity trade-off across lambda, with CF and DPP for reference."""
+    lam_keys = sorted((k for k in results if k.startswith("mmr_") and k != "mmr_floor"),
+                      key=lambda k: float(k.split("_")[1]))
+    if not lam_keys:
+        return
+    lams = [float(k.split("_")[1]) for k in lam_keys]
+    fig, axes = plt.subplots(1, 2, figsize=(11, 4.8))
+    for ax, metric, label in ((axes[0], "ild", "Mean ILD"), (axes[1], "niche_pct", "Mean niche %")):
+        vals = [results[k][metric] for k in lam_keys]
+        sds = [results[k][metric + "_std"] for k in lam_keys]
+        ax.errorbar(lams, vals, yerr=sds, fmt="o-", color="#f59e0b", linewidth=2.2, markersize=9,
+                    capsize=5, label="MMR (no floor)")
+        for key, name, color in SERIES:
+            if key in ("content_filtering", "graph_dpp_rerank", "mmr_floor"):
+                ax.axhline(results[key][metric], color=color, linestyle="--", linewidth=1.6,
+                           label=name.replace("\n", " ") + (" (λ=0.7)" if key == "mmr_floor" else ""))
+        ax.set_xticks(lams)
+        ax.set_xlabel("λ (1 = pure relevance)", fontsize=12)
+        ax.set_ylabel(label, fontsize=12)
+        ax.grid(linestyle="--")
+    axes[0].legend(framealpha=0.3, facecolor="#1a1a3e", edgecolor="#3d3d7a", fontsize=9)
+    fig.suptitle("MMR λ sweep: relevance/diversity trade-off (error bars = ±1 std)",
+                 fontsize=14, fontweight="bold")
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "niche_percentage.png"), dpi=150, bbox_inches="tight")
+    plt.savefig(os.path.join(output_dir, "mmr_lambda_curve.png"), dpi=150, bbox_inches="tight")
     plt.close()
-    print("  ✓ niche_percentage.png")
+    print("  ✓ mmr_lambda_curve.png")
 
 
-def main():
+def generate_all(results, output_dir="output"):
     setup_style()
-    results = load_results()
-    output_dir = "output"
     os.makedirs(output_dir, exist_ok=True)
-
-    print("Generating plots...")
     plot_diversity(results, output_dir)
     plot_fairness(results, output_dir)
     plot_popularity(results, output_dir)
     plot_tradeoff(results, output_dir)
     plot_niche_percentage(results, output_dir)
+    plot_mmr_lambda_curve(results, output_dir)
+
+
+def main():
+    print("Generating plots...")
+    generate_all(load_results())
     print("\n✅ All plots saved to output/")
 
 
