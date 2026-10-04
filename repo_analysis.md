@@ -12,7 +12,7 @@
 | Plots (`generate_plots.py`) | Working. Five comparison charts plus an MMR λ chart. |
 | Web UI / server | Updated. `index.html` renders metrics, comparison and paired-test tables from `output/results.json` (no hard-coded results); `search.html` and `server.py` serve all five methods. Needs `output/` generated first. |
 | Tests | None. |
-| Validity of conclusions | Limited — see "Caveats". The experiment runs correctly; what it can support is narrower than earlier write-ups claimed. |
+| Validity of conclusions | Limited — see "Limitations". The experiment runs correctly; what it can support is narrower than earlier write-ups claimed. |
 
 ## Setup of the experiment
 
@@ -73,14 +73,46 @@ Among comparisons not involving Greedy, **the only results that survive Bonferro
 5. **MMR's λ curve is flat.** ILD moves from 0.120 to 0.113 across λ=0.5→0.9 and niche % stays at 26–28 (see `output/mmr_lambda_curve.png`); the λ differences are within run-to-run noise on niche % and, although some ILD differences between λ values are nominally significant, they are tiny.
 6. **DPP is not shown to beat CF on niche representation** (p=0.19) and is nominally *less* equal in Gini. The earlier claim that DPP "decisively wins" is not supported.
 
-## Caveats
+## Complexity analysis
 
-- **Genre labels are playlist-level, not track-level.** 17% of artists with ≥ 2 tracks appear under more than one genre, and spot checks show mislabels (see `data/dataset_report.md`). The genre one-hot dominates the similarity vector, so "diversity" here partly measures the diversity of those noisy labels.
-- **ILD is almost always near zero** because candidates retrieved by similarity are nearly all the same genre. The experiment therefore has little room to separate re-ranking strategies, which is also why the λ curve is flat.
-- **30 runs from random seed sets** are not real user histories; seed sets of 5–10 random tracks are usually genre-incoherent.
-- **The niche floor is best-effort** and missed in 2/30 runs for both DPP and MMR+floor when the 50-candidate pool had too few niche tracks.
-- **Bonferroni is conservative**; the nominal-only findings should be treated as hypotheses, not results.
-- The Greedy tie-break uses track-id order, and ids are assigned in genre-alphabetical order. Only 3 tracks tie at the cutoff here (all Pop), so it does not affect the result, but it would on other data.
+Notation: **n** = tracks in the dataset (3,000), **m** = seed songs (5–10), **d** = feature dimension (14), **N** = candidate-pool size (50), **K** = list length (10). Every bound below was checked against the code in `recommendation_engine.py`, and the operation counts and timings were measured.
+
+| Stage / method | Time | What dominates (from the code) |
+|---|---|---|
+| **Greedy** | O(n log n) | One sort of the non-seed tracks (`greedy_recommend`); the seed filter is O(n). |
+| **Retrieval** (shared by CF, MMR, DPP) | O(n·m·d + n log n) | `similarity_scores`: n tracks × m seeds × one cosine, each O(d), then one sort. |
+| **Content Filtering** | O(n·m·d + n log n) | Retrieval, then take the top K. |
+| **MMR** (selection only) | O(N·K·d) | `_mmr_select`: K rounds; each scans ≤ N candidates in O(N), then updates the running max-similarity of the remaining candidates with one O(d) cosine each. Treating d as a constant this is the O(N·K) greedy selection. |
+| **DPP rerank** (selection only) | O(N²·d + N·K⁴) | (i) `pairwise_cosine_matrix` + building L: N² / 2 cosines, O(N²·d). (ii) The greedy loop calls `np.linalg.slogdet` on a fresh (k+1)×(k+1) submatrix for **every** remaining candidate at **every** step, i.e. N·K determinants of size up to K, each O(k³): Σ_k N·k³ = O(N·K⁴). |
+| **Niche floor** (MMR+floor, DPP) | O(N log N) | One sort of the niche pool plus an O(K) swap. |
+
+Full pipelines are the sum of retrieval and re-ranking, and the two terms scale with different quantities:
+
+- **MMR / MMR+floor:** O(n·m·d + n log n) *retrieval, scales with the dataset* + O(N·K·d) *re-ranking, scales with the pool and list size*.
+- **DPP:** O(n·m·d + n log n) *retrieval* + O(N²·d) *kernel construction* + O(N·K⁴) *greedy selection*.
+
+**Confirmed by measurement** (n = 3,000, m = 8, N = 50, K = 10):
+
+| Stage | Time |
+|---|---|
+| Retrieval (similarity + sort) | ≈ 100 ms |
+| DPP rerank (kernel + selection) | ≈ 11 ms |
+| MMR selection | ≈ 1.7 ms |
+| Greedy | ≈ 2 ms |
+
+- The number of `slogdet` calls equals Σ_{k<K}(N−k) exactly (240, 455, 810 for K = 5, 10, 20 at N = 50), confirming N·K determinants, which is the "N·K" part of N·K⁴.
+- **In practice retrieval dominates the whole pipeline.** At these sizes the determinants are tiny (≤ 10×10, about 4 µs each, dominated by call overhead), so the K³ per-determinant cost is invisible: wall-clock time grows roughly with N·K calls and with N² for the Python-loop kernel build (DPP: 10.8 ms at N = 50, 32.7 ms at N = 100, 109 ms at N = 200), not with K⁴. The K⁴ term would only start to dominate for much larger K (the cost of a single `slogdet` jumps from ≈ 40 µs at 100×100 to ≈ 0.8 ms at 200×200).
+- The experiment recomputes retrieval separately for CF, the three MMR variants, MMR+floor and DPP (six times per seed set). Sharing one retrieval per seed set would cut experiment time by a large factor without changing any result.
+
+**Note on the O(N·K²) figure.** The commonly quoted O(N·K²) greedy-MAP cost for DPPs applies to an *incremental* implementation, not to this one. This code recomputes each candidate's log-determinant from scratch, hence O(N·K⁴) (the extra K² comes from recomputing a k×k determinant, O(k³), instead of updating one).
+
+### Future work: incremental Cholesky update (O(N·K²))
+
+Fast greedy MAP inference for DPPs (Chen, Zhang & Zhou, NeurIPS 2018) maintains, for each candidate i, a row of the Cholesky factor of the selected-set kernel. When item j is selected, each remaining candidate's row gains one entry, computed in O(k) from its existing row and the new row of the kernel, and the marginal log-determinant gain of i is just log of its squared residual. Each of the K rounds therefore costs O(N·k) instead of N determinants of size k, for O(N·K²) total, on top of the O(N²·d) kernel construction (or O(N·K·d) if kernel rows are computed lazily for selected items only). That would make the re-ranking cost for DPP the same order as the MMR selection times K. Because the greedy log-det objective is unchanged, the selected lists should be identical up to the 1e-8 jitter currently added to the diagonal, which makes this a drop-in speed-up that can be validated by comparing selected lists on the 30 seed sets. Two cheaper engineering fixes are independent of it: vectorising `similarity_scores` as one normalised matrix product (the dominant 100 ms stage) and sharing retrieval across strategies.
+
+## Limitations
+
+**Data.** The source's low-popularity file caps popularity at 68, which compressed the scale to 11–68 and made the old fixed "niche = popularity < 40" threshold meaningless. This was fixed by merging the dataset's high-popularity file (range 11–100, 25.2% of tracks below 40) rather than by redefining niche as a percentile; the < 40 threshold is still an arbitrary absolute cut-off on a skewed, genre-dependent distribution (8% of Rock tracks are niche against 44% of World tracks), so "niche" partly tracks genre. Balancing genres traded dataset size for balance: after de-duplication only 4,359 mappable tracks remain, so reaching a per-genre floor of 50 required merging Metal into Rock and Country and Indie into Indie-Folk, dropping the non-genre `gaming` playlists (107 tracks), and the 3,000-track sample is still uneven (Ambient 470 vs Indie-Folk 76 of 91 available). Genre labels are playlist-level rather than track-level: 17% of artists with at least two tracks appear under more than one genre and the spot checks show clear mislabels. **Method.** Similarity uses no audio features. It is a 14-dimensional vector dominated by a noisy genre one-hot plus duration, an explicit flag and artist rarity, even though the source data contains energy, valence, danceability and similar features. Because candidates retrieved by that similarity are nearly all the same genre, ILD is close to zero in most runs for every method (median ≤ 0.02), which leaves little room to separate re-ranking strategies and is why MMR's λ curve is almost flat. Seed sets are 30 random tracks per run rather than real listening histories, the niche floor is best-effort (missed in 2 of 30 runs for both DPP and MMR+floor), and Greedy's tie-break uses track-id order, which follows genre-alphabetical order (harmless here since only 3 Pop tracks tie at the cutoff, but not in general). **Comparison result.** MMR does not match DPP on ILD at any λ (DPP is higher, p ≤ 2.1e-5, surviving Bonferroni), but the difference is small (median +0.007 to +0.011). On niche representation no pairwise difference between CF, MMR, MMR+floor and DPP survives correction, and MMR+floor reproduces DPP's niche share (31.0 vs 30.7%, p = 0.89) and floor compliance (28/30 runs) at no detectable ILD cost relative to plain MMR. The hard niche floor, not the DPP kernel, therefore accounts for DPP's fairness behaviour, and the kernel's justified contribution is a small ILD gain over MMR+floor (−0.040 mean, p = 5.1e-6). With n = 30 and run-to-run standard deviations as large as the means, these tests cannot establish equivalence where they find no difference, and Bonferroni (α/84) is conservative, so nominal-only findings should be treated as hypotheses.
 
 ## Baseline snapshot
 
@@ -88,5 +120,5 @@ Among comparisons not involving Greedy, **the only results that survive Bonferro
 
 ## Remaining work
 
-- Phase 6 (write-up): complexity analysis and Limitations paragraph.
+- Implement the incremental-Cholesky DPP and shared retrieval described under Complexity analysis.
 - Optional: audio-feature-based similarity (energy, valence, danceability and others are in the source data) to replace the noisy genre one-hot.
