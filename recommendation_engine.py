@@ -526,8 +526,8 @@ def paired_comparisons(per_run):
 # 6. COMPARISON TABLE PRINTER
 # ─────────────────────────────────────────────
 
-def load_old_results(path="output/old_results.json"):
-    """Load the baseline snapshot (pre-fix run, see output/archive_20260929/README.md)."""
+def load_old_results(path="baseline/baseline_results.json"):
+    """Load the baseline snapshot (pre-fix run, see baseline/README.md)."""
     if os.path.exists(path):
         with open(path) as f:
             return json.load(f)
@@ -598,7 +598,7 @@ def main():
     print("\n[OK] Results saved -> output/results.json")
 
     # Load old results for comparison (if they exist)
-    old_summary = load_old_results("output/old_results.json")
+    old_summary = load_old_results("baseline/baseline_results.json")
 
     print_comparison_table(summary, old_summary)
 

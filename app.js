@@ -33,8 +33,8 @@ async function loadResultsData() {
 function normalizeResultsData(data) {
     return {
         greedy: data.greedy,
-        content_filtering: data.content_filtering || data.similarity,
-        graph_dpp_rerank: data.graph_dpp_rerank || data.hybrid,
+        content_filtering: data.content_filtering,
+        graph_dpp_rerank: data.graph_dpp_rerank,
     };
 }
 

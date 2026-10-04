@@ -11,7 +11,7 @@ Usage:
 Steps:
   1. (Optional) Download + integrate the new Kaggle dataset
   2. Run recommendation_engine experiments (30 seeds, K=10, fixed RNG seed 42)
-  3. Print side-by-side metric table (new vs old)
+  3. Print side-by-side metric table (new vs baseline/baseline_results.json)
   4. (Optional) Regenerate plots
 """
 
@@ -21,18 +21,6 @@ import os
 import sys
 
 
-def backup_old_results():
-    """If output/results.json exists from the old run, move it to old_results.json."""
-    src  = "output/results.json"
-    dest = "output/old_results.json"
-    if os.path.exists(src) and not os.path.exists(dest):
-        import shutil
-        shutil.copy(src, dest)
-        print(f"[backup] Saved existing results -> {dest}")
-    elif os.path.exists(dest):
-        print(f"[backup] {dest} already exists — skipping backup.")
-
-
 def main():
     parser = argparse.ArgumentParser(description="DiverseTune pipeline runner")
     parser.add_argument("--skip-dl", action="store_true",
@@ -40,9 +28,6 @@ def main():
     parser.add_argument("--plots",   action="store_true",
                         help="Regenerate matplotlib plots after experiments")
     args = parser.parse_args()
-
-    # 1. Backup old results so comparison table can load them
-    backup_old_results()
 
     # 2. Dataset integration
     if not args.skip_dl:
@@ -76,7 +61,7 @@ def main():
     print("\n[OK] Results saved -> output/results.json")
 
     # 4. Print comparison table
-    old_summary = load_old_results("output/old_results.json")
+    old_summary = load_old_results("baseline/baseline_results.json")
     print_comparison_table(summary, old_summary)
 
     # 5. Optional plots
