@@ -88,7 +88,5 @@ Among comparisons not involving Greedy, **the only results that survive Bonferro
 
 ## Remaining work
 
-- Phase 5 (repo hygiene): `.gitignore`, untrack generated files, delete `integrate_kaggle.py`, remove legacy-key shims in `app.js`, add `requirements.txt` and README.
 - Phase 6 (write-up): complexity analysis and Limitations paragraph.
-- Update `server.py` / `index.html` / `app.js` to display MMR and MMR+floor.
 - Optional: audio-feature-based similarity (energy, valence, danceability and others are in the source data) to replace the noisy genre one-hot.
