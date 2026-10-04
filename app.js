@@ -1,115 +1,184 @@
+// Methods shown in the UI. `key` is the results.json key, `cls` the CSS/API key.
+const METHODS = [
+    { key: 'greedy',            cls: 'greedy',            name: 'Greedy',              type: 'Popularity-based' },
+    { key: 'content_filtering', cls: 'content_filtering', name: 'Content Filtering',   type: 'Cosine similarity' },
+    { key: 'mmr_0.7',           cls: 'mmr',               name: 'MMR (λ=0.7)',         type: 'Similarity + redundancy penalty' },
+    { key: 'mmr_floor',         cls: 'mmr_floor',         name: 'MMR + niche floor',   type: 'MMR + ≥20% niche floor' },
+    { key: 'graph_dpp_rerank',  cls: 'graph_dpp_rerank',  name: 'Graph DPP Rerank',    type: 'Similarity + DPP + niche floor' },
+];
+const METRICS = [
+    { key: 'ild',            label: 'ILD (Diversity)',    digits: 3, better: 'high' },
+    { key: 'gini',           label: 'Gini (popularity concentration)', digits: 3, better: null },
+    { key: 'avg_popularity', label: 'Avg popularity',     digits: 1, better: null },
+    { key: 'niche_pct',      label: 'Niche songs (%)',    digits: 1, better: 'high' },
+];
+
+function esc(value) {
+    const d = document.createElement('div');
+    d.textContent = value == null ? '' : String(value);
+    return d.innerHTML;
+}
+
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', () => {
     initParticles();
     animateNumbers();
     loadResultsData();
-    animateBarsOnScroll();
     initScrollSpy();
     setupSearch();
 });
 
-// Load the JSON results and display sample recommendations
+// Load output/results.json (written by run_pipeline.py) and render the dashboard sections
 async function loadResultsData() {
+    if (!document.getElementById('metrics-dashboard')) return; // not the dashboard page
     try {
-        // Fetch the output JSON. In a production app, this would be an API call.
-        // For static deployment, we expect it to be served alongside the HTML.
         const response = await fetch('output/results.json');
-
-        if (!response.ok) {
-            console.error('Failed to load results.json, using fallback mock data for testing UI.');
-            useFallbackData();
-            return;
-        }
-
+        if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
-        renderRecommendations(normalizeResultsData(data));
+        renderMetrics(data);
+        renderComparison(data);
+        renderPaired(data);
     } catch (e) {
-        console.error('Error fetching results.json:', e);
-        // Fallback for local file testing without server
-        useFallbackData();
-    }
-}
-
-function normalizeResultsData(data) {
-    return {
-        greedy: data.greedy,
-        content_filtering: data.content_filtering,
-        graph_dpp_rerank: data.graph_dpp_rerank,
-    };
-}
-
-// Fallback data if JSON cannot be loaded (e.g. file:// protocol testing)
-function useFallbackData() {
-    const fallback = {
-        "greedy": {
-            "runs": [{
-                "recommendations": [
-                    { "name": "Bright Dark Roses", "artist": "21 Savage", "popularity": 98 },
-                    { "name": "Stars of Stars", "artist": "Kendrick Lamar", "popularity": 97 },
-                    { "name": "The Memories", "artist": "Kanye West", "popularity": 97 },
-                    { "name": "Broken Crystal Fire", "artist": "Kendrick Lamar", "popularity": 97 },
-                    { "name": "Hidden Heart", "artist": "21 Savage", "popularity": 96 }
-                ]
-            }]
-        },
-        "content_filtering": {
-            "runs": [{
-                "recommendations": [
-                    { "name": "Shadows of Roses", "artist": "Daniel Caesar", "popularity": 41 },
-                    { "name": "The Skies", "artist": "Jason Aldean", "popularity": 46 },
-                    { "name": "Sacred", "artist": "Beach House", "popularity": 31 },
-                    { "name": "Endless Eyes", "artist": "Luke Bryan", "popularity": 38 },
-                    { "name": "The Flames", "artist": "Brent Faiyaz", "popularity": 35 }
-                ]
-            }]
-        },
-        "graph_dpp_rerank": {
-            "runs": [{
-                "recommendations": [
-                    { "name": "Shadows of Roses", "artist": "Daniel Caesar", "popularity": 41 },
-                    { "name": "The Skies", "artist": "Jason Aldean", "popularity": 46 },
-                    { "name": "Endless Eyes", "artist": "Luke Bryan", "popularity": 38 },
-                    { "name": "Sacred", "artist": "Beach House", "popularity": 31 },
-                    { "name": "Bright Midnight Flames", "artist": "Tame Impala", "popularity": 28 }
-                ]
-            }]
-        }
-    };
-    renderRecommendations(fallback);
-}
-
-// Render the sample recommendations lists
-function renderRecommendations(data) {
-    const algos = ['greedy', 'content_filtering', 'graph_dpp_rerank'];
-
-    algos.forEach(algo => {
-        const listEl = document.getElementById(`recs-list-${algo}`);
-        if (!listEl) return;
-
-        listEl.innerHTML = ''; // Clear default
-
-        // Take first run
-        const run = data[algo].runs[0];
-
-        // Take top 5 for UI clarity
-        run.recommendations.slice(0, 5).forEach(rec => {
-            const li = document.createElement('li');
-            li.className = 'recs-item';
-
-            let popClass = 'pop-med';
-            if (rec.popularity >= 80) popClass = 'pop-high';
-            else if (rec.popularity < 40) popClass = 'pop-low';
-
-            li.innerHTML = `
-                <div class="recs-song">
-                    <span class="recs-name">${rec.name}</span>
-                    <span class="recs-artist">${rec.artist}</span>
-                </div>
-                <span class="recs-pop ${popClass}">🔥 ${rec.popularity}</span>
-            `;
-
-            listEl.appendChild(li);
+        console.error('Could not load output/results.json:', e);
+        const msg = '<div class="load-error">Results not found. Run <code>python run_pipeline.py --skip-dl --plots</code> ' +
+                    'and open this page through <code>python server.py</code>.</div>';
+        document.getElementById('metrics-dashboard').innerHTML = msg;
+        ['comparison-table', 'paired-table'].forEach(id => {
+            const t = document.getElementById(id);
+            if (t) t.innerHTML = '<tbody><tr><td>' + msg + '</td></tr></tbody>';
         });
+    }
+    animateBarsOnScroll();
+}
+
+function fmt(v, digits) { return Number(v).toFixed(digits); }
+
+function bestKey(data, metric) {
+    const vals = METHODS.filter(m => data[m.key]).map(m => [m.key, data[m.key][metric.key]]);
+    if (!metric.better) return null;
+    return vals.reduce((a, b) => ((metric.better === 'high') === (b[1] > a[1]) ? b : a))[0];
+}
+
+function renderMetrics(data) {
+    const first = data[METHODS[0].key];
+    document.getElementById('metrics-desc').textContent =
+        `Mean over ${first.n_runs} paired runs (K=${first.K}, RNG seed ${first.rng_seed}) with random seed songs`;
+
+    // Bar widths are relative to the largest mean of that metric so bars are comparable
+    const maxOf = {};
+    METRICS.forEach(m => {
+        maxOf[m.key] = Math.max(...METHODS.filter(x => data[x.key]).map(x => data[x.key][m.key]), 1e-9);
+    });
+
+    document.getElementById('metrics-dashboard').innerHTML = METHODS.filter(m => data[m.key]).map(m => {
+        const r = data[m.key];
+        const items = METRICS.map(mt => {
+            const width = Math.max(2, Math.round(100 * r[mt.key] / maxOf[mt.key]));
+            return `
+                <div class="metric-item">
+                    <div class="metric-bar-container">
+                        <div class="metric-bar metric-bar-${m.cls}" style="--bar-width: ${width}%"></div>
+                    </div>
+                    <div class="metric-info">
+                        <span class="metric-label">${esc(mt.label)}</span>
+                        <span class="metric-value">${fmt(r[mt.key], mt.digits)}
+                            <span class="metric-sub">± ${fmt(r[mt.key + '_std'], mt.digits)} · median ${fmt(r[mt.key + '_median'], mt.digits)}</span>
+                        </span>
+                    </div>
+                </div>`;
+        }).join('');
+        return `
+            <div class="metric-column" id="metric-${m.cls}">
+                <div class="metric-header metric-header-${m.cls}">
+                    <h3>${esc(m.name)}</h3>
+                    <span>${esc(m.type)}</span>
+                </div>
+                <div class="metric-body">${items}</div>
+            </div>`;
+    }).join('');
+
+    document.getElementById('metrics-note').textContent =
+        'ILD and niche % are bimodal (the standard deviation is as large as the mean for ILD), so medians are shown ' +
+        'alongside means. Bar lengths are relative to the largest value of each metric.';
+}
+
+function renderComparison(data) {
+    const ms = METHODS.filter(m => data[m.key]);
+    const head = `<thead><tr><th>Metric</th>${ms.map(m => `<th class="th-${m.cls}">${esc(m.name)}</th>`).join('')}<th>Leader by mean*</th></tr></thead>`;
+
+    const rows = METRICS.map(mt => {
+        const best = bestKey(data, mt);
+        const cells = ms.map(m => {
+            const r = data[m.key];
+            return `<td class="${m.key === best ? 'td-best' : ''}">${fmt(r[mt.key], mt.digits)}<span class="td-note">median ${fmt(r[mt.key + '_median'], mt.digits)}</span></td>`;
+        }).join('');
+        const bm = ms.find(m => m.key === best);
+        const winner = bm ? `<span class="winner-badge winner-${bm.cls}">${esc(bm.name)}</span>` : '<span class="td-note">descriptive only</span>';
+        return `<tr><td class="td-label">${esc(mt.label)}${mt.better === 'high' ? ' ↑' : mt.better === 'low' ? ' ↓' : ''}</td>${cells}<td class="td-winner">${winner}</td></tr>`;
+    }).join('');
+
+    const floorRow = `<tr><td class="td-label">Runs meeting the ≥20% niche floor</td>${ms.map(m => {
+        const runs = data[m.key].per_run_niche_pct;
+        const ok = runs.filter(v => v >= 20).length;
+        return `<td>${ok} / ${runs.length}</td>`;
+    }).join('')}<td class="td-winner"><span class="td-note">floor enforced only by MMR + floor and DPP</span></td></tr>`;
+
+    document.getElementById('comparison-table').innerHTML = head + `<tbody>${rows}${floorRow}</tbody>`;
+}
+
+function pairedEntry(data, a, b) {
+    const P = data._paired || {};
+    if (P[`${a}__minus__${b}`]) return { e: P[`${a}__minus__${b}`], sign: 1 };
+    if (P[`${b}__minus__${a}`]) return { e: P[`${b}__minus__${a}`], sign: -1 };
+    return null;
+}
+
+function renderPaired(data) {
+    const pairs = [
+        ['graph_dpp_rerank', 'content_filtering'],
+        ['mmr_0.7', 'content_filtering'],
+        ['graph_dpp_rerank', 'mmr_0.7'],
+        ['mmr_floor', 'mmr_0.7'],
+        ['mmr_floor', 'graph_dpp_rerank'],
+    ];
+    const name = k => (METHODS.find(m => m.key === k) || { name: k }).name;
+    const cell = (e, sign, metric, digits) => {
+        const x = e[metric];
+        const sig = x.significant_bonferroni;
+        return `<td>${sign * x.mean_diff >= 0 ? '+' : ''}${fmt(sign * x.mean_diff, digits)} / ${sign * x.median_diff >= 0 ? '+' : ''}${fmt(sign * x.median_diff, digits)}` +
+               `<span class="td-note">p = ${Number(x.wilcoxon_p).toPrecision(2)} ${sig ? '— survives Bonferroni' : '— not significant after correction'}</span></td>`;
+    };
+    let alpha = null;
+    const body = pairs.map(([a, b]) => {
+        const r = pairedEntry(data, a, b);
+        if (!r) return '';
+        alpha = r.e.ild.bonferroni_alpha;
+        return `<tr><td class="td-label">${esc(name(a))} − ${esc(name(b))}</td>${cell(r.e, r.sign, 'ild', 3)}${cell(r.e, r.sign, 'niche_pct', 1)}</tr>`;
+    }).join('');
+    document.getElementById('paired-table').innerHTML =
+        '<thead><tr><th>Comparison (A − B)</th><th>ILD: mean / median diff</th><th>Niche %: mean / median diff</th></tr></thead><tbody>' + body + '</tbody>';
+    document.getElementById('paired-note').textContent =
+        `Paired two-sided Wilcoxon signed-rank test, same seed sets for every method. Bonferroni threshold across all method pairs and metrics: α = ${alpha}. ` +
+        'Raw p-values are shown; only those marked "survives" are claimed as significant.';
+}
+
+// Render one method's recommendation list into the search demo
+function renderRecList(listEl, recs) {
+    listEl.innerHTML = '';
+    recs.forEach(rec => {
+        const li = document.createElement('li');
+        li.className = 'recs-item';
+        let popClass = 'pop-med';
+        if (rec.popularity >= 80) popClass = 'pop-high';
+        else if (rec.popularity < 40) popClass = 'pop-low';
+        li.innerHTML = `
+            <div class="recs-song">
+                <span class="recs-name">${esc(rec.name)}</span>
+                <span class="recs-artist">${esc(rec.artist)}</span>
+            </div>
+            <span class="recs-pop ${popClass}">🔥 ${Math.round(rec.popularity)}</span>
+        `;
+        listEl.appendChild(li);
     });
 }
 
@@ -244,7 +313,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'canvas-fairness': 'output/fairness_comparison.png',
         'canvas-popularity': 'output/popularity_comparison.png',
         'canvas-tradeoff': 'output/tradeoff_chart.png',
-        'canvas-niche': 'output/niche_percentage.png'
+        'canvas-niche': 'output/niche_percentage.png',
+        'canvas-lambda': 'output/mmr_lambda_curve.png'
     };
 
     for (const [canvasId, imgSrc] of Object.entries(chartMapping)) {
@@ -373,8 +443,8 @@ function setupSearch() {
                         div.className = 'search-result-item';
                         div.innerHTML = `
                             <div>
-                                <span class="search-result-name">${item.name}</span>
-                                <span class="search-result-artist">${item.artist}</span>
+                                <span class="search-result-name">${esc(item.name)}</span>
+                                <span class="search-result-artist">${esc(item.artist)}</span>
                             </div>
                             <span class="recs-pop pop-med">🔥 ${Math.round(item.popularity)}</span>
                         `;
@@ -411,13 +481,14 @@ function setupSearch() {
         const gridEl = document.getElementById('recs-grid-container');
         if (gridEl) gridEl.style.display = 'grid';
 
-        const algos = ['greedy', 'content_filtering', 'graph_dpp_rerank'];
+        const algos = METHODS.map(m => m.cls);
         algos.forEach(algo => {
             const listEl = document.getElementById(`recs-list-${algo}`);
             if (listEl) listEl.innerHTML = '<div style="text-align:center; padding: 2rem; color:#888;"><span class="search-spinner" style="display:inline-block; margin-bottom:10px;">' + spinnerSvg + '</span><br>Generating...</div>';
         });
 
-        document.getElementById('interactive-demo').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const demo = document.getElementById('interactive-demo');
+        if (demo) demo.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
         try {
             const res = await fetch(`/api/recommend?id=${id}`);
@@ -427,27 +498,7 @@ function setupSearch() {
                 const listEl = document.getElementById(`recs-list-${algo}`);
                 if (!listEl) return;
 
-                listEl.innerHTML = '';
-                const recs = data[algo] || [];
-
-                recs.forEach(rec => {
-                    const li = document.createElement('li');
-                    li.className = 'recs-item';
-
-                    let popClass = 'pop-med';
-                    if (rec.popularity >= 80) popClass = 'pop-high';
-                    else if (rec.popularity < 40) popClass = 'pop-low';
-
-                    li.innerHTML = `
-                        <div class="recs-song">
-                            <span class="recs-name">${rec.name}</span>
-                            <span class="recs-artist">${rec.artist}</span>
-                        </div>
-                        <span class="recs-pop ${popClass}">🔥 ${Math.round(rec.popularity)}</span>
-                    `;
-
-                    listEl.appendChild(li);
-                });
+                renderRecList(listEl, data[algo] || []);
             });
         } catch (e) {
             console.error("Recommendation error:", e);

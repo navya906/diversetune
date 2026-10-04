@@ -10,7 +10,7 @@
 | Dataset build (`integrate_new_dataset.py`) | Working. Deduped on (name, artists), no sampling with replacement, per-genre floor enforced and asserted. |
 | Experiment (`recommendation_engine.py`) | Working. Four method families (7 configurations), 30 paired runs, seed songs excluded and asserted, results reproducible. |
 | Plots (`generate_plots.py`) | Working. Five comparison charts plus an MMR λ chart. |
-| Web UI / server | **Not updated for the new methods.** `server.py` and `app.js` still serve only Greedy, CF and DPP. `app.js` still contains hard-coded fallback mock data and old-key shims (Phase 5). |
+| Web UI / server | Updated. `index.html` renders metrics, comparison and paired-test tables from `output/results.json` (no hard-coded results); `search.html` and `server.py` serve all five methods. Needs `output/` generated first. |
 | Tests | None. |
 | Validity of conclusions | Limited — see "Caveats". The experiment runs correctly; what it can support is narrower than earlier write-ups claimed. |
 

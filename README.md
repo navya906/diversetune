@@ -49,7 +49,7 @@ python server.py                            # web UI + API at http://localhost:8
 | `generate_plots.py` | Draws the comparison charts and the MMR λ chart into `output/` from `output/results.json`. |
 | `run_pipeline.py` | Orchestrates dataset -> experiments -> results table (vs `baseline/`) -> plots. |
 | `server.py` | HTTP server for the web UI and the `/api/search` and `/api/recommend` endpoints. |
-| `index.html`, `search.html`, `app.js`, `index.css` | Web frontend. Note: currently covers only Greedy, CF and DPP. |
+| `index.html`, `search.html`, `app.js`, `index.css` | Web frontend. The dashboard tables are rendered from `output/results.json`; the search demo shows all five methods via `server.py`. |
 | `baseline/` | Archived pre-fix results used only for the delta table. Not citable. |
 
 ## Outputs

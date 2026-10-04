@@ -17,6 +17,8 @@ from recommendation_engine import (
     greedy_recommend,
     content_filtering_recommend,
     graph_dpp_rerank_recommend,
+    mmr_recommend,
+    mmr_floor_recommend,
 )
 
 PORT = 8000
@@ -61,6 +63,8 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             greedy         = greedy_recommend(tracks, K=5, liked_indices=[track_id])
             similar        = content_filtering_recommend(tracks, [track_id], K=5)
             graph_dpp_recs = graph_dpp_rerank_recommend(tracks, [track_id], K=5, min_niche_pct=0.20)
+            mmr_recs       = mmr_recommend(tracks, [track_id], K=5)
+            mmr_floor_recs = mmr_floor_recommend(tracks, [track_id], K=5)
 
             def format_recs(recs):
                 return [
@@ -76,6 +80,8 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
             response = {
                 "greedy":          format_recs(greedy),
                 "content_filtering": format_recs(similar),
+                "mmr": format_recs(mmr_recs),
+                "mmr_floor": format_recs(mmr_floor_recs),
                 "graph_dpp_rerank": format_recs(graph_dpp_recs),
             }
 
